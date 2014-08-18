@@ -1,0 +1,292 @@
+% 一种书籍的风格，对中文处理较好。
+%
+% by wanze
+% LPPL LaTeX Public Project License
+%
+%
+
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{myconfig}
+
+%宏包编写基本命令。
+%\def\hi{Hello, this is my own package}
+%\let\myDate\date
+%\newcommand\GoodBye[1][\bfseries]{{#1Good Bye}}
+
+
+%========基本必备的宏包========%
+\RequirePackage{calc,float,multicol,moresize}
+\RequirePackage[doublespacing]{setspace}
+%\linespread{1.5}
+%1.3 onehalfspacing
+%试卷或需要文字紧凑的
+%1.6 doublespacing
+
+%===========加入目录 某章或某节=====%
+
+\newcommand{\addchtoc}[1]{
+        \cleardoublepage
+        \phantomsection
+        \addcontentsline{toc}{chapter}{#1}}
+
+\newcommand{\addsectoc}[1]{
+        \phantomsection
+        \addcontentsline{toc}{section}{#1}}
+
+%===========全文基本格式==========%
+
+\newenvironment{common-format}{ %
+        \setlength{\parskip}{1.6ex plus 0.2ex minus 0.2ex}   %段落間距
+        \setlength{\parindent}{\baselineskip * \real{0.06} + \textpt * \real{2.4}}}
+    {}
+
+%=========页面设置=========%
+%ifphone 和 具体设置在主模板，这样方便些。
+\ifphone
+%for phone
+\RequirePackage[
+  paperwidth=145mm, %210-30-30
+  paperheight=272mm,%297-15-10
+  bindingoffset=0mm,%裝訂線
+  top=30mm,  %
+  bottom=30mm,%下邊距 包括頁腳
+  left=5mm,  %左邊距or inner
+  right=5mm,  %右邊距or  outer
+  headheight=25mm,%頁眉
+  footskip=25mm,%頁腳
+  includemp=true,% 旁註寬度計入width
+  marginparsep=0mm, %沒有旁註
+  marginparwidth=0mm %沒有旁註
+  ]{geometry}
+\else
+
+\RequirePackage[a4paper, %a4paper size 297:210 mm
+  bindingoffset=0mm,%裝訂線
+  top=35mm,  %上邊距 包括頁眉
+  bottom=30mm,%下邊距 包括頁腳
+  left=35mm,  %左邊距or inner
+  right=40mm,  %右邊距or  outer
+  headheight=10mm,%頁眉
+  headsep=15mm,%
+  footskip=15mm,%頁腳
+ includemp=true,% 旁註寬度計入width
+ marginparsep=0mm, %旁註與正文間距
+marginparwidth=0mm  %旁註寬度
+  ]{geometry}
+\fi
+
+%color
+\RequirePackage[table,svgnames]{xcolor}
+\definecolor{bgcolor-0}{HTML}{CCFFCC}
+
+
+%================字體================%
+%设置数学字体
+\RequirePackage{amssymb,amsmath}
+\RequirePackage{fontspec}
+ %設置英文字體
+\setmainfont[Mapping=tex-text]{DejaVu Serif}
+\setsansfont[Mapping=tex-text]{DejaVu Sans}
+\setmonofont[Mapping=tex-text]{DejaVu Sans Mono}
+
+%中文環境
+\RequirePackage[CJKnumber=true]{xeCJK}
+\xeCJKsetup{PunctStyle=plain}
+\defaultCJKfontfeatures{Scale=1.2}   %放大全局CJK字體。中文字應該稍微高於英文字，这样更美观
+\setCJKmainfont[BoldFont=Adobe 黑体 Std,ItalicFont=Adobe 楷体 Std]
+    {Adobe 宋体 Std}%影響rmfamily字體
+\setCJKsansfont{Adobe 黑体 Std}%影響sffamily字體
+\setCJKmonofont{Adobe 楷体 Std}%影響ttfamily字體
+
+\RequirePackage{xltxtra} %put here to avoid some package option error. maybe this package is useless ?
+
+%=============新的字符===========%
+\newfontfamily{\libertine}[Scale=1.5]{Linux Libertine O}
+\newfontfamily{\ubuntu}[Scale=3]{Ubuntu}
+\RequirePackage{newunicodechar}
+\newunicodechar{Ⓐ}{{\libertine{Ⓐ}}}
+\newunicodechar{Ⓑ}{{\libertine{Ⓑ}}}
+\newunicodechar{Ⓒ}{{\libertine{Ⓒ}}}
+\newunicodechar{Ⓓ}{{\libertine{Ⓓ}}}
+\newunicodechar{①}{{\libertine{①}}}
+\newunicodechar{②}{{\libertine{②}}}
+\newunicodechar{③}{{\libertine{③}}}
+\newunicodechar{④}{{\libertine{④}}}
+\newunicodechar{⑤}{{\libertine{⑤}}}
+\newunicodechar{}{{\ubuntu{}}}
+
+%%===============中文化=========%
+\renewcommand\contentsname{目~录}
+\renewcommand\listfigurename{插图目录}
+\renewcommand\listtablename{表格目录}
+\renewcommand\bibname{参~考~文~献}
+\renewcommand\indexname{索~引}
+\renewcommand\figurename{图}
+\renewcommand\tablename{表}
+\renewcommand\partname{部分}
+\renewcommand\appendixname{附录}
+\renewcommand\today{\number\year年\number\month月\number\day日}
+
+
+%=======页眉页脚格式=========%
+\RequirePackage{fancyhdr}   %頁眉頁腳
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{第\CJKnumber{\arabic{section}}节~~#1}{}}
+\fancypagestyle{plain}{%
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+%    \renewcommand{\chaptermark}[1]{\markboth{第\CJKnumber{\arabic{chapter}}章~~#1}{}}
+%    \fancyhf[HL]{\ttfamily \footnotesize \leftmark }
+    \fancyhf[HR]{\ttfamily \footnotesize \rightmark }
+    \fancyhf[FR]{\thepage}
+    \fancyhfoffset[R]{\marginparwidth+\marginparsep}}
+\pagestyle{plain}
+
+%=========章節標題設計=========%
+\RequirePackage{titlesec}
+%修改part
+\titleformat{\part}{\huge\sffamily}{}{0em}{}
+%修改chapter
+\titleformat{\chapter}{\LARGE\sffamily}{}{0em}{}
+%修改section
+\titleformat{\section}{\Large\sffamily}{}{0em}{}
+%修改subsection
+\titleformat{\subsection}{\large\sffamily}{}{0em}{}
+%修改subsubsection
+\titleformat{\subsubsection}{\normalsize\sffamily}{}{0em}{}
+
+
+%================目录===============%
+%toc label to contents space   dynamic adjust
+\RequirePackage{tocloft}%
+\renewcommand{\numberline}[1]{%
+  \@cftbsnum #1\@cftasnum~\@cftasnumb%
+}
+
+%==============超鏈接===============%
+\RequirePackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref} %設置書簽和目錄鏈接等
+\newcommand{\hlabel}[1]{\phantomsection \label{#1}}%某一小段的引用
+
+
+%=================文字強調=========%
+\RequirePackage{ulem} %下劃線,加點
+\normalem%normal em , not instead of the uline
+
+\DeclareRobustCommand*{\uwave}%因为中文字放大，波浪线稍微下移点。
+{\bgroup \markoverwith{\lower5\p@\hbox{\sixly \char58}}\ULon}
+
+
+\newcommand\reduline{\bgroup\markoverwith
+    {\textcolor{red}{\rule[-0.8ex]{1em}{0.4pt}}}\ULon}
+\renewcommand\emshape{\color{red}}
+
+%==================插入圖片=======%
+\RequirePackage{graphicx}
+\graphicspath{{figures/}}
+%change the caption style a little like 1-1
+\renewcommand{\thefigure}{\arabic{chapter}-\arabic{figure}}
+
+\newenvironment{fig}[2][1]
+        {\begin{figure}[H]
+        \centering
+        \includegraphics[scale=#1 , keepaspectratio]{#2}}
+        {\end{figure}}
+\newenvironment{linefig}[2][1]
+        {\begin{figure}[H]
+        \centering
+        \includegraphics[width=#1\linewidth ,totalheight=0.95\textheight , keepaspectratio]{#2}}
+        {\end{figure}}
+
+%==============插入表格========%
+\RequirePackage{booktabs}
+\renewcommand{\arraystretch}{1.3}
+
+%插入代码
+\RequirePackage{xverbatim}%小代码环境
+
+%=============插入尾注=========%
+\RequirePackage{endnotes}
+
+%==========其他宏包===========%
+\RequirePackage{chemfig} %化学 同时tikz制图宏包也加载了
+
+%========脚注=========%
+
+\RequirePackage{perpage} %the perpage package
+%\MakePerPage{footnote} %the perpage package command
+
+
+\renewcommand\@makefntext[1]
+{\vspace{10pt}
+\noindent
+\makebox[24pt][c]{\@makefnmark}
+\fontsize{10pt}{18pt}\selectfont #1}
+
+\setlength{\skip\footins}{20pt plus 10pt}
+
+
+
+%=====特殊的环境特殊的文字======%
+%=========重新定义 quote=====%
+\renewenvironment{quote}[1][anonymous]{
+\newcommand{\quoteauthor}[1][anonymous]{#1}
+\list{}{\rightmargin\leftmargin %右间距等于左间距
+\itemindent   24pt
+}\item\relax
+\ttfamily\fontsize{10pt}{12pt}\selectfont}
+{\\
+\makebox[\linewidth][r]{\sffamily —\quoteauthor}
+\endlist}
+
+%重新定义quotation
+\renewenvironment{quotation}
+{\list{}{
+\itemindent 24pt %item的缩进也就是第一段的缩进
+\listparindent \itemindent %第二段的缩进
+}%
+\item\relax
+\ttfamily\fontsize{10pt}{12pt}\selectfont}
+{\endlist}
+
+%======notecard环境 一种卡片式记忆环境====%
+%长高按照黄金比例分割来，长1，高0.62--0.62\linewidth 0.38\linewidth
+%推荐的颜色有：black olive blue orange brown pink cyan purple darkgray red gray teal green violet lightgray white lime magenta yellow 建议都调淡30。!30
+%不过推荐一个文档内部一种类型使用一种，其他颜色也是可以的。
+\newsavebox{\tempbox}
+\newenvironment{notecard}[1][white]
+ {\noindent\ignorespaces%
+ \setlength{\fboxsep}{10pt}
+  \newcommand{\tempcolor}{#1}
+  \begin{lrbox}{\tempbox}%
+  \begin{minipage}[c][0.36\linewidth][c]{0.58\linewidth}
+        \setlength{\parindent}{\baselineskip * \real{0.06} + \textpt * \real{2.4}}
+        \setlength{\parskip}{0.12\parindent}   %段落間距
+}
+ {
+ \ignorespacesafterend%
+  \end{minipage}%
+  \end{lrbox}%
+  \colorbox{\tempcolor}{\usebox{\tempbox}}}
+
+%但是如果文字过多
+\newenvironment{flashcard}[1][white]
+ {\noindent\ignorespaces%
+ \setlength{\fboxsep}{10pt}
+  \newcommand{\tempcolor}{#1}
+  \begin{lrbox}{\tempbox}%
+  \begin{minipage}[c][0.58\linewidth][c]{0.93\linewidth}
+        \setlength{\parindent}{\baselineskip * \real{0.06} + \textpt * \real{2.4}}
+        \setlength{\parskip}{0.12\parindent}   %段落間距
+}
+ {
+ \ignorespacesafterend%
+  \end{minipage}%
+  \end{lrbox}%
+  \colorbox{\tempcolor}{\usebox{\tempbox}}}
+
+
+
+\endinput
+
+
