@@ -16,8 +16,7 @@
 
 %========基本必备的宏包========%
 \RequirePackage{calc,float,multicol,moresize}
-\RequirePackage[doublespacing]{setspace}
-%\linespread{1.5}
+\linespread{1.5}
 %1.3 onehalfspacing
 %试卷或需要文字紧凑的
 %1.6 doublespacing
@@ -64,8 +63,8 @@
   bindingoffset=0mm,%裝訂線
   top=35mm,  %上邊距 包括頁眉
   bottom=30mm,%下邊距 包括頁腳
-  left=35mm,  %左邊距or inner
-  right=40mm,  %右邊距or  outer
+  left=30mm,  %左邊距or inner
+  right=35mm,  %右邊距or  outer
   headheight=10mm,%頁眉
   headsep=15mm,%
   footskip=15mm,%頁腳
@@ -92,7 +91,6 @@ marginparwidth=0mm  %旁註寬度
 %中文環境
 \RequirePackage[CJKnumber=true]{xeCJK}
 \xeCJKsetup{PunctStyle=plain}
-\defaultCJKfontfeatures{Scale=1.2}   %放大全局CJK字體。中文字應該稍微高於英文字，这样更美观
 \setCJKmainfont[BoldFont=Adobe 黑体 Std,ItalicFont=Adobe 楷体 Std]
     {Adobe 宋体 Std}%影響rmfamily字體
 \setCJKsansfont{Adobe 黑体 Std}%影響sffamily字體
@@ -203,7 +201,8 @@ marginparwidth=0mm  %旁註寬度
 \renewcommand{\arraystretch}{1.3}
 
 %插入代码
-\RequirePackage{xverbatim}%小代码环境
+\RequirePackage{fancyvrb}%小代码环境
+\fvset{frame=lines,tabsize=4 ,baselinestretch=1.8, fontsize=\footnotesize , framesep=1em}
 
 %=============插入尾注=========%
 \RequirePackage{endnotes}
@@ -213,18 +212,14 @@ marginparwidth=0mm  %旁註寬度
 
 %========脚注=========%
 
-\RequirePackage{perpage} %the perpage package
-%\MakePerPage{footnote} %the perpage package command
-
-
 \renewcommand\@makefntext[1]
-{\vspace{10pt}
+{\vspace{5pt}
 \noindent
-\makebox[24pt][c]{\@makefnmark}
-\fontsize{10pt}{18pt}\selectfont #1}
+\makebox[20pt][c]{\@makefnmark}
+\fontsize{10pt}{12pt}\selectfont #1}
 
 \setlength{\skip\footins}{20pt plus 10pt}
-
+%main body 与脚注之间的距离
 
 
 %=====特殊的环境特殊的文字======%

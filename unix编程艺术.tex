@@ -2,9 +2,9 @@
 %新加入的命令如下：addchtoc addsectoc reduline printendnotes hlabel
 %新加入的环境如下：common-format  fig scalefig 
 
-\documentclass[11pt,oneside]{book}
+\documentclass[12pt,oneside]{book}
 \newlength{\textpt}
-\setlength{\textpt}{11pt} 
+\setlength{\textpt}{12pt} 
 \newif\ifphone
 \phonefalse
 
@@ -22,7 +22,7 @@
 \authorinfo{作者：埃里克·斯蒂芬·雷蒙（Eric Steven Raymond，著名黑客。）}
 \editor{德山书生}
 \email{a358003542@gmail.com}
-\editorinfo{编者：万泽，湖南常德人氏。}
+\editorinfo{\href{http://www.catb.org/~esr/writings/taoup/html/}{官方英文网站}，}
 \version{0.01}
 \titleLC
 
@@ -185,7 +185,7 @@ Unix管道的发明人、Unix传统的奠基人之一Doug Mcllroy在[Mcllroy78]�
 
 Unix哲学是这样的：一个程序只做一件事，并做好。程序要能协作。程序要能处理文本流，因为这是最通用的接口。
     
-Rob Pike，最伟大的C语言大师之一，在《Notes on C \linebreak Programming》中从另一个稍微不同的角度表述了Unix的哲学[Pike]：
+Rob Pike，最伟大的C语言大师之一，在《Notes on C  Programming》中从另一个稍微不同的角度表述了Unix的哲学[Pike]：
 
 原则1：你无法断定程序会在什么地方耗费运行时间。瓶颈经常出现在想不到的地方，所以别急于胡乱找个地方改代码，除非你已经证实那儿就是瓶颈所在。
 
@@ -528,7 +528,7 @@ Doug Mcllroy[Mcllroy91]后来这样描述这个时代：“外界的压力和纯
 \subsection{出埃及记：1971-1980}
 最初的Unix用汇编语言写成，应用程序用汇编语言和解释型语言B混和编写。B语言的优点在于小巧，能在PDP-7上运行，但是作为系统编程语言还不够强大，所以Dennis Ritchie给它增加了数据类型和结构。C语言从1977年起自B语言进化而来；1973年，Thompson和Ritchie成功地用新语言重写了整个Unix系统。这是一个大胆的举动——那时为了最大程度地利用硬件性能，系统编程都通过汇编器来完成。与此同时，可移植操作系统的概念几乎鲜为人知。l979年，Ritchie终于可以这么写了：“很肯定，Unix的成功很大程度上源自其以高级语言作为表述方式所带来的可读性、可改性和可移植性”，虽然理想与现实此时尚有一线距离。
 
-1974年在《美国计算机通信》（Communications of the ACM\linebreak ）上发表的一篇论文中[Ritchie—Thompson]第一次公开展示了Unix。文中作者描述了Unix前所未有的简洁设计，并报告了600多例Unix应用——这些都是安装在即便按照那个年代的标准，性能都算很低的机器上，但是（正如Ritchie和Thompson所写）“性能的局限不仅成就了经济性，而且鼓励了设计的简约”。
+1974年在《美国计算机通信》（Communications of the ACM）上发表的一篇论文中[Ritchie—Thompson]第一次公开展示了Unix。文中作者描述了Unix前所未有的简洁设计，并报告了600多例Unix应用——这些都是安装在即便按照那个年代的标准，性能都算很低的机器上，但是（正如Ritchie和Thompson所写）“性能的局限不仅成就了经济性，而且鼓励了设计的简约”。
 
 CACM论文发表后，全球各个研究实验室和大学都嚷着要亲身体验Unix。根据1958年为解决反托拉斯案例达成的和解协议，AT\&{}T（贝尔实验室的母公司）被禁止进入计算机相关的商业领域。所以，Unix不能够成为一种商品。实际上，根据和解协议的规定，贝尔实验室必须将非电话业务的技术许可给任何提出要求的人。Ken Thompson开始默默回应那些请求，将磁带和磁盘一包包地寄送出去——据传说，每包里都有一张字条，写着“love，ken”（爱你的，ken）。
 
@@ -568,7 +568,7 @@ SUN微系统公司的创立者Bill Joy、Andreas Bechtolsheim和Vinod Khosla打�
 
 C语言也在1982年有望被选为Unix世界外的系统编程语言。仅仅只用了五年左右的时间，C语言就几乎让机器码汇编语言完全失去了作用。到了九十年代早期，C和C++不仅统治了系统编程领域，而且成为应用编程的主流。到九十年代晚期，其他所有传统编译语言实际上都已经过时了。
 
-1983年，在DEC公司取消PDP-10的后继机型的“木星”\linebreak （Jupiter）开发计划后，运行Unix的VAX机器开始代之成为主流的互联网机器，直到被Sun工作站取代。到1985年，尽管DEC极力抵抗，还是有25\%{}左右的VAX用上了Unix。但是取消木星计划的长期效应并明显。更主要的是，MIT人工智能实验室以PDP-10为中心的黑客文化的消亡激发了Richard StallMan开始编制GNU——一个完全自由的Unix克隆版本。
+1983年，在DEC公司取消PDP-10的后继机型的“木星”（Jupiter）开发计划后，运行Unix的VAX机器开始代之成为主流的互联网机器，直到被Sun工作站取代。到1985年，尽管DEC极力抵抗，还是有25\%{}左右的VAX用上了Unix。但是取消木星计划的长期效应并明显。更主要的是，MIT人工智能实验室以PDP-10为中心的黑客文化的消亡激发了Richard StallMan开始编制GNU——一个完全自由的Unix克隆版本。
 
 到1983年，IBM PC可使用不下六种的Unix通用操作系统：uNETix、Venix、Coherent、QNX、Idris和运行在Snitek PC子板上的移植版本。但是System V和BSD版本仍然没有Unix移植——两个群体都悲观地认为8086微处理器不够强大，根本就没打算这么做。IBM PC上的这些Unix通用操作系统无一取得显著的商业成功，但表明了市场迫切需求运行Unix的低价硬件，而主要厂商并不供应。个人用户谁也买不起，更何况源码许可证上还挂着4万美元的价签呢。
 
@@ -1554,7 +1554,7 @@ nobody:*:99:99:Nobody:/:
 Usenet新闻是一个全球性分布式公告牌系统(BBS)，比今天的P2P网络要早20年。它使用的信息格式与RFC 822电子邮件信息格式非常相似，只不过不是直接发送给个人接受者，而是发给主题组。所有在入网站点上张贴的文章先转发到登记为友邻的站点上，最终发送到整个网内的所有站点。
 
 几乎所有的Usenet读者都理解.newsrc文件，该文件记录了使用者已经阅读过哪些信息。尽管该文件名字很像一个运行控制文件，但不仅启动时要读取该文件，而且通常在新闻阅读器运行结束时还要更新该文件。自1980年左右出现第一个新闻阅读器以后，.newsrc格式就固定了下来。例5.2是.newsrc文件中具有代表性的一段代码。
-\begin{Verbatim}
+\begin{Verbatim}[label=.newsrc实例]
 rec.arts.sf.misc! 1-14774,14786,14789
 rec.arts.sf.reviews! 1-2534
 rec.arts.sf.written: 1-876513
@@ -1635,7 +1635,8 @@ RFC 822格式的一个弱点是，当一个文件中有不止一个RFC 822信息
 \subsection{Cookie-Jar格式}
 Cookie-jar格式是fortune(1)程序为随机引用数据库而使用的一种格式。这种格式很适用记录只是一堆非结构化文本的情况。这种格式简单使用跟随\%{}\%{}的新行符（或者有时只有一个\%{}）作为记录分隔符。例5.3是来自电子邮件签名引用文件的部分例行。
 
-\begin{Verbatim}
+
+\begin{Verbatim}[label=例5.3 fortune文件实例]
 "Among the many misdeeds of British rule in India, history will look
 upon the Act depriving a whole nation of arms as the blackest."
         -- Mohandas Gandhi, "An Autobiography", pg 446
@@ -1653,264 +1654,419 @@ it an offense to keep arms."
         -- Supreme Court Justice Joseph Story, 1840
 \end{Verbatim}
 
+寻找记录分隔符时接受\%{}后的空格是个好做法，有助于解决人为编辑的错误。更好的做法就是使用\%{}\%{}，并忽略从\%{}\%{}到行结束处的所有文本。
+\begin{quote}[Ken Arnold]
+cookie-jar分隔符最初是“\%{}\%{}\textbackslash n”。我当时希望找个能比“\%{}”更显眼的东西。事实上，任何“\%{}\%{}”之后的内容都作注释处理（至少我是这样写的）。
+\end{quote}
+
+简单的cookie-jar格式适用于词以上结构没有自然顺序，而且结构不易区别的文本段，或适用于搜索关键字而不是文本上下文的文本段。
+
+
+\subsection{Record-Jar格式}
+cookie-jar记录分隔符和RFC 822记录元格式结合得非常好，产生一种我们称之为“record-jar”的格式。如果文本格式要支持显式字段数目可变的多重记录，众望所归的方法就是采用例5.4类似的格式。
+
+\begin{Verbatim}[label=例5.4以record-jar格式表达的三颗行星基本数据]
+Planet: Mercury
+Orbital-Radius: 57,910,000 km
+Diameter: 4,880 km
+Mass: 3.30e23 kg
+%%
+Planet: Venus
+Orbital-Radius: 108,200,000 km
+Diameter: 12,103.6 km
+Mass: 4.869e24 kg
+%%
+Planet: Earth
+Orbital-Radius: 149,600,000 km
+Diameter: 12,756.3 km
+Mass: 5.972e24 kg
+Moons: Luna
+\end{Verbatim}
+
+当然，记录分隔符也可以是一个空行，但是由“\%{}\%\textbackslash n”构成的一行更为清晰，也不大可能在编辑时无意产生（两个可打印字符比一个好，因为这样不可能由单个笔误引起）。在类似这样的格式中，直接忽略空行是个不错的办法。
+
+如果记录中含有部分非结构化文本，record-jar格式就非常接近邮箱格式。在这种情况下，关键有一个定义良好的转义分隔符的方法，这样分隔符才能出现在文本中；否则，读取记录的程序总有一天会卡在形式不良文本部分上。本书指出了和字节填充（本章后面部分将有描述）类似的一些技巧。
+
+Record-jar格式适合于那些类似DSV文件、但又有可变字段数目而且可能伴随无结构文本的字段属性关系集合。
+ 
+\subsection{ XML}
+XML语法类似于HTML，非常简单——尖括号括起的（<>）标签和“\&{}”记号引导字面值序列。它几乎和纯文本标记一样简单，但又能表达递归嵌套的数据结构。XML只是一种低级的语法，需要文档类型定义（例如XHTML）和相关的应用逻辑赋予其语义。
+
+XML非常适合复杂的数据格式（旧学派Unix传统会为此使用类似RFC 822的节格式），尽管对简单的数据来说未免有些大材小用。它尤其适合那些RFC 822元格式不太好处理、有复杂递归或嵌套数据结构的格式。对这种格式的详细介绍，可参见《XML in a Nutshell》一书[Harold-Means].
+\begin{quote}[Keith Packard]
+设计文本格式最难处理的问题是引句（quoting）、空格符和其它低级语法细节。用户文件格式常常因为语法结构上的轻微错误而不能跟类似格式匹配。使用XML之类的标准格式，可以由标准程序库来校验并解析，解决了这些问题中的绝大部分。
+\end{quote}
+
+例5.5是一个基于XML的配置文件简单实例。它是Linux下随开源KDE office suite（套装办公软件）发布的\textit{kdeprint}工具的一部分，描述了从图像转换到PostScript的过滤操作选项，以及如何将它们映射成过滤器命令行参数。另一个有益示例请参见第8章对\textit{Glade}的讨论。
+
+XML的一个优势在于经常无需知道数据语义，仅通过语法检查就能发现形式不良、损坏或错误生成的数据。
+
+XML最严重的问题是无法很好和传统的Unix工具协作。读取XML格式的软件需要XML解析器，这就意味着需要庞大复杂的程序。同样，XML本身也相当庞大，要在所有的标记中找到数据很困难。
+
+XML占据明显优势的应用领域是文档文件的标记格式（我们将在第18章予以更详细的讨论）。在大块纯文本中，此类文件的标记往往比较稀疏，因此Unix传统工具仍能出色完成简单的文本搜索和转换。
+
+\begin{Verbatim}[label=例5.5 XML实例]
+<?xml version="1.0"?>
+<kprintfilter name="imagetops">
+    <filtercommand 
+           data="imagetops %filterargs %filterinput %filteroutput" />
+    <filterargs>
+        <filterarg name="center" 
+                   description="Image centering" 
+                   format="-nocenter" type="bool" default="true">
+            <value name="true" description="Yes" />
+            <value name="false" description="No" />
+        </filterarg>
+        <filterarg name="turn" 
+                   description="Image rotation" 
+                   format="-%value" type="list" default="auto">
+            <value name="auto" description="Automatic" />
+            <value name="noturn" description="None" />
+            <value name="turn" description="90 deg" />
+        </filterarg>
+        <filterarg name="scale" 
+                   description="Image scale" 
+                   format="-scale %value" 
+                   type="float" 
+                        min="0.0" max="1.0" default="1.000" />
+        <filterarg name="dpi" 
+                   description="Image resolution" 
+                   format="-dpi %value" 
+                   type="int" min="72" max="1200" default="300" />
+    </filterargs>
+    <filterinput>
+        <filterarg name="file" format="%in" />
+        <filterarg name="pipe" format="" />
+    </filterinput>
+    <filteroutput>
+        <filterarg name="file" format="> %out" />
+        <filterarg name="pipe" format="" />
+    </filteroutput>
+</kprintfilter>
+\end{Verbatim}
+
+这些领域间有一个很有趣的沟通桥梁，就是PYX格式——面向行的XML转换，可由传统的Unix面向行文本工具进行修改，然后再无损转换成XML。在网上搜索“Pyxie”即可找到相关资源。xmltk工具包则采取相反办法，提供类似\textit{grep}(1)和\textit{sort}(1)的面向流工具来过滤XML文档；在网上搜索“xmltk”即可找到。
+
+选择XML可以简化问题，也可能使问题复杂化。对它的大肆吹捧很多，但不要不加批判地采用或拒绝，否则就会成为时尚的牺牲品。请谨慎选择，牢记KISS原则。
+
+
+\subsection{Windows INI格式}
+许多微软的Windows程序都使用类似例5.6的文本数据格式。这个例子将名为account、directory、numeric\_{}id和developer的可选资源和名为python、sng、fetchmail和py-howto的项目关联在一起。如果某个指定的输入项没有提供值，则DEFAULT输入项将提供相应值。
+
+
+\begin{Verbatim}[label=例5.6 .INI文件实例]
+[DEFAULT]
+account = esr
+
+[python]
+directory = /home/esr/cvs/python/
+developer = 1
+
+[sng]
+directory = /home/esr/WWW/sng/
+numeric_id = 1012
+developer = 1
+
+[fetchmail]
+numeric_id = 18364
+
+[py-howto]
+account = eric
+directory = /home/esr/cvs/py-howto/
+developer = 1
+\end{Verbatim}
+
+这种风格的数据文件格式并不是Unix自带的，但在Windows影响下，一些Linux程序（特别是Samba，一种在Linux系统上获取Windows文件共享的工具套件）也开始支持这种格式。这种格式可读性好，设计得不错，但和XML一样，不能与\textit{grep}(1)或常规Unix脚本工具很好地配合使用。
+
+如果数据围绕指定的记录或部分能够自然分成“名称－属性对”两层组织结构，.INI格式非常适用。但这种格式并不适合数据存在完全递归树形结构的情况（XML更适合）。 而对于简单的名称－值关系列表，这种格式又是大材小用（这时应使用DSV格式）。
+
+\subsection{Unix文本文件格式的约定}
+Unix关于文本数据格式应该怎样的传统由来已久。这些约定大多来源于我们刚刚讨论过的Unix标准元格式中的一个或多个格式。若非确有特殊原因，最好还是遵循这些约定。
+
+我们将在第10章讨论程序运行控制文件使用的一套不同约定。但大家应该注意，以下一些原则（尤其在词法级别上，字符如何组合成标记的规则）也同样适用这套约定。
+\begin{itemize}
+\item \textbf{如果可能，以新行符结束的每一行只存一个记录}。这样用文本流工具提取记录就非常容易。为了和其它操作系统交换数据，最好让文件格式的解析器不受行结束符是LF还是CR-LF的影响。在这种格式中，习惯上忽略结尾的空白，以防范常见的编辑错误。
+\item  \textbf{如果可能，每行不超过80个字符}。这样使格式可以在普通尺寸的终端视窗上浏览。如果很多记录一定要超过80个字符，考虑使用分节格式（stanza format）（见下文）。
+\item \textbf{使用“\#{}”引入注释}。能在数据文件中嵌入注解和说明会非常好。最好是把它们作为文件结构的一部分，便可被知道这种格式的工具保存下来。对于解析时不保存的说明，惯例上采用“\#{}”作为起始字符。
+\item \textbf{支持反斜杠约定}。支持嵌入不可打印控制字符的最自然方法，就是解析C语言风格的反斜杠转义——\textbackslash{}n表示新行，\textbackslash{}r表示回车，\textbackslash{}t表示制表符，\textbackslash{}b表示退格，\textbackslash{}f表示走纸，\textbackslash{}e表示ASCII escape (27)，\textbackslash{}nnn或\textbackslash{}onnn或\textbackslash{}0nnn表示八进制值为nnn的字符，\textbackslash{}xnn表示十六进制值为nn的字符，\textbackslash{}dnnn表示十进制值为nnn的字符，\textbackslash{}\textbackslash{}表示实际意义上的反斜杠。还有一个较新但也应当遵守的约定是使用\textbackslash{}unnn表示十六进制的Unicode字面值。
+\item \textbf{在每行一条记录的格式中，使用冒号或任何连续的空白作为字段分隔符}。冒号约定似乎起源于Unix的口令文件。如果某个字段必须包含分隔符，使用反斜杠前缀进行转义。
+\item \textbf{不要过分区别tab和whitespace}。否则，当用户编辑器的tab设置不同时，会产生很多令人头痛的麻烦。这条原则是治愈头痛的良方。况且，一般来说，眼睛很难区别tab和whitespace。仅使用tab作为分隔符尤其容易产生问题；相反，允许使用连续的tab和空格作为分隔符却非常有效。
+\item \textbf{优先选用十六进制而不是八进制}。和三位的八进制数字相比，两位或四位的十六进制数字更容易直观地与字节以及今天的32位和64位字对应起来；而且，效率也或多或少高一点。强调该准则是因为\textit{od}(1)等一些较老的Unix工具违反了这条准则，这是较老的PDP小型机的机器语言指令字段大小所产生的历史遗留问题。
+\item \textbf{对于复杂的记录，使用“节（stanza）”格式：一个记录若有多行，就使用\%{}\%{}\textbackslash{}n或\%{}\textbackslash{}n作为记录分隔符}。在人们肉眼检查文件时，这种分隔符是非常有用而且直观的边界标志。
+\item \textbf{在节格式中，要么每行一个记录字段，要么让记录格式和RFC 822电子邮件头类似，用冒号终止的字段名关键字作为引导字段}。当字段经常空缺或者超过80个字符，或者当记录很稀疏时（如经常有空字段），适用第一二种方案。
+\item \textbf{在节格式中，支持连续行}。解释文件时，或者抛弃空格符之后的反斜杠，或者将空格符之后的新行符解释为单个空格；这样，一个很长的逻辑行就能够折叠成多个很短（容易编辑！）的物理行。在这些格式中，习惯上忽略结尾的空格，可防范常见的编辑错误。
+\item \textbf{要么包含一个版本号，要么将格式设计成相互独立的自描述字节块}。哪怕只存在一丁点格式发生改变或扩展的可能性，也要包含一个版本号，这样代码才能够有条件地在所有版本上正确运行。换句话说，将格式设计成自描述字节块，无需立即破坏旧代码就可以增加新的块类型。
+\item \textbf{注意浮点数取整问题}。由于所用转换库质量的不同，浮点数从二进制格式转换成文本格式再转换回二进制格式时可能会有精度损失。如果列集/散集的结构中包含浮点数，应该从两个方向都测试一下转换。如果看上去任何一个方向的转换都可能存在取整误差，做好将浮点字段作为未处理的二进制格式或字符串编码形式转储的准备。如果在C语言或调用了C printf/scanf的语言中编程，C99的\%{}a指示符可以解决这个问题。
+\item \textbf{不要仅对文件的一部分进行压缩或二进制编码}。见下文……
+\end{itemize}
+
+
+\subsection{文件压缩的利弊}
+许多现代的Unix项目，如OpenOffice.org和AbiWord，现在都使用\textit{zip}(1)或\textit{gzip}(1)压缩的XML作为数据文件格式。压缩的XML综合了空间经济性和文本格式的一些优势——尤其是避免了二进制格式常常必须要为那些特定情况下（如特殊选项或超大范围）可能用不到的信息分配空间的问题。但目前对此还存在争论，也正是这种争论引发了本章讨论的一些主要折衷方案。
+
+一方面，实验表明，经过压缩的XML文件通常比Microsoft Word自带的二进制文件格式明显要小，虽然大家可能认为二进制文件占用的空间更小。原因同Unix“就做好一件事”的基本哲学原理有关。创建一个简单的工具来做好压缩，要比仅对文件某些部分进行特别压缩更有效，原因在于，压缩工具可以扫描所有数据，然后找到信息中的所有重复部分进行压缩。
+
+同时，将表现形式的设计和具体压缩的方法分离，将来就可能只要对实际文件解析做最少量修改便可以使用不同的压缩方法——或许根本就不需要任何修改。
+  
+从另一方面来看，压缩确实在某种程度上损害了透明性。尽管人可以根据上下文推测解开压缩文件是否会看到有用的东西，但是直到2003年中期，file(1)之类的工具仍然还无法看穿这个“包装层”。
+
+可能有人会提倡那些没有这么结构化的压缩格式——比方说，不要\textit{zip}(1)提供的内部结构和自识别头部块，直接用\textit{gzip}(1)压缩XML数据。尽管使用类似\textit{zip}(1)的格式能解决识别问题，但对于用比较简单脚本语言编写的程序来说，解码这些文件会相当棘手。
+
+这些解决方案中的任何一种（纯文本，纯二进制或压缩文本）都可能是最佳方案，具体取决于对存储经济性、可显性或让浏览工具编写起来尽可能简单等问题的权衡考虑。上述讨论并非要鼓吹哪一种方法比其它方法更好，而是就如何考虑清楚各种选择方案和设计出折中方案提出一些建议。
+
+人们一直说，真正的Unix式解决方案也许是用\textit{file}(1)透过压缩看文件前缀——如果不行，就围绕\textit{file}(1)写一个shell脚本，对压缩内容执行gunzip(1)再看。
+
+
+\section{应用协议设计}
+我们将在第7章讨论“将复杂应用程序划分成几个协作进程、通过应用程序专用命令集或协议通信”的优点。所有将数据文件格式设计成文本格式的好理由同样适用于应用程序专用协议的设计。
+
+如果应用协议是文本式的，而且仅凭肉眼就能很容易地分析，那么很多好事情就更容易实现了。事务转存更容易解释。测试负载也更容易编写。
+
+服务器进程通常由\textit{inetd}(8)之类的统一控制程序( harness programs )调用，其方式是服务器程序从标准输入中接收命令，然后将响应发送到标准输出。我们将会在第11章更详细地描述这种“CLI服务器”模式。
+
+CLI服务器的命令集是为达到简洁性而设计的，这种服务器程序有一个可贵的特性，就是测试人员能够直接向服务器进程键入命令来探知软件的工作情况。
+
+另一个需要牢记在心的问题是端对端( end-to-end )设计守则。每一个协议设计者都应该读一读经典的《系统设计中的端对端论》( End-to-End Arguments in System Design )[Saltzer]。人们经常会严肃地对究竟协议栈哪一层应该处理安全和认证之类的功能提出问题。这篇文章为如何考虑这个问题提供了一些很好的概念性手段。除此以外，还有第三个问题，就是为获得良好的性能而设计应用协议。我们将在第12章更详细讨论这个问题。
+
+1980年以前，互联网应用协议的设计传统一直独立于Unix发展\footnote{互联网协议的行结束符通常是CR-LF，而不是Unix的单LF，这就是这段前Unix历史的遗留痕迹。}。但自那以后，这些传统已经完全融入了Unix实践。
+
+下面我们将研究三个使用最广泛，也是被广大互联网hacker看作典范的应用协议实例：SMTP、POP3和IMAP，来说明互联网的风格。这三个协议分别致力于邮件传输（和万维网一起构成网络最重要的两个应用）的不同方面，而所涉及的问题（传输消息、设置远程状态、报告错误状态）对非电子邮件应用协议也颇具普遍意义，并且通常也可采用类似的技巧来处理。
+
+
+
+\subsection{实例分析：SMTP，一个简单的套接字协议}
+例5.7是RFC 2821描述的SMTP协议（简单邮件传送协议）中的一个处理实例。在这个例子中，C: 行由发送邮件的邮件传输代理（MTA）发送，S: 行由接收邮件的MTA返回。用\textit{斜体字}强调的是注释，并非事务处理的实际部分。
+
+\begin{Verbatim}[label=例5.7  SMTP会话实例, commandchars=\\\{\}]
+C: <client connects to service port 25>
+C: HELO snark.thyrsus.com               \textit{sending host identifies self}
+S: 250 OK Hello snark, glad to meet you  \textit{receiver acknowledges}
+C: MAIL FROM: <esr@thyrsus.com>         \textit{identify sending user}
+S: 250 <esr@thyrsus.com>... Sender ok   \textit{receiver acknowledges}
+C: RCPT TO: cor@cpmy.com                \textit{identify target user}
+S: 250 root... Recipient ok             \textit{receiver acknowledges}
+C: DATA
+S: 354 Enter mail, end with "." on a line by itself
+C: Scratch called.  He wants to share
+C: a room with us at Balticon.
+C: .                                   \textit{ end of multiline send}
+S: 250 WAA01865 Message accepted for delivery
+C: QUIT                                \textit{ sender signs off}
+S: 221 cpmy.com closing connection      \textit{receiver disconnects}
+C: <client hangs up>
+\end{Verbatim}
+
+邮件就是这样在互联网机器上传输的。注意以下特征：请求的命令参数格式，应答由状态码和紧接其后的指示信息构成，以及“DATA”命令的有效数据部分以一个只有单个“．”的行结束。
+
+SMTP是互联网上仍在使用的最古老的两三个应用协议之一。这个协议简单有效经受住了时间的考验。我们在这里重点指出的几个特征，也经常在互联网其它协议中出现。如果说设计良好的互联网应用协议有个原型的话，那么这个原型一定是SMTP。
+
+\subsection{实例分析：POP3，邮局协议}
+另一个经典的互联网协议是POP3，即邮局协议（Post Office Protocol）。这个协议也用于邮件传输，但是SMTP是邮件发送者启动事务处理的“推（push）”协议，而POP3是邮件接收者启动事务处理的“拉（pull）”协议。不连续访问互联网的用户（如拨号连接）可以让他们的邮件存在一个邮箱机器上，然后使用POP3连接将邮件通过网线接收到自己的电脑上。
+
+例5.8是POP3会话的一个例子。其中，C: 行由客户端发送，S: 行由邮件服务器端发送。可以看到它跟SMTP有很多相似之处。这个协议也是文本协议，也是面向行的，发送的有效消息部分由单点行加上行终止符结束，甚至使用同一个退出命令——QUIT。如同SMTP，每次客户端操作都经过回复行确认，回复行以状态码开头，其中包括了可供人眼识别的提示信息。
+
+
+\begin{Verbatim}[label=例5.8 POP3会话实例]
+C: <client connects to service port 110> 
+S: +OK POP3 server ready <1896.6971@mailgate.dobbs.org>
+C: USER bob
+S: +OK bob
+C: PASS redqueen
+S: +OK bob's maildrop has 2 messages (320 octets)
+C: STAT
+S: +OK 2 320
+C: LIST
+S: +OK 2 messages (320 octets)
+S: 1 120
+S: 2 200
+S: .
+C: RETR 1
+S: +OK 120 octets
+S: <the POP3 server sends the text of message 1>
+S: .
+C: DELE 1
+S: +OK message 1 deleted
+C: RETR 2
+S: +OK 200 octets
+S: <the POP3 server sends the text of message 2>
+S: .
+C: DELE 2
+S: +OK message 2 deleted
+C: QUIT
+S: +OK dewey POP3 server signing off (maildrop empty)
+C: <client hangs up>
+\end{Verbatim}
+
+与SMTP有一些不同之处，最明显的区别是POP3使用状态标记，而不是像SMTP那样使用3位数字的状态码。当然，请求的语义也不同。但是两者的族谱相似性（本章稍后讨论通用互联网元协议时会对此详细说明）很明显。
+
+
+\subsection{实例分析：IMAP，互联网消息访问协议}
+为了完整展示互联网应用协议的三剑客，我们最后再看看IMAP——另一个设计风格略有不同的邮局协议。请看例5.9：跟前面一样，C: 行由客户端发送，S: 行由邮件服务器发送。用\textit{斜体字}强调的是注释，并非事务处理的实际部分。
+
+\begin{Verbatim}[label=例5.9 IMAP会话实例]
+C: <client connects to service port 143>
+S: * OK example.com IMAP4rev1 v12.264 server ready
+C: A0001 USER "frobozz" "xyzzy"
+S: * OK User frobozz authenticated
+C: A0002 SELECT INBOX
+S: * 1 EXISTS
+S: * 1 RECENT
+S: * FLAGS (\Answered \Flagged \Deleted \Draft \Seen)
+S: * OK [UNSEEN 1] first unseen message in /var/spool/mail/esr
+S: A0002 OK [READ-WRITE] SELECT completed
+C: A0003 FETCH 1 RFC822.SIZE                    \textit{Get message sizes}
+S: * 1 FETCH (RFC822.SIZE 2545)
+S: A0003 OK FETCH completed
+C: A0004 FETCH 1 BODY[HEADER]                   \textit{Get first message header}
+S: * 1 FETCH (RFC822.HEADER {1425}
+<server sends 1425 octets of message payload>
+S: )
+S: A0004 OK FETCH completed
+C: A0005 FETCH 1 BODY[TEXT]                     \textit{Get first message body}
+S: * 1 FETCH (BODY[TEXT] {1120}
+<server sends 1120 octets of message payload>
+S: )
+S: * 1 FETCH (FLAGS (\Recent \Seen))
+S: A0005 OK FETCH completed
+C: A0006 LOGOUT
+S: * BYE example.com IMAP4rev1 server terminating connection
+S: A0006 OK LOGOUT completed
+C: <client hangs up>
+\end{Verbatim}
+
+IMAP对有效载荷部分的分隔方法略有不同，它不是用一个点号来结束，而是将有效载荷的长度直接放在有效载荷之前发送。这稍稍增加了服务器的负担（消息必须提前完成组合，无法在初始化后流转），但使客户端工作更容易了——客户端可以提前知道需要分配多少存储空间作为整个处理消息的缓冲区。
+
+同时，应注意，每个响应都标上了由请求提供的序列标签，本例中这个标签的形式为A000n，但客户端也可以在这个位置上生成任何其它标记。这个特性使IMAP命令无需等待响应就可以流向服务器端；然后客户端的状态机就能够在数据回来时直接解析响应和有效数据载荷。这样可以减少等待时间。
+
+IMAP（为取代POP3协议而设计）是一个成熟而强大的互联网应用协议的优秀设计典范，值得学习和效仿。
+
+
+\section{应用协议元格式}
+就像数据文件元格式是为了简化存储的序列化操作而发展出来一样，应用协议元格式是为了简化网络间事务处理的序列化操作而发展出来的。但在这种情况中采取的折衷略有不同：因为网络带宽要比存储昂贵得多，所以需更加重视事务处理的经济性。尽管如此，文本格式的透明性和互用性优势仍然十分显著，所以大多数设计者还是抵制住了牺牲可读性来优化性能的诱惑。
+
+\subsection{经典的互联网应用元协议}
+Marshall Rose的RFC 3117《论应用协议的设计》( On the Design of Application Protocols）\footnote{从<ftp://ftp.rfc-editor.org/in-notes/rfc3117.txt>处参阅RFC 3117。}很好地概括了互联网应用协议设计中的种种问题。它明确了我们在分析SMTP、POP和IMAP时所注意到的一些经典互联网协议的描述手段( trope )，并对其
+进行了具启发意义的分类。推荐大家一读。
+
+经典的互联网元协议是文本格式，使用单行请求和响应，但有效数据载荷可以多行。
+
+有效数据载荷要么是8位组数据作为前导，要么以“\verb+\r\n+”行作为结束符。在后一种情况下，有效数据载荷在字节上已被补齐；所有以句点“．”开始的行前面需要另加一个句点，接收方既负责识别结束符又负责去除补齐字节。应答行由状态码和后接人可识别的消息构成。
+
+这种经典风格的关键优势是可以随时扩展。解析器和状态机框架无需太多修改就能够适应新的请求，而且代码也容易编写，使其可以解析未知请求并返回错误信息或直接忽略这些未知请求。SMTP、POP3和IMAP在使用过程中都经历了相当频繁的小扩展，互用性问题极少。相比之下，那些设计比较简单的二进制协议，却以不耐用而臭名昭著。
+
+\subsection{作为通用应用协议的HTTP}
+自从万维网在1993年左右吸引到足量用户以来，应用协议的设计者已经越来越倾向于在HTTP上构建专用协议，并使用网页服务器作为通用服务平台。
+
+这是一种可行的方案，因为在事务层上，HTTP非常简单和通用。HTTP请求采用类似RFC-822/MIME格式的消息：通常，消息头包含识别和认证信息，第一行是对通用资源指示符( URI )指定的某个资源的方法调用。最重要的方法是GET（获取资源）、PUT（修改资源）和POST（将数据发送给某个表单或后端进程）。URI最重要的形式是URL，即统一资源定位符（ Uniform Resource Locator）；URL通过服务类型、主机名称和在主机上的位置对资源进行识别。HTTP响应只是一种RFC-822/MIME消息，可以包含由客户端解释的任意内容。
+
+网页服务器处理HTTP的传输和请求多路复合层，同时也处理标准的服务类型，如http和ftp。要编写可以处理自定义服务类型的网页服务器插件相对比较容易，也很容易分派URI格式的其它元素。
+
+除了避免很多底层细节之外，这种方法也意味着应用协议可以通过标准的HTTP服务端口，不需要自身的TCP/IP服务端口。这成为一个非常显著的优势：大多数防火墙都开放80端口，而试图穿透其它端口则可能遇到技术上和政治上的困难。
+
+风险也伴随这种优势而来：这意味着网页服务器和插件会越变越复杂，任何这些代码的破解都可能带来巨大的安全问题。要隔离并关闭出问题的服务也可能会更加困难。通常此时就要在安全和便利间做出折衷。
+
+RFC 3205《论使用HTTP作为底层》( On the Use of HTTP As a Substrate）\footnote{参见RFC 3205<http://www.fags.org/rfcs/rfc3205.html>}向正在考虑将HTTP作为应用协议底层使用的人提出了很好的设计建议，文中还总结了各种权衡方案和所涉及的问题。
+
+\subsubsection{实例分析：CDDB/freedb.org数据库}
+音频CD由一序列称为CDDA-WAV的数字格式音轨组成。在一般计算机拥有足够速度和声音处理能力来实时解码之前几年，音频CD是为让简单消费型电子产品能够播放而设计的。正因为如此，它没有提供相应的格式来记录甚至非常简单的一些元信息，如唱片专辑和歌曲音轨标题等。但是现代计算机中的CD播放器需要这些信息，这样用
+户可以整理和编辑播放列表。
+
+连上互联网，网上有（至少两个）资料库可提供根据CD上音轨长度表计算出的散列码与艺术家/专辑名/音轨名之间的对应记录。最初的一个资料库是cddb.org，但另一个名为freedb.org的站点也许现在资料更完整，用的人也更多。随着新CD的不断推出，这两个站点都依靠用户来完成更新数据库的巨大任务。当CDDB决定将用户提供的
+所有信息都收为专有后，作为开发者的反抗，freedb.org发展了起来。
+
+对这些服务的查询本可以作为基于TCP/IP的自定义应用协议来实现，但是那样就要求采取以下步骤，如给它分配一个新的TCP/IP端口号，还要为它费力地从成千上万的防火墙上争取到通路。为了避免这些麻烦，该服务基于HTTP作为简单的CGI查询来实现（就好像CD的散列码是用户通过在网页上填表提供的）。
+
+由于作了这种选择，所有现行各种编程语言的HTTP和Web访问程序库的基础代码都可以支持数据库的查询和更新。结果，在CD播放器中增加这样的支持功能几乎不费吹灰之力，而实际上现在每款CD播放软件都知道如何使用这些功能。
+
+\subsubsection{实例分析：互联网打印协议}
+互联网打印协议（IPP，Internet Printing Protocol）是一个非常成功、被广泛采用的网络访问打印机控制标准。指向RFC的链接、各种实现和大量的其它相关材料都可以在IETF的打印机工作组站点<http://www.pwg.org/ipp/>获得。
+
+IPP使用HTTP1.1作为传输层。所有的IPP请求都通过HTTP POST方法调用发送；响应是普通的HTTP响应。（《互联网打印协议模型和结构基本原理》( Rationale for the Structure of the Model and Protocol for the Internet Printing Protocot )，RFC 2568的4.2节很好解释了做出这种选择的理由，值得正在考虑编写新应用协议的所有人员研究）。
+
+在软件方面，HTTP1.1得到了广泛应用。HTPP1.1已经解决了许多传输层问题，不然，这些问题将使协议的设计者和实现者无法集中精力解决打印的域语义问题。HTTP1.1能够很干净地进行扩展，因此IPP还有足够的发展空间。人们非常熟悉处理POST请求的CGI编程模型，开发工具也很丰富。
+
+大多数具有网络能力的打印机已经内置了网页服务器，因为这是能人工远程查询打印机状态的一个自然的方法。这样，向打印机固件增加IPP服务的额外成本并不是很高。（这一点也适用于许许多多具有网络能力的硬件，包括自动售货机、自动咖啡机\footnote{参见RFC 2324<http://www.ietf.org/rfc/rfc2324.txt>和RFC 2325<http://www.ietf.org/rfc/rfc2325.txt>}和自动澡盆！）
+
+基于HTTP的IPP协议的唯一严重缺点就是协议完全由客户端的请求来驱动。这样，模型中就不存在可供打印机向客户返回异步报警信息的余地（然而，聪明的客户可以运行一个很小的HTTP服务程序，来接收打印机发送的HTTP请求格式报警信息）。
+
+\subsection{BEEP：块可扩展交换协议}
+BEEP（原先叫BXXP）是一种通用协议，对于通用底层这一角色来说和HTTP一样具有竞争力。之所以说竞争，是因为目前为止还没有一个制定较完善的元协议非常适合真正的对等网（P2P）应用，不像客户端-服务器应用——HTTP在这一领域游刃有余。访问<http://www.beepcore.org/beepcore/docs/sl-beep.jsp>项目网站可以找到有关标准以及数种语言的开源实现。
+ 
+BEEP的特点是既支持客户端/服务器模式，又支持对等网模式（ peer-to-peer）。协议作者们对BEEP协议和支持库进行了良好设计。这样，只要选取正确组件就能省去很多杂务，如数据编码、流控、堵塞（congestion）处理、端对端加密支持和用多路传输组成长应答等。
+
+从内部而言，BEEP用户端（peer）之间相互交换自描述二进制包序列，后者与PNG中字节块类型非常相像。跟经典的互联网协议或HTTP相比，BEEP设计对经济性的强调高于透明性，当数据量非常大时可能是更好的选择。BEEP也避免了HTTP所有请求都必须由客户端发起的问题：在服务器端需要向客户端异步返回状态信息的情况下，BEEP协议会更好。
+
+到2003年年中，BEEP仍然是一项新兴技术，只有几个演示项目。但是BEEP论文是非常不错的关于设计最佳协议的分析材料：即使BEEP本身无法得到广泛采用，这些论文仍然具有相当重要的指导价值。
+
+\subsection{XML-RPC，SOAP和Jabber}
+应用协议设计的一种发展趋势是在MIME中使用XML来架构请求和有效数据载荷。BEEP用户端使用这种格式进行信道协商。有三个重要协议始终采用XML路线，包括XML-RPC，用于远程过程调用的SOAP（Simple Object Access Protocol，简单对象访问协议）和用于即时消息和在线状态报告（instant messaging and presence）的Jabber。这三个协议都基于XML文档。
+
+XML-RPC非常具有Unix精神（其作者宣称在二十世纪七十年代通过阅读原始的Unix源码学会了编程）。它着意追求最简化，但是仍然非常强大，对于绝大多数专为传送布尔/整数/浮点/字符串标量数据类型的各种RPC应用提供一种方法，使它们能够以一种轻量、易于理解和监控的方式来完成任务。XML-RPC类型实体比文本流丰富，但仍然简单而具有移植性，可被有效地用于检查接口复杂性。它有很多开源实现。XML-RPC主页<http://www/xmlrpc.com/>做得不错，提供了规格书和多个开源实现。
+
+SOAP是一个较重量级的RPC协议，数据类型更为丰富，包括数组和类似C的结构。这个协议受到了XML-RPC的启发，但一直被批评为过分追求“第二系统效应”设计的受害者，这么说不无道理。直到2003年中，SOAP标准还在制定当中，但是在Apache上的试验版实现一直紧跟其设计草案。大家可以很容易地在网上搜索到Perl、Python、Tcl和Java中的开源客户端模块。W3C规范的草案可从<http://www.w3.org/TR/SOAP/>获得。
+
+作为远程过程调用方法的XML-RPC和SOAP都会带来某种风险，我们将在第7章结尾部分予以讨论。
+
+Jabber是一个为支持即时消息和在线状态报告而设计的对等协议。Jabber作为应用协议的有趣之处在于：它支持XML表单和随时更新文档（live document）的输送。规格说明、文档和开源实现都可以通过Jabber款件基金会的站点<http://www.jabber.org/about/overview.html>获得。
+
+
+\chapter{透明性：来点儿光}
+
+
+
+
 
 \end{common-format}  
 \end{document}
-    寻找记录分隔符时接受%后的空格是个好做法，有助于解决人为编辑的错误。更好
-的做法就是使用%%，并忽略从%%到行结束处的所有文本。
-cookie-j ar分隔符最初是“%%\n”。我
-西。事实上，
-当时希望找个能比“%’’更显眼的东
-任何“%%”之后的内容都怍注释处理（至少我是这样写的）。
-
-
-
-
-第5章文本化：好协议产生好实践
-    简单的cookie-jar格式适用于词以上结构没有自然顺序，而且结构不易区别的文本
-段，或适用于搜索关键字而不是文本上下文的文本段。
-5.2.4  Record．Jar格式
-    cookie-jar记录分隔符和RFC 822记录元格式结合得非常好，产生一种我们称之为
-“record-j ar”的格式。如果文本格式要支持显式字段数目可变的多重记录，众望所归的
-方法就是采用例5.4类似的格式。
-例5.4以record-jar格式表达的三颗行星基本数据
-Planet :  Mercury
-Orbital-Radius :  57， 910， 000  km
-Diameter:  4， 880 km
-Mass:  3 .30e23  kg
-%%
-Planet :  Venus
-Orbital-Radius :  108， 200， 000  krn
-Diameter:  12， 103 . 6  km
-Mass: 4.869e24 kg
-%%
-Planet :  Earth
-Orbi七al-Radius :  149， 60U， （JOO  km
-Diame七er:  12， 756.3  km
-Mass: 5.972e24 kg
-Moons :  Luna
-    当然，记录分隔符也可以是一个空行，但是由“% C/o\n”构成的一行吏为清晰，也不
-大可能在编辑时无意产生（两个可打印字符比一个好，因为这样不可能由单个笔误引起）。
-在类似这样的格式中，直接忽略空行是个不错的办法。
-    如果记录中含有部分非结构化文本，record-j ar格式就非常接近邮箱格式。在这种情
-况下，关键有一个定义良好的转义分隔符的方法，这样分隔符才能出现在文本中；否则，
-读取记录的程序总有一天会卡在形式不良文本部分上。本书指出了和字节填充（本章后
-面部分将有描述）类似的一些技巧。
-www.pdf365.com
-5.2数据文件元格式
-1 17
-    Record-j ar格式适合于那些类似DSV文件、但又有可变字段数目而且可能伴随无结
-构文本的字段属性关系集合。
-5.2.5  XML
-    XML语法类似于HTML，非常简单——尖括号括起的（<>）标签和“&’’记号引导
-字面值序列。它几乎和纯文本标记一样简单，但又能表达递归嵌套的数据结构。XML只
-是一种低级的语法，需要文档类型定义（例如XHTML）和相关的应用逻辑赋予其语义。
-    XML非常适合复杂的数据格式（旧学派Unix传统会为此使用类似RFC 822的节格
-式），尽管对简单的数据来说未免有些大材小用。它尤其适合那些RFC 822元格式不太
-好处理、有复杂递归或嵌套数据结构的格式。对这种格式的详细介绍，可参见《XML in
-aNutshell》 -书[Harold-Means].
-    设计文本格式最难处理的问题是引句（quoting）、空格符和其它低级语法细节。
-  用户文件格式常常因为语法结构上的轻微错误而不能跟类似格式匹配。使用XML
-  之类的标准格式，可以由标准程序库来校验并解析，解决了这些问题中的绝大部
-  分。
--Keith Packard
-    例5.5是一个基于XML的配置文件简单实例。它是Linux下随开澡KDE office suite
-（套装办公软件）发布的kdeprint工具的一部分，描述了从图像转换到PostScript的过滤
-操作选项，以及如何将它们映射成过滤器命令行参数。另一个有益示例请参见第8章对
-Glade的讨论。
-    XML的一个优势在于经常无需知道数据语义，仅通过语法检查就能发现形式不良、
-损坏或错误生成的数据。
-    XML最严重的问题是无法很好和传统的Unix工具协作。读取XML格式的软件需
-要XML解析器，这就意味着需要庞大复杂的程序。同样，XML本身也相当庞大，要在
-所有的标记中找到数据很困难。
-    XML占据明显优势的应用领域是文档文件的标记格式（我们将在第18章予以更详
-细的讨论）。在大块纯文本中，此类文件的标记往往比较稀疏，因此Unix传统工具仍能
-出色完成简单的文本搜索和转换。
+    Beauty fJmorefmportant加computing than anywhere else in technology because
+sofiware is so complicated. Beauty is the ultimate defense against complexity.
+    美在计算科学中的地位，要比在其它任何技术中的地位都重要，因为软件是太复杂
+了。美是抵御复杂的终极武器。
+    Machine Beauty:Elegance and the Heart of Technoloogy  （1998）
+    《机器美学：优雅和技术本质》（1998年）
+    -David Gelernter
+    我们在前一章讨论了把数据格式和应用协议进行文本化的重要性，这种方式的表
+达容易让人分析和参与，使一些设计品质得以提升，虽然Unix传统非常重视这些品质，
+但很少（如果有的话）明确谈论过，那就是：透明性和可显性。
+    如果没有阴暗的角落和隐藏的深度，软件系统就是透明的。透明性是一种被动品质。
+如果实际上能预测到程序行为的全部或大部分情况，并能建立简单的心理模型，这个程
+序就是透明的，因为可以着透机器究竟在于什么。
+    如果软件系统所包含的功能是为了帮助人们对软件建立正确的“做什么、怎样做，，
+的心理模型而设计，这个软件系统就是可显的。因此，举例来说，对用户而言，良好的
+UNIX编程艺-宋
+  www.pdf365.com
+1 34
+第6章透明性：来点儿光
+文档有助于提高可显性；对程序员而言，良好的变量和函数名有助于提高可显性。可显
+性是一种主动品质。在软件中要达到这一点，仅仅做到不晦涩是不够的，还必须尽力做
+到有帮助1。
+    透明性和可显性对用户和软件开发人员都很重要。但是重要性体现在不同的方面。
+用户喜欢UI中的这些特性，是因为这意味着学习曲线比较平缓。当人们说UI“直观’’
+时，很大程度上是指UI的透明性和可显性；剩下一部分则来源于最小立异原则。我们将
+在第1 1章更深入分析这些使用户界面舒适而有效的特性。
+    软件开发者喜欢代码本身（用户不可见部分）的这些品质，因为他们经常需要对代
+码有很好理解后才能进行修改和调试。同时，如果程序的设计使内部数据流程非常容易
+理解，则这个程序更不可能因设计者没有注意到的不良交互而崩溃，更可能优雅地向前
+发展（包括适应新维护者接手的变化）。
+    透明性是本章引言David Gelemter所说的“美”的主要构成部分。Unix程序员借鉴
+了数学家的说法，经常使用更明确的术语“优雅”来表达Gelemter所说的品质。优雅是
+力量与简洁的结合。优雅的代码事半功倍；优雅的代码不仅正确，而且显然正确；优雅
+的代码不仅将算法侍达给计算机，同时也把见解和信心传递给阅读代码的人。通过追求
+代码的优雅，我们能够编写更好的代码。学习编写透明的代码是学习如何编写优雅代码
+的第一关，很难的一关——而关注代码的可显性则帮助我们学习如何编写透明的代码。
+优雅的代码既透明又可显。
+    通过两个极端例子来辨别透明性和可显性之间的差别可能会更容易些。Linux的内核
+源码相当透明（相对其行为的内在复杂性而言），但根本不具备可显性——要获得必要
+的知识以便融入代码中并理解开发者的惯用语相当困难，而一旦做到，～切便豁然开朗2。
+另一方面，Emacs Lisp库是可显的，但却不透明。要获得足够的知识来领会一件事很容
+易，但要理解整个系统却相当困难。
+1一位有经济头脑的朋友评论：  “可显性降低进入门槛；透明性则减少代码中的存在成本。”
+2 Linux内核在可显性上做了很多努力，包括Linux内核源码tarball中的Documentation子目录和相
+当多的教程网站和指导书籍。这些努力比起内核变化的速度来说远远不够，文档还将长期落后。
 UNIX编程艺术
-  www.pdf365.com
-第5章文本化：好协议产生好实践
-例5.5 XML实例
-<?xml  version= " I - 0 " ?>
-<kprintfilter  name= " imagetops " >
-     <filtercorrunand
-               da七a= 'r imagetops  %filterargs  oo f il七erinput   %fil七eroutput "   />
-     <filterargs>
-                      < fil t erarg   name= " cent cr "
-                       description= " Image  cent ering "
-                       format = " -nocen七er "  七ype= "bool "   de fault= " t rue " >
-<
-<
-<va上ue
-（value
-/filterar
-filt erarg
-name= " true "   description= " Yes "   />
-name= " false -'   description= " No "    />
-g>
- name= " turn "
-                         description= "工mage  ro七ation"
-                           format= " - %value "    Lype- " J_i s七 "   defaul七= " auto " >
-    <value  name= " auto "   descrip七ion= r' Automatic Fl   />
-    <value   name= " noturn"   description= "None "   />
-    <value  name= "turn "   description= " 90   deg "   />
-    </f ilterarg>
-           <filterarg  name= " scale"
-                         description= " Image  scale "
-                            forma七= 'r _ scale  %value "
-                            type- " f l oa七 "
-                                       fliirl= r' 0 . 0 'r  max="l. O "  detault= " I _ 000 "   />
-          <filterarg  name="dpi "
-                       description= " Image   resolu七 ion "
-                          forma七= " -dpi   %value "
-    type= " iriL '*   mjn-. " 72 ，，   max= " ~200 "   default= -' 300 "   />
-    </filterargs>
-     <filterinput>
-           <fil七erarg  name- " file "   format= " %in "   /）
-                                                                                                    -/-
-           <filterarg  name- "pipe 'r   format_ " "   />
-    </fil七erinput >
-     <filterou七put >
-          <filterarg  na玎1e=" file"  format= ">  %out"  />
-          <filterarg  name= " pipe"   forma七= " "   />
-    </ fil七eroutput>
-</kprint filter>
-               -                                      --
-                                                                                                    ---- --
-返些领域间有一个很有趣的沟通桥梁，就是PYX格式——面向行的XML转换，可
-由传统的Unix面向行文本工具进行修改，然后再无损转换成XML。在网上搜索
-“Pyxie”
-www.pdf365.com
-5.2数据文件元格式
-119
-即可找到相关资源。xmltk工具包则采取相反办法，提供类似grep （1）和sort（1）的面
-向流工具来过滤XML文档；在网上搜索“xmltk”即可找到。
-    选择XML可以简化问题，也可能使问题复杂化。对它的大肆吹捧很多，但不要不
-加批判地采用或拒绝，否则就会成为时尚的牺牲品。请谨慎选择，牢记KISS原则。
-5.2.6  Windows INI格式
-    许多微软的Windows程序都使用类似例5.6的文本数据格式。这个例子将名为
-account、directory、numeric_id干口developer的可选资源和名为python、
-sng、fetchmail和py -howto的项目关联在一起。如果某个指定的输入项没有提供
-值，则DEFAULT输入项将提供相应值。
-例5.6.INI文件实例
-[ DEFAULT]
-account  =  esr
-[py七hon J
-directory = /home/esr/cvs/python/
-developer = I
- [sng]
-directory = /home/esr/WWW/sng/
-numeric_id = 1012
-developer - 1
-[ fe七chmail]
-numeric_id = 18364
-[py-howto]
-account  =  eric
- directory=  /home/esr/cvs/py-howto/
-developer  =l
-    、_________.__-..__-__._0’一
-    这种风格的数据文件格式并不是Unix自带的，但在Windows影响下，一些Linux
-程序（特别是Samba，一种在Linux系统上获取Windows文件共享的工具套件）也开始
-支持这种格式。这种格式可读性好，设计得不错，但和XML一样，不能与擘即（1）或
-常规Unix脚本工具很好地配合使用。
-UNIX编程艺术
-  www.pdf365.com
-1 20
-第5章文本化：好协议产生好实践
-    如果数据围绕指定的记录或部分能够自然分成“名称一属性对’’两层组织结构，.INI
-格式非常适用。但这种格式并不适合数据存在完全递归树形结构的情况（XML更适合）o
-而对于简单的名称一值关系列表，这种格式又是大材小用（这时应使用DSV格式）。
-5.2.7 Unix文本文件格式的约定
-    Unix关于文本数据格式应该怎样的传统由来已久。这些约定大多来源于我们刚刚讨
-论过的Unix标准元格式中的一个或多个格式。若非确有特殊原因，最好还是遵循这些约
-定。
-    我们将在第10章讨论程序运行控制文件使用的一套不同约定。但大家应该注意，以
-下一些原则（尤其在词法级别上，字符如何组合成标记的规则）也同样适用这套约定。
-    ●如果可能，以新行符结束的每一行只存一个记录。这样用文本流工具提取记录就
-    非常容易。为了和其它操作系统交换数据，最好让文件格式的解析器不受行结束
-    符是LF还是CR-LF的影响。在这种格式中，习惯上忽略结尾的空白，以防范常
-    见的编辑错误。
-    ●如果可能，每行不超过80个字符。这样使格式可以在普通尺寸的终端视窗上浏
-    览。如果很多记录一定要超过80个字符，考虑使用分节格式（stanza format）[见
-    下文）。
-●使用“}}”引入注释。能在数据文件中嵌入注解和说明会非常好。最好是把它们
-  作为文件结构的一部分，便可被知道这种格式的工具保存下来。对于解析时不保
-  存的说明，惯例上采用“}}”作为起始字符。
-●支持反斜杠约定。支持嵌入不可打印控制字符的最自然方法，就是解析C语言
-  风格的反斜杠转义——＼n表示新行，＼r表示回车，＼七表示制表符，＼b表示
-  退格，＼f表示走纸，＼e表示ASCII escape （27），＼nnn或＼onnn或＼Onnn
-  表示八进制值为nnn的字符，＼xnn表示十六进制值为nn的字符，\dnnn表
-  示十迸制值为nnn的字符，＼＼表示实际意义上的反斜杠。还有一个较新但也应当
-  遵守的约定是使用＼unnn表示十六进制的Unicode字面值。
-●在每行一条记录的格式中，使用冒号或任何连续的空白作为字段分隔符。冒号约
-  定似乎起源于Unix的口令文件。如果某个字段必须包含分隔符，使用反斜杠前
-  缀进行转义。
-www.pdf365.com
-121
-●不要过分区别tab和whitespace。否则，当用户编辑器的tab设置不同时，会产
-  生很多令人头痛的麻烦。这条原则是治愈头痛的良方。况且，一般来说，眼睛很
-  难区别tab和whitespace。仅使用tab作为分隔符尤其容易产生问题；相反，允
-  许使用连续的tab和空格作为分隔符却非常有效。
-●优先选用十六进制而不是八进制。和三位的八进制数字相比，两位或四位的十六
-  进制数字更容易直观地与字节以及今天的32位和64位字对应起来；而且，效率
-  也或多或少高一点。强调该准则是因为Dd（1）等一些较老的Unix工具违反了
-  这条准则，这是较老的PDP小型机的机器语言指令字段大小所产生的历史遗留
-  问题。
-●对于复杂的记录，使用“节（stanza）"格式：一个记录若有多行，就使用%%＼n
-  或%\n作为记录分隔符。在人们肉眼检查文件时，这种分隔符是非常有用而且
-  直观的边界标志。
-●在节格式中，要么每行一个记录字段，要么让记录格式和RFC 822电子邮件头类
-  似，用冒号终止的字段名关键字作为引导字段。当字段经常空缺或者超过80个
-  字符，或者当记录很稀疏时（如经常有空字段），适用第一二种方案。
-●在节格式中，支持连续行。解释文件时．或者抛弃空格符之后的反斜杠，或者将
-  空格符之后的新行符解释为单个空格；这样，一个很长的逻辑行就能够折叠成多
-  个很短（容易编辑！）的物理行。在这些格式中，习惯上忽略结尾的空格，可防
-  范常见的编辑错误。
-●要么包含一个版本号，要么将格式设计成相互独立的自描述字节块。哪怕只存在
-  一丁点格式发生改变或扩展的可能性，也要包含一个版本号，这样代码才能够有
-  条件地在所有版本上正确运行。换句话说，将格式设计成自描述字节块，无需立
-  即破坏旧代码就可以增加新的块类型。
-●注意浮点数取整问题。由于所用转换库质量的不同，浮点数从二进制格式转换成
-  文本格式再转换回二进制格式时可能会有精度损失。如果列集／散集的结构中包
-  含浮点数，应该从两个方向都测试一下转换。如果看上去任何一个方向的转换都
-  可能存在取整误差，做好将浮点字段作为未处理的二进制格式或字符串编码形式
-UNI×编鹰；艺．术
-  www.pdf365.com
-122
-第5章文本化：好协议产生好实践
-  转储的准备。如果在C语言或调用了C printf/scanf的语言中编程，C99的%a指
-  示符可以解决这个问题。
-●不要仅对文件的一部分进行压缩或二进制编码。见下文……
-5.2.8文件压缩的利弊
-    许多现代的Unix项目，如OpenOffice.org和AbiWord，现在都使用Zip（1）或gzip
-（1）压缩的XML作为数据文件格式。压缩的XML综合了空间经济性和文本格式的一
-些优势——尤其是避免了二进制格式常常必须要为那些特定情况下（如特殊选项或超大
-范围）可能用不到的信息分配空间的问题。但目前对此还存在争论，也正是这种争论引
-发了本章讨论的一些主要折衷方案。
-    一方面，实验表明，经过压缩的XML文件通常比Microsoft Word自带的二进制文
-件格式明显要小，虽然大家可能认为二进制文件占用的空间更小。原因同Unix“就做好
-一件事”的基本哲学原理有关。创建一个简单的工具来做好压缩，要比仅对文件某些部
-分进行特别压缩更有效，原因在于，压缩工具可以扫描所有数据，然后找到信息中的所
-有重复部分进行压缩。
-    同时，将表现形式的设计和具体压缩的方法分离，将来就可能只要对实际文件解析
-做晟少量修改便可以使用不同的压缩方法～—或许根本就不需要任何修改。
-    从另一方面来看，压缩确实在某种程度上损害了透明性。尽管人可以根据上下文推
-沏0解开压缩文件是否会看到有用的东西，但是直到2003年中期，file（1）之类的工具
-仍然还无法看穿这个“包装层”。
-    可能有人会提倡那些没有这么结构化的压缩格式——比方说，不要zip （1）提供的
-内部结构和自识别头部块，直接用gzip （l）压缩XML数据。尽管使用类似zip （1）的
-格式能解决识别问题，但对于用比较简单脚本语言编写的程序来说，解码这些文件会相
-当棘手。
-    这砦解决方案中的任何一种（纯文本，纯二进制或压缩文本）都可能是最佳方案，
-具体取决于对存储经济性、可显性或让浏览工具编写起来尽可能简单等问题的权衡考虑。
-上述讨论并非要鼓吹哪一种方法比其它方法更好，而是就如何考虑清楚各种选择方案和
-设计出折中方案提出一些建议。
-www.pdf365.com
-
-
-
-
-
-
+    www.pdf365.com
+6.1研究实例
+135
 
 
 \chapter{附录}
