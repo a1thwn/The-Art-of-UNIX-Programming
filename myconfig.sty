@@ -36,7 +36,7 @@
 
 \newenvironment{common-format}{ %
         \setlength{\parskip}{1.6ex plus 0.2ex minus 0.2ex}   %段落間距
-        \setlength{\parindent}{\baselineskip * \real{0.06} + \textpt * \real{2.4}}}
+        \setlength{\parindent}{\textpt * \real{2}}}
     {}
 
 %=========页面设置=========%
@@ -123,7 +123,7 @@ marginparwidth=0mm  %旁註寬度
 \renewcommand\tablename{表}
 \renewcommand\partname{部分}
 \renewcommand\appendixname{附录}
-\renewcommand\today{\number\year年\number\month月\number\day日}
+\renewcommand\today{\number\year 年\number\month 月\number\day 日}
 
 
 %=======页眉页脚格式=========%
@@ -245,34 +245,17 @@ marginparwidth=0mm  %旁註寬度
 {\endlist}
 
 %======notecard环境 一种卡片式记忆环境====%
-%长高按照黄金比例分割来，长1，高0.62--0.62\linewidth 0.38\linewidth
 %推荐的颜色有：black olive blue orange brown pink cyan purple darkgray red gray teal green violet lightgray white lime magenta yellow 建议都调淡30。!30
 %不过推荐一个文档内部一种类型使用一种，其他颜色也是可以的。
 \newsavebox{\tempbox}
-\newenvironment{notecard}[1][white]
+\newenvironment{notecard}[2][white]
  {\noindent\ignorespaces%
  \setlength{\fboxsep}{10pt}
   \newcommand{\tempcolor}{#1}
   \begin{lrbox}{\tempbox}%
-  \begin{minipage}[c][0.36\linewidth][c]{0.58\linewidth}
-        \setlength{\parindent}{\baselineskip * \real{0.06} + \textpt * \real{2.4}}
-        \setlength{\parskip}{0.12\parindent}   %段落間距
-}
- {
- \ignorespacesafterend%
-  \end{minipage}%
-  \end{lrbox}%
-  \colorbox{\tempcolor}{\usebox{\tempbox}}}
-
-%但是如果文字过多
-\newenvironment{flashcard}[1][white]
- {\noindent\ignorespaces%
- \setlength{\fboxsep}{10pt}
-  \newcommand{\tempcolor}{#1}
-  \begin{lrbox}{\tempbox}%
-  \begin{minipage}[c][0.58\linewidth][c]{0.93\linewidth}
-        \setlength{\parindent}{\baselineskip * \real{0.06} + \textpt * \real{2.4}}
-        \setlength{\parskip}{0.12\parindent}   %段落間距
+  \begin{minipage}{#2}
+        \setlength{\parindent}{0pt}
+        \setlength{\parskip}{1.618ex}   %段落間距
 }
  {
  \ignorespacesafterend%
