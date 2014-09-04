@@ -78,11 +78,22 @@ marginparwidth=0mm  %旁註寬度
 \RequirePackage[table,svgnames]{xcolor}
 \definecolor{bgcolor-0}{HTML}{CCFFCC}
 
-
 %================字體================%
 %设置数学字体
 \RequirePackage{amssymb,amsmath}
 \RequirePackage{fontspec}
+%si unit
+\RequirePackage{siunitx}
+\sisetup{
+math-micro = \text{μ},
+text-micro = μ
+}
+%num命令两边加上空格 numb
+\providecommand{\numb}[1]{{~\num{#1}~}}
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\everymath{\displaystyle}
+
  %設置英文字體
 \setmainfont[Mapping=tex-text]{DejaVu Serif}
 \setsansfont[Mapping=tex-text]{DejaVu Sans}
@@ -203,6 +214,8 @@ marginparwidth=0mm  %旁註寬度
 %插入代码
 \RequirePackage{fancyvrb}%小代码环境
 \fvset{frame=lines,tabsize=4 ,baselinestretch=1.8, fontsize=\footnotesize , framesep=1em}
+\VerbatimFootnotes%脚注下verb命令可用
+
 
 %=============插入尾注=========%
 \RequirePackage{endnotes}
@@ -254,7 +267,7 @@ marginparwidth=0mm  %旁註寬度
   \newcommand{\tempcolor}{#1}
   \begin{lrbox}{\tempbox}%
   \begin{minipage}{#2}
-        \setlength{\parindent}{0pt}
+        \setlength{\parindent}{24pt}
         \setlength{\parskip}{1.618ex}   %段落間距
 }
  {
