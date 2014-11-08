@@ -1367,7 +1367,7 @@ API在模块间扮演双重角色。在实现层面，作为模块之间的滞�
 
 如果副作用扰乱了程序员或用户的思维模式，带来种种不便甚至可怕的结果（最好还是忘掉吧），这就是出现了非正交性问题。尤其在没有忘记这些副作用时，你总要被迫做额外工作来抑制或修正它们。
 
-《程序员修炼之道》（The Pragmatic Programmer）\cite{Hunt-Thomas}一书中对正交性以及如何达到正交性有精彩的讨论。正如该书所指出的，正交性缩短了测试和开发的时间，因为那种既不产生副作用也不依赖其它代码副作用的代码校验起来要容易得多——需要测试的情况组合要少得多。如果正交性代码出现问题，把它替换掉而不影响系统其余部分也很容易做到。最后，正交性代码更容易文档化和复用。
+《程序员修炼之道》(The Pragmatic Programmer)\cite{Hunt-Thomas}一书中对正交性以及如何达到正交性有精彩的讨论。正如该书所指出的，正交性缩短了测试和开发的时间，因为那种既不产生副作用也不依赖其它代码副作用的代码校验起来要容易得多——需要测试的情况组合要少得多。如果正交性代码出现问题，把它替换掉而不影响系统其余部分也很容易做到。最后，正交性代码更容易文档化和复用。
 
 \textbf{重构}（refactoring）概念是作为“极限编程（Extreme Programming）”学派的一个明确思想首次出现的，跟正交性紧密相关。重构代码就是改变代码的结构和组织，而不改变其外在行为。当然，自从软件领域诞生之日起，软件工程师就一直在从事这项工作，给这种做法命名并把重构的一套技术方法确定下来，则非常有效地帮助了人们集中思路。因为重构概念与Unix设计传统关注的核心问题非常契合，所以Unix开发者很快就吸收了这一术语和它的思想\footnote{在这一概念的奠基性著作“重构》(Refactoring)\cite{Fowler}一书中，作者差一点就道出了“重构的原则性目标就是提高正交性”的天机。但是由于缺少这个概念，他只能从几个不同的方向接近这个思想：比如消除重复代码和各种“坏味道”，大部分就是指一些违背正交性的做法。}。
 
@@ -6524,7 +6524,355 @@ MPL和LGPL具备的传递性比GPL更为有限。倘若GPL或非GPL代码之间�
 这并不是说应该把这些许可证当作笑话来对待。那对凝结在软件中的创造力和血汗未免有失敬意，而且官司轻重不说，你恐怕也不会把激怒作者、成为第一被告的经历当作享受吧。但在缺少权威判例法的情况下，能做的99\%{}就是明确承诺努力满足作者的要求；另外的或许可以（或许不能）通过咨询律师来达到保护自己的1\%{}的额外努力，而这又有什么不同呢。
 
 
+\part{Community}
 \chapter{可移植性：软件可移植性与遵循标准}
+\begin{flushright}
+\begin{notecard}{30em}
+对于可移植性，目标机器的操作系统和其硬件结构都是障碍，意识到这一点，可能会导致相当激进的意见：完全规避问题的方法，就是移植操作系统本身。
+
+{\hfill —C程序的可移植性和Unix系统(1978)}
+\end{notecard}
+\end{flushright}
+
+
+Unix是第一款移植到不同系列处理器上的生产级操作系统（Unix版本6，1976-1977）。现今，Unix可以被移植到每一款足够强大可以运行内存管理单元的新机器上，这已经毫不稀奇了。应用程序也常常在差异极大的不同硬件上运行的Unix间移来移去；事实上，还没听说哪次移植失败过。
+
+移植性一直是Unix的主要优势。Unix程序员往往设想硬件是易变的，只有Unix API才是稳定的，尽可能少地假定诸如字长、字节顺序和存储体系等机器的特殊细节。实际上，在Unix圈中，以任何方式超出C的抽象机器模型而依赖于硬件的代码，都会被认定为不良的形式，仅允许发生在诸如操作系统内核等极为特殊的情况下。
+
+Unix程序员已经了解到，一旦设想软件项目的生命期很短，就非常容易犯错。\footnote{PDP-7 Unix和Linux都是持久性出乎意料的例子。Unix最初是作为一个研究玩具由几个研究者在项目工程间编制而出，一半是为了实验文件系统的创意，一半是为了运行一个游戏。而Linux则被其创造者总结为“长了腿的终端模器”\cite{Torvalds}。}所以，Unix程序员往往尽量避免软件依赖于某种特殊易逝的技术，而严谨地遵循开放标准。这种考虑可移植性的编码习惯在Unix传统中根深蒂固，甚至应用于那些一次性小型单用途的代码中。这种习惯也始终贯穿于Unix开发工具的设计，以及例如Perl、Python和Tcl之类在Unix下发展起来的语言中。
+
+可移植性最直接的效益是工具和应用程序无需每隔几年就重写，因为Unix软件比起原生的硬件平台来得长久，这是再正常不过的。今天，最初为Unix版本7（1979）所编写的应用程序，不仅用在其直系后裔中，也用在那些按照Unix规范编写操作系统API，但并没有从Bell实验室源码树共享代码的交种中，如Linux。
+
+间接的益处并不明显但可能更为重要。可移植性的戒律往往在架构、接口和实现上施加了一种简单化的影响。这既提高了项目成功的几率也降低了生命期的维护成本。
+
+本章概览Unix标准的范围和历史。我们将讨论哪些部分在今天仍然意义重大，并描述Unix API中或多或少变化的部分。我们将检视某些Unix开发者用来保持代码可移植性的工具和惯例，同时逐步展示出对良好实践的建议。
+
+\section{C语言的演化}
+C语言及其附带服务接口（挑明了，就是标准输入输出库函数及其友元）的稳定性一直以来都是Unix编程经历的主要核心事。诞生于1973年的一门语言，在三十年来的频繁使用中，只有很少的变动需求，这真是非常了不起：在计算机科学和工程领域中尚无人出其右。
+
+在第4章，我们论述了C语言如此成功是因为它可以作为计算机硬件上的薄胶合层，近似于\cite{BlaauwBrooks}的“标准架构”。当然，成功的因素并不仅止于此。为了理解其余的内幕，我们需要简要地回顾一下C语言的历史。
+
+C语言诞生在1971年，最初作为Unix移植到PDP-11的系统编程语言，基于Ken Thompson早期的B语言解析器，脱胎于BCPL （Basic Common Programming Language），于1966-1967在剑桥大学诞生\footnote{C语言中的"C"因此代表“Common（通用）”——或者，代表"Christopherr"。BCPL最初表示“Bootstrap CPL（引导性CPL）”——CPL的一个非常简化的版本，CPL是一种非常有趣但抱负过大而从未实现的牛津剑桥通用编程语言，也被亲切地称之为“Christopher's Programming Language（Christopher编程语言）”，以这门语言的主要贡献者，计算机科学的先驱Christopher Strachey命名。}。
+
+Dennis Ritchie的原始C编译器（也常常以他名字的首字母称为"DMR"编译器）在Unix版本5、6、7快速持续增长的社区中都有应用。版本6的C编译器派生了Whitesmiths C编译器，这个重新的实现成为了第一款商业的C编译器，也是软件通用型IDRIS的核心。但是多数现代的C语言实现都以Steven C. Johnson的“可移植C编译器（PCC）”为模型，该编译器在版本7中首次亮相，并在System V和BSD 4.x的发布中完全取代了DMR编译器。
+
+在1976年，版本6的C语言引入了typedef、union和unsigned int声明。带初值的变量初始化语法和一些复合操作符也有改动。
+
+最初C语言的参考手册是Brian Kernighan和Dennis M. Ritchie原创的《The C Programming Language》（C编程语言），即《白皮书》\cite{Kernighan-Ritchie}。该书出版于1978年，同年Whitemiths C编译器问世。
+
+白皮书描述了增强的版本6C语言，包含一个涉及公用存储处理的重要例外。基于任何能够处理FORTRAN语言的机器都可以立即处理C语言的理论，Rithie原意是仿造FORTRAN语言中"COMMON"声明的规则。在公用块（common-block）模型中，公用变量也许会被声明好几次；相同的声明由链接器合并。但是两个早期的C移植（ Honeywell和IBM 360大型机）恰好是那种限制公用存储或链接器较为原始或两者兼有的机器。这样，C编译器版本6采用了在白皮书中描述的、较为严格的定义引用模型（要求任何公用变量至多只有一处声明，并在引用处使用关键字extern来标记）。
+
+许多现存源码都依赖较为宽松的规则，所以这个决定在随着版本7发布的C编译器中被颠覆了。向后兼容的压力也阻碍了另一个转换尝试（1983年的System V Release 1），直到1988年ANSI标准草案才最终解决了定义引用原则。公用块公共存储依然是标准许可的变体。
+
+C版本7引入了enum，并且将struct和union的值作为第一类对象，可被赋值，可作为参数传递，也可作为函数的返回值（而不是靠地址传递）。
+
+\begin{quote}[Steve Johnson]
+V7中的另一个主要变化是Unix的数据结构写在了头文件中，并可以被包含。原先的Unix将这些结构（如目录）打印在手册中，人们需要将其复制到代码中。毋庸多言，这是个重要的移植性问题。
+\end{quote}
+
+System III C版本的PCC编译器（也随BSD 4.1c一起发布）改变了struct声明的处理，这样不同struct中的同名成员不会冲突。同时引入了void和unsigned char声明。函数内的extern声明，其作用域也限制在函数体中，而不再覆盖所有位于声明以后的代码。
+
+ANSI C草案提议标准（The ANSI C Draft Proposed Standard）加入了const（只读存储）和volatile（表明在程序控制的线程中例如内存映射寄存器等需要异步修改的地方）。unsigned类型修饰符泛化了，可以应用于任何类型，同时加入了一个对称的signed修饰符。也加入了auto数组、结构初始化器以及union类型的初始化语法。
+最重要的，加入了函数原型。
+
+早期C语言最重要的变化就是，转型为定义引用和在ANSI C草案提议标准（Draft Proposed ANSI C Standard）中引入的函数原型。自从1985-1986年X3J11委员会关于标准草案的工作报告将委员会的意向传达给编译器的实现者之后，C语言在本质上一直都很稳定。
+
+早期C语言更详细的历史，可以参阅其设计者编写的《Ritchie93》。
+
+\subsection{C语言标准}
+C语言标准的发展一直是个保守的过程，原始C语言的精髓得以小心留存，更认可现存编译器中的实验技术而不是发明新的特征。C9X宪章（charter）\footnote{请参阅\href{http://anubis.dkuug.dk/JTC1/SC22/WG14/www/charter}{这个网站}。}文档很好地表述了这个任务。
+
+第一个官方C语言标准化工作在X3J11 ANSI委员会的赞助下始于1983年。主要的功能增加在1986年末就已经解决，在这一点上，对于编程者来说，区别"K\&{}R C"和"ANSI C"变得很普遍。
+
+\begin{quote}[ Henry Spencer 	]
+许多人都没有意识到C语言标准化努力的工作是多么的不同寻常，尤其是最初的ANSIC工作，它坚持只将经过测试的特征列入标准。很多语言的标准委员会把大量时间花在新的语言特性上，而几乎不考虑应该如何实现。确实，极少数凭空产生的ANSI C特征——例如，臭名昭著的“三字母操作符（trigraphs）”——就是C89中最讨厌最不成功的特征。
+\end{quote}
+
+\begin{quote}[Steve Johnson]
+标准化努力的部分结果是发明了void指针，并且成为赢家。但是Henry的观点也被很好地接受了。
+\end{quote}
+
+尽管ANSI C的核心早就确定了下来，关于标准库内容的争论还是拖延了好几年。正式的标准直到1989年末才发布，那是在许多编译器都已经实现了1985年的建议之后。该标准最初称为ANSI X3.159，但在1990年国际标准组织（ISO）成为新的赞助方后重新设计为ISO/IEC 9899:1990。该标准描述的语言变体通带称为C89或C90。
+
+第一本关于C语言和Unix可移植性的书籍，《Portable C and Unix Systems Programming》（可移植的C语言和Unix系统编程）\cite{Lapin}，于1987年出版（在那时迫于雇主压力，此书以公司笔名出版）。第二版的《\cite{Kernighan-Ritchie}》于1988年出版。
+
+C89一个次要的修订，称作修订1, AM1, or C93，在1993年付诸实施。该修正增加了对宽字符集和Unicode更多的支持。这就是 ISO/IEC 9899-1:1994。
+
+C89标准的修订始于1993年。在1999年，ISO/IEC 9899（通常称作C99）为ISO所采用。该协议集成了修订1并增加了许多次要的特征。其中也许对大多数编程者最重要的一个就是，具备了像C++一样可以在代码块任意点，而不是仅仅只能在开始处声明变量。同时也加入了参数个数可变的宏。
+
+C9X工作组的网页在\href{http://anubis.dkuug.dk/JTC1/SC22/WG14/www/projects}{这里}，但是在2003年中期还没有第三个标准化工作列入计划。正在为嵌入式系统发展一个C语言的补遗。
+
+在C语言标准化工作开始以前，可工作的兼容实现已经运行在广泛的不同系统上，这个事实极大地协助了C语言的标准化工作。但这也更难以论证究竟哪种特征应该加入到标准之中。
+
+\section{Unix标准}
+1973年用C语言重写后，Unix史无前例地容易移植和修改。结果，始祖的Unix分别发展出了一系列早期操作系统。发展Unix标准最初就是为统一Unix系列不同分支的API。
+
+在1985年后发展的Unix标准在这方面相当成功——因此而成为了现代Unix实现极具价值的API文档。实际上，现实世界的诸多Unix都紧密地遵循公开标准，所以开发者能够（也常常这样做）更依赖诸如POSIX规格说明的文档，而不是手头使用中的变种Unix官方手册页。
+
+实际上，在新近的开源Unix（例如Linux）中，就往往使用公开标准作为其操作系统功能特征的规格说明。我们在本章稍后审视RFC标准化过程时还会回到这一点来。
+
+\subsection{标准和Unix之战}
+Unix标准发展的原动力是第2章叙述过的AT\&{}T和Berkeley阵线在发展上的分裂。
+
+4.x BSD Unix源自1979年的版本7。在1980年4.1BSD发布后，BSD阵线很快赢得了Unix发展前沿的好名声。重要的新特性包括vi可视编辑器，从单一控制台管理多重前后台任务的作业控制功能，以及信号的改进（参见第7章）。迄今为止最重要的增加是TCP/IP网络，但是尽管Berkeley在1980年就获得了该合同，TCP/IP三年内都没能随对外发布的版本一起交付。
+
+但是另一个版本，1981年的System III，成为了AT\&{}T后来发展的基础。System III重编了版本7的终端接口，使之更简洁，更优雅，但同Berkeley的改进完全不兼容。它保留了老的（无重置）信号语义（也请参考第7章关于这点的讨论）。1983年1月发布的System V Release 1整合了某些BSD实用程序（如\textit{vi}(1)）。
+
+在1983年2月，UniForum进行了架通两者的第一次尝试，这是一个很有影响的Unix用户组。它们的Uniforum 1983年标准草案（UDS 1983）描述了一个“核心Unix系统”，由System III核心的一个子集和函数库加上文件锁定原语构成。AT\&{}T宣布支持USD83，但是标准只是基于4.1BSD的发展实践的不完全子集。在1983年4.2BSD发布的时候，这个问题加重了，它为该版本增加了许多功能（包括TCP/IP网络），也引入了许多跟原
+先版本7并不兼容的东西。
+
+1984年Bell运营公司的剥离以及Unix战争的开始（参考第2章）使问题更加复杂。Sun Microsystems朝BSD方向领导着工作站产业；AT\&{}T甚至一边继续向诸如Sun的竞争对手授权操作系统，一边利用对Unix的控制作为战略武器并试图进入商务领域。为了保持竞争优势，所有商家作出的商业决策都是差异化他们的Unix版本。
+
+在Unix内战中，在某种意义上，技术标准成为相互合作技术人员奋力推动的东西，而产品经理不是勉强接受就是积极反对。重大而重要的例外是AT\&{}T，当它在1984年1月发布System V Release 2（SVr2）时，宣布了同用户组在标准设立上的合作计划。1984年的UniForum草案标准第二次修订版，追踪和影响了SVr2的API。后来的Unix标准中，除了某些BSD功能在效用上特别领先的领域，均倾向遵从System V（例如，现代Unix标准描述了System V的终端控制而不是BSD同样功能的接口，就是这个原因）。
+
+在1985年，AT\&{}T发布了System V接口定义（System V Interface Definition，SVID）。SVID结合UDS84为SVr2 API提供了一个更为正式的说明。后来的版本，SVID2以及SVID3遵从了System V release 3和4的接口。SVID成为了POSIX标准的基础，而POSIX最后在系统和C函数库上Berkeley/AT\&{}T的分歧中，大多数都偏向了AT\&{}T。
+
+但趋势在好几年内都仍不明显；其间，Unix之争仍战事频繁。例如，1985年，网络共享文件系统就发布了两个竞争的API标准：Sun的网络文件系统（Network File System，NFS）以及AT\&{}T的远程文件系统（Remote File System，RFS）。Sun的NFS更流行一些，因为Sun公司不仅愿意共享规格说明还愿意将代码公开。
+
+这个成功的经验其实更应该值得指出，因为纯粹基于逻辑判断来说，RFS远远更加优秀。它支持更好的文件锁定语义以及在不同系统用户身份更好的映射，并且总的来说，作出了相当的努力以期获得Unix文件系统语义更好更准确的细节，而不像NFS。然而这个成功的经验却往往被忽略，甚至在1987年，开源X window系统战胜了Sun专有网络视窗系统(Networked Window System (NeWS))时，也不例外。
+
+1985年后，主要的Unix标准化推进传递给了美国的电气电子工程协会（Institute of Electrical and Electronic Engineers，IEEE）。IEEE的1003委员会发展了一系列的标准，通常称作POSIX\footnote{最初1986年的试用标准叫做IEEE-IX。"POSIX"的名称是Richard Stallman的建议。POSIX.1的介绍说：“应该发[pahz-icks]的音，而不是[poh-six]或别的什么，公布发音方式是为了以尝试传播一种引用标准操作系统接口的标准化方法。”}。这些标准不仅描述系统调用和C函数库功能，还说明了具体的shell语义和最小命令集，并具体化了各种非C编程语言的接口。它首次发布于1990年，1996年发布了第二版。国际标准组织采用其作为ISO/IEC 9945。
+
+关键的POSIX标准包括：
+\begin{description}
+\item[1003.1 （1990年颁布）] 函数程序库。描述了C系统调用API，大部分同版本7相同，除了信号机制与终端
+控制接口。
+\item[1003.2 （1992年颁布）] 标准shell和实用程序。Shell语义几乎同System V的Bourne shell一模一样。
+\item[1003.4 （1993年颁布）] 实时Unix。二元信号量、进程内存锁、内存映射文件、共享内存、优先调度、实时信号、时钟和定时器、IPC消息传递、同步I/O、异步I/O、实时文件。
+\end{description}
+
+在1996年的第二版中，1003.4分成了1003.1b（实时）和1003.1c（线程）两个部分。
+
+尽管在几个关键的领域里（比如信号处理语义上）说明不足，也遗漏了BSD套接字，最初的POSIX标准还是成为了所有后来Unix标准化工作的基础。它仍然作为一个权威被引用，纵使许多都是通过POSIX Programmer's Guide（POSIX程序员指南）\cite{Lewine}等间接引用。实际上的Unix API标准仍然是“POSIX+套接字”，以后的标准主要是增加功能以及在不常见边界情况更紧密的一致性规定。
+
+下一个参与者是X/Open（后来更名为Open Group），它是在1984年形成的Unix商家联盟。它们的X/Open Portability Guides（XPGs）最初与POSIX草案平行发展，而在1990年之后，XPGs整合扩展了POSIX。POSIX试图捕捉所有Unix的安全子集，而XPG更倾向前沿开发的普遍实现；即使是1985年的XPG1，就跨越了SVr2和4.2BSD，还包含了套接字。
+
+1987年的XPG2增加了终端处理API，基本上是System V的\textit{curses}(3)。1990年的XPG3融合了X11 API。1992年的XPG4完全遵从了ANSI C 1989标准。XPG2、XPG3和XPG4极度关注国际化的支持，并描述了一套详尽的API来处理字符集和消息目录。
+
+在阅读Unix标准的时候，也许会碰到"Spec 1170"（自1993年）、"Unix95"（自1995年）和"Unix 98"（自1998年）。这些认证标记都基于X/Open标准；现在仅仅只是历史的兴趣罢了。但是XPG4完成的工作成为了Spec 1170，而Spec 1170又转变成第一版的“单一Unix规范”（Single Unix Specification，SUS）。
+
+1993年，包括每个主要Unix公司在内的75个系统和软件提供商对Unix战争作出了了断，宣布支持X/Open开发出Unix的通用定义。作为协商的一部分，X/Open组织获得了Unix商标权。整合的标准变成了单一Unix标准版本1。接下来就是1997年的版本2。在1999年X/Open并入了POSIX的活动。
+
+在2001年，X/Open（现在的The Open Group）发布了\href{http://www.unix.org/version3/}{单一Unix标准版本3}。所有Unix API的标准化流程最终汇合到一起。这反应了如今的现实状况；不同种类的Unix已经会聚在一个通用API集合中。并且，至少对1980年代的动荡记忆犹新的老一辈人来说，这太令人愉悦了。
+
+\subsection{庆功宴上的幽灵}
+但很不幸地，有个尴尬的情况——支持整合努力的旧学派Unix商家处于新学派开源Unix的严峻压力之下，在某些时候不得不抛弃（有利于Linux）已经为确保一致性付出巨大努力的专有Unix。
+
+单一Unix规范的一致性验证检测是个昂贵的任务。每个发布都需要做一次，但这超出了大多数开源操作系统发布者的能力。无论如何，Linux的变化如此之快，任何发布版本在获得认证时，可能都已经过时了\footnote{有个Linux发布商，英国的Lasermoon，确实获得了POSIX.1 FIPS 151-2认证——它已经倒闭了，因为潜在用户对此根本不关心。}。
+
+诸如单一Unix规范之类的标准并没有完全失去实用性，它们仍然对Unix实现者有很高的指导价值。但是Open Group以及其它旧学派Unix标准化机构如何适应开源发布的节奏（以及开源开发组低预算或零预算运作），还有待观察。
+
+
+\subsection{开源世界的Unix标准}
+在1990年代中期，开源社区开始了自己的标准化努力。这些努力建立在由POSIX及其继承标准确保的源码级兼容性之上。特别是Linux，它从头到尾都是按POSIX之类类Unix API标准编写的。\footnote{进一步讨论请参考《Just for Fun》（玩玩而已）\cite{Torvalds}。}
+
+在1998年，Oracle把领先市场的数据库产品移植到了Linux上，这场运动正是Linux被大型机所接受的一次重大突破。在被记者问及Oracle必须战胜的困难是什么的时候，负责移植的工程师的回应很有说服力：API标准工作完成得相当出色。他回答：“我们键入‘make’”。
+
+由此看来，新学派Unix的问题并不是在源码层次上API的兼容性。每个人都理所当然地认为在不同的Linux、BSD和专有Unix发布之间移植源码是轻而易举的。新问题不是源码而是二进制的兼容性。因为由于商业PC机硬件的胜利，Unix的底层基础已经发生了微妙的变化。
+
+在旧时代，每种Unix都运行在实际上属于它自己的硬件平台上。存在许多种类的处理器指令集和机器体系，所以应用程序若要移植就必须在源码层次上完成。另一方面，又只有极少数几个Unix的重要版本，相对来说其有较长的生命期。而诸如Oracle之类的应用程序提供商能够为三到四个硬件/软件组合分别编译和提供独立的二进制发布版本，因为他们可以通过大量的使用人群和较长的产品生命期来摊低源码移植的成本。
+
+但是后来小型机和工作站商家淹没在了基于386廉价的个人机中，而开源Unix改变了规则。商家发现再也不能找到一个稳定的平台来发售它们的二进制程序。
+
+首先，表面的问题是，大量的Unix发布者——随着Linux发布市场的统一，越来越清楚真正的问题是时间变化率。API是稳定的，但是系统管理文件的预期位置、实用程序以及用户邮箱名和日志文件的前缀路径等常常发生变化。
+
+首次标准化努力是新学派Linux和BSD社区自身中发展出来（始于1993）的文件系统层次标准（Filesystem Hierarchy Standard，FHS）。此标准被集成到Linux标准基础（Linux Standards Base，LSB）中，它标准化了一套预期的服务库和辅助应用程序库。两个标准都成为了自由标准组织（\href{http://www.freestandards.org/}{Free Standards Group}）的行为，到2001年，该组织已经扮演了在旧学派Unix商家中X/Open的角色。
+
+\section{IETF和RFC标准化过程}
+当Unix社区同互联网工程师文化相结合时，也继承了从互联网工程任务组（Internet Engineering Task Force，IETF）RFC标准化过程中形成的思维方式。在IETF传统中，标准必须来自于一个可用原型实现的经验——但是一旦成为标准，同标准不一致的代码就被认定是不合规范的，必须无情地抛弃。
+
+不幸地是，这并不是标准通常发展的方式。计算机历史充满了许多这样的例子，技术标准是别有企图研究的最糟糕特征与黑暗密室政治结合的产物——这样产生的规格说明在任何曾经的实现中都找不到踪影。更糟糕的是，许多规范不是严苛得无法实际实现，就是说明不够充分，解决的问题远不如产生的困惑多。这些规范随之被塞给软件商，它们如果发现什么地方不易实现，就忽略掉标准。
+
+标准无用最臭名昭著的例子就是，1980年代同TCP/IP竞争的开放系统互联（Open Systems  Interconnect）协议——它的七层模型乍看很优雅，但在实际中却被证明是过度复杂而不可实现的\footnote{网络搜索可以找到一个流行的幽默帖子，将OSI七层模型和七层玉米卷比较一一前者还处于劣势。}。视频显示终端功能的ANSI X3.64标准是另一个恐怖故事：同标准保持一致的实现版本之间居然存在微妙的不兼容性，真是该死。即使在字符阵列终端大部分被位图显示终端所替代以后，这些也还是问题（特别地，这就是为什么\textit{xterm}(1)中功能和热键偶尔会失效的原因）。串行通讯的RS232标准也是说明不够充分，有时候似乎没有两个串行线是相似的。关于标准类似的恐怖故事真是可以写一本厚厚的书。
+
+IETF的哲学已经被概括为著名的“我们反对国王、总统和投票。我们信任大致的共识和可运行代码”\footnote{这句最初是由IETF的高级干事Dave Clark在混乱的1992年会议上，IETF拒绝OSI协议时所说的。}。首先，要求可工作实现将使其免于最糟的莽撞行为。实际上，它的规范更严格：
+
+\begin{quote}[互联网标准过程——修订稿3(RFC 2026)]
+（任何）候选规范在被采用为互联网标准之前，必须得到实现，对操作的正确性以及众多独立方的互操作性必须得到测试，以及必须已经使用在要求越来越高的环境中。
+\end{quote}
+    
+所有的IETF标准都要经过RFC（请求评注）的阶段。RFC的提议过程故意地设置为非正式的。RFC可以提出标准、调查结果、建议后续RFC的哲学基础，或者甚至是玩笑。每年4月1日愚人节RFC年鉴的出现就是互联网玩家中最盛大的庆祝仪式，并且产生许多如宝石般的精华标准，例如Transmission of IP Datagrams on Avian Carriers （IP数据包的信鸽传递，RFC 1149）\footnote{RFC 1149 见\href{http://www.ietf.org/rfc/rfc1149.txt}{网页}。不仅如此，它还被\href{http://www.blug.linux.no/rfc1149/writeup.html}{实现}了。}、Hyper Text Coffee Pot Control Protocol（超文本咖啡壶控制协议，RFC 2324）\footnote{RFC 2324见\href{http://www.ietf.org/rfc/rfc2324.txt}{网页}。}、Security Flag in the IPv4 Header （IPv4包头的安全标志位，RFC 3514）。\footnote{RFC 3514见\href{http://www.ietf.org/rfc/rfc3514.txt}{网页}。}
+
+但是搞笑RFC大概是唯一能够立即成为RFC的提议。严肃的提议实际上以“互联网草案（Internet-Drafts）"开始，通过IETF在几个著名主机上的目录让公众评注。没有正式身份的互联网草案个体，其提出者在任何时候都可以改动或终止。如果他们既不撤销也不提升到RFC状态，在六个月后草案将被移除。
+
+互联网草案并不是规范，而软件实现者和软件商被特别禁止宣称符合某条草案，并将其按规范对待。互联网草案通常是在一个由电子邮件列表联系在一起的工作组讨论的焦点。当工作组领导认为适合的话，就把互联网草案提交给RFC编辑，从而被分配一个RFC号码。
+
+一旦互联网草案作为一个带编号的RFC发布，就成为其实现者可以宣称与之相符的规格。接下来，RFC的作者和社区将开始以实际实验来更正规格说明。
+
+一些RFC就到此为止了。一个未能吸引用户和经受现场测试的规格可能被默默遗忘了，而且最后被RFC编辑标记为“Not recommended（不推荐）”或“Superseded（被取代）”。失败的提议通常认为是进程的日常开销，相关的提议不会因此打上耻辱的印记。
+
+IETF的指导委员会（IESG，或者Internet Engineering Steering Group）负责将成功的RFC推向标准之路。他们将合格的RFC标明为“Proposed Standard（提倡标准）"。对于具备提倡标准资格的RFC，其规格必须稳定，经过同行评审，并且已经吸引了互联网社区的极大兴趣。当然，一个RFC成为提倡标准，并不绝对要求存在实现，如果有则最好不过；如果RFC改变或可能动摇互联网核心协议，IESG则有权要求RFC提供实现。
+
+提倡标准仍可能被修订，如果IESG和IETF确实有更好的解决方案，甚至还会被撤消。它们并不推荐在“崩溃敏感环境”中使用——不要将他们使用在空中交通控制系统或是需要精心照料的设备上。
+
+对于提倡标准，如果至少存在两个可工作的、完备的、独立发展出来的、可互用的实现，就能够由IESG提升到“草案标准”状态。如RFC2005所说：  “提升到草案标准阶段是个重要的进步，表明有充分理由相信规格是成熟而有用的。”
+
+一旦RFC达到了草案标准状态，就只能更改规格说明中的逻辑错误。草案标准可随时被部署使用在崩溃敏感环境中。
+
+当草案标准经过了实现的广泛测试并且达到了普遍接受的程度，就可以成为一个互联网标准（Internet Standard）。互联网标准保留自身的RFC编号，也可以申请一个STD序列号。在本书写作时，虽然有3000多个RFC，但仅仅只有60个STD。
+
+尚未成为标准的RFC被标记为Experimental（实验性）、Informational（资料性）（搞笑RFC就被赋予该标记），或者Historic（历史性）。历史性的标记被用于过时标准。RFC2026注释为：“（完美主义者建议这个词应该是“Historical（历史上的）”；但是，在这一点上，“历史性”一词的使用是历史上的原因。）
+
+IETF标准化过程有意提倡由实践而非理论驱动的标准化过程，并确保标准协议都经受过严格的同行评审和测试。这种模式的成功结果显而易见——全世界的互联网。
+
+
+\section{规格DNA，代码RNA}
+甚至在PDP-7的旧石器时代，Unix程序员就比其他业界同行更倾向于认为代码是可弃的。这无疑是Unix传统注重模块性的产物，使其更容易在无损失的情况下抛弃和更换系统的各个子部分。Unix程序员已经从经验中认识到补救糟糕的代码或设计比起重新开始常常更费时费事。在其它编程文化中，被迫弥补大型单个程序是种本能的反应，因为从头再来需要太多太多的工作，而在Unix文化则主张干脆拆毁重来。
+
+IETF传统反复教导我们将代码作为标准的从属物来思考。正是标准让程序可以协作，将各项技术结合起来成为比部分之和更大的整体。IETF向我们展示了，精细的标准化过程，瞄准获得最好的实践，其实是种强有力的形式，相比于无法实现的完美理想的信誓旦旦来说，能够获得更大的成功。
+
+1980年后，Unix社区越发受到这个教训的影响。从1989年以来的ANSI/ISO C标准虽并非毫无瑕疵，但考虑到其长度和重要性，它的确异常简洁和实用。单一Unix规范在更广泛的领域中包含三十年来的实验和改进，比ANSI C更为凌乱。但是标准的组成相当良好。一个强有力的证明就是，Linus Torvalds通过它而成功从头开始编制了一个Unix。IETF强大的示范给Linus Torvalds的壮举创造了一个关键背景，并使其成为可能。
+
+尊重已颁布标准和IETF过程已经在Unix丈化中根深蒂固；故意违反Internet STD就是不妥当的。这一点有时候往往会造成Unix背景的技术人员同其它技术人员之间相互不理解，其它技术人员往往设想最流行或最广泛配置的协议实现就是定义上的正确——即使定义严重地违反标准而不能与完全符合标准的软件进行协作。
+
+Unix程序员可能大力反对其它种类的前规格说明，他们对已颁布标准的尊敬显得很有趣。当“瀑布模型”（首先详尽说明，然后实现，然后调试，在任何阶段都没有反向动作）在软件工程学中失宠时，在Unix程序员中成为笑柄其实已经好几年了。经验以及合作开发的浓厚传统，已经训练了Unix程序员，先原型然后循环不断地测试和演进才是更好的方法。
+
+Unix传统清楚地意识到良好的规格说明具有巨大的价值，但是需要像“互联网草案”和“提议标准”的方式那样，被视作是暂时的、需要订正的对象，必须通过在现场实验中的不断改进。在最好的Unix实践中，程序的文档就近似于规范主体的“提议标准”，需要不断修改订正。
+
+\begin{quote}[Keith Packard]
+与其它环境不同，在Unix开发中，文档常常在程序之前，或者至少同程序一起编写。对于X11，X核心标准在X第一版发布之前完成，并且自从那时起基本上就没有改动过。不同X系统间的兼容性更进一步地被严格的规格驱动测试所改善。
+
+有了良好编写的规格说明，开发X测试套件便更加容易。在X规格说明中的每一项声明都转换成代码来测试其实现，在这个过程中发现了几个次要的、跟规格不一致的地方，其最终结果就成为了一个测试套件，覆盖了X实例库和服务器中重要的代码路径，并且不引用实现源码。
+\end{quote}
+
+生成半自动化的测试套件被证实为一个主要优势。尽管图形艺术的现场实验和发展导致对X设计基础的许多批判，尽管X的某些部分（例如安全和用户资源模型）似乎笨拙而实现过度复杂，但X在稳定性和跨系统发布的互用性方面达到了非同一般的良好水平。
+
+在第9章我们讨论了将编码尽量往上推以最小化常数缺陷密度效应。Keith Packard含蓄地说明X文档并不仅是期望功能列表，而是以高级代码形式来表述。另外一个X的关键开发者证实了这一点：
+
+\begin{quote}[Jim Gettys]
+在X中，规格说明就是一切。有时规格存在缺陷需要修正，但是代码通常比规格说明具备更多的bug（对任何值得着墨的规格说明）。
+\end{quote}
+
+Jim继续阐明X的过程实际很像IETF过程。它的功用并不是仅仅局限于构建优良的测试套件；它也意味着相关的系统行为争论可以在关于规格的功能层面解决，避免了太多实现问题的纠缠。
+
+\begin{quote}[Keith Packard]
+以考虑周全的规格说明来驱动开发可能会引起“bug还是功能”的小小争论；但没有正确实现规格说明的系统就是破损不全的，必须得到修正。
+
+我怀疑这在我们当中是如此的根深蒂固，有时反而忽略了它的威力。
+
+一个在Bellevue以东一家小公司工作的朋友奇怪，Linux应用程序开发者为什么可以随着应用程序发布版本同步地进行OS改动。在那个公司里，主要的系统级API频繁改动以容纳一些古怪念头，所以基本的OS功能必须常常随着每个应用程序一起发布。
+
+我向他描述了规格说明所具有的威力以及实现应当如何遵从规格，然后接着断言，如果一个应用程序按接口文档得到一个非预期的结果，那么不是违反了规格，就是发现了bug。他认为这个观念非常令人吃惊。
+
+分辨这类bug再简单不过了，只要检查接口实现是否违反了规格。当然，如果有实现的源码会更简单。
+\end{quote}
+
+这种标准先行的态度对于最终用户同样有益。Bellevue以东的那个小公司变大了，它难以兼容以前发行的办公软件，而在1988年为X11编写的GUI应用程序在今天的X实现中仍然没有改变地运行着。在Unix世界中，这种长寿是很正常的——这也就是为什么将标准视作DNA的原因。
+
+经验表明，遵从标准、喜欢抛弃重建的Unix文化，虽然花费额外时间，但相比于因为没有标准提供指导和连续性，而必须不停地对代码基础库缝缝补补，往往能够产生更好的互用性。这真的或许是Unix最重要的教益。
+
+Keith最后的评注直接引出一个问题，也是随开源Unix的成功而提到前台的问题——开放标准和开放源码间的关系。我们将在本章末尾讨论这个问题——但在这之前，是讨论Unix程序员如何能够使用大量的标准和知识来获得软件可移植性的实践问题的时候了。
+
+\section{可移植性编程}
+软件可移植性通常是准空间问题：代码可以从其诞生的环境移到别的硬件和软件平台吗？但是几十年的Unix经验告诉我们时间上的持久性同样重要，甚至更重要。软件的未来如果可以详细地预测，最好现在就来预测——然而，在可移植性编程中，我们应该尝试考虑选定最可能持续的软件环境特征作为构建软件的基础，同时要避免不久的将来就可能消亡的技术。
+
+Unix二十年对详述可移植性API问题的关注，在很大程度上解决了这个问题。在单一Unix规范中描述的功能今天几乎仍然存在于现代的Unix平台中，将来也不会不支持。
+
+但并不是所有的平台依赖性都同系统和库函数API相关。实现语言也有关系；源系统和目标系统之间文件系统设计和配置的不同也是个问题。还好，Unix实践已经发展出解决方法。
+
+\subsection{可移植性和编程语言选择}
+可移植性编程的首要问题是实现语言的选择。所有我们在第14章讨论过的主要编程语言，从在全部现代Unix上都有兼容实现的角度来说，均具有较高的可移植性；而大多数在Windows和MacOS下也有实现。在这里，可移植性问题往往并不在于核心的编程语言，而在于支持库以及同本地环境整合的程度（尤其是IPC、并发进程管理以及GUI的基础设施）。
+
+\subsubsection{C的可移植性}
+C语言核心的可移植性非常高。标准的unix实现是GNU C编译器，它在开源Unix和现代专有Unix中普遍存在。GNU C也已经移植到了Windows和古典的MacOS中，但在那里使用并不普遍，因为缺少对本地GUI的可移植接口。
+
+标准输入/输出库、数学例程以及国际化支持都可以移植到所有的C实现中。如果小心谨慎地只使用在“单一Unix规范”中描述的现代API，文件I/O、信号、进程控制也可以移植到各个Unix；老一些的C代码常常需要经过条件预处理宏才能移植，但使用POSIX之前接口的代码往往来自于古老专有的Unix，而且在2003年这些Unix如果不是
+已经废弃就是接近废弃了。
+
+对于IPC、线程以及GUI接口，C的可移植性问题开始有些严重了。我们在第7章已经讨论过IPC和线程的移植问题。真正实际中的问题是GUI工具包。许多开源的GUI工具包可跨越各种现代Unix使用，还被移植到了Windows和传统的MacOS中——Tk、wxWindows、GTK和Qt是其中四个最著名的，可以通过网络搜索得到的源码和文档。但是它们中没有一个随所有平台一起发布，而且（更多的是法律而不是技术因素）没有一个能够提供所有平台原汁原味的GUI观感。我们已在第15章给出了处理这个问题的指导原则。
+
+已经有大批关于如何编写可移植性C代码的书了，本书并不想成为其中的一本。我们推荐阅读Recommended C Style and Coding Standards（C的推荐风格和编码标准）\cite{Cannon}以及《The Practice of Programming（程序设计实践）》 \cite{Kernighan-Pike99}）中关于可移植性的相关章节。
+
+\subsubsection{C++的可移植性}
+在操作系统层次上，所有C语言的移植性问题C++都有，当然也存在一些自身的问题。其中一个增加的问题是开源的C++编译器已经落后于专有的实现；这样，在2003年年中，仍然没有一个统一的像GNU C一样能够成为事实标准的基础。更进一步，仍然没有一款C++编译器完全实现了C++99 ISO语言标准，尽管GNU C++是最接近的一个。
+
+\subsubsection{Shell的可移植性}
+很不幸，shell脚本的可移植性非常糟。问题不在shell本身；\textit{bash}(1)（开源的Bourne Again shell）已经普遍存在，所以纯shell脚本几乎可以到处运行。问题是大多数的shell脚本大量使用了其它可移植性差的命令和过滤器，而且绝不保证在任意指定的机器上它们都存在。
+
+这个问题可以借助一些额外的工作来克服，比如\textit{autoconf}(1)工具。但是这个问题很严重，所以大多数在shell中稍重量级的编程都转移到诸如Perl、Python、Tcl等第二代脚本语言中完成。
+
+\subsubsection{Perl的可移植性}
+Perl的可移植性良好。Perl的核心版本甚至提供一套支持跨Unix、MacOS和Windows平台GUI的Tk工具包接口。然而也有个问题很讨厌。Perl脚本常常要求来自CPAN（ Comprehensive Perl Archive Network）的插件库，无法保证它在每个Perl实现中都存在。
+
+\subsubsection{Python的可移植性}
+Python可移植性极其出色。如同Perl一样，Python的主干版本甚至提供一个Tk包的可移植接口，可支持Unix、MacOS和Windows的GUI。
+
+Python主干版本存在比Perl更丰富的标准函数库，但是没有等价于Perl程序员可以依靠的CPAN；重要的扩展模块常常随主干Python的次要版本的发布一起发布。这是以牺牲空间来换取时间，使得Python更少成为模块丢失效应的对象，代价是Python的次版本号要比Perl发布的版本级别重要得多。在实践中，权衡似乎对Python更为有利。
+
+\subsubsection{Tcl的可移植性}
+Tcl的可移植性总的来说不错，但是随着项目复杂度的不同而有极大差异。为跨平台GUI编程而生的Tk包原生于Tcl。同Python一样，语言核心的发展相对顺利，很少存在版本不兼容问题。但不幸的是，Tcl甚至比Perl更依赖那些并不能保证随着每个实现一起发布的扩展功能——也没有像CPAN一样的地方来集中发布这些扩展功能。
+
+因此，对于不依赖扩展的小项目，Tcl的移植性相当高。但是大项目往往大量依赖扩展，和（同shell编程一样）调用在目标机器可能存在也可能不存在的外部命令；这些东西的移植性相当糟。
+
+具有讽刺意味地，Tcl也许吃够了容易增加扩展的苦头。当一个特殊的扩展开始引人注目，似乎可以成为标准发布中的一个部分时，一般都已经存在好几个不同的版本了。在1995年的Tcl/Tk学术研讨会上，John Ousterhout对为什么没有在标准Tcl发布中加入OO支持而解释道：
+
+\begin{quote}
+想想五位大学者围坐一圈，一起叫着“杀死他，异教徒”。如果我把某个特殊的OO设计加入到内核中，其中一个就会说“祝福你，我的孩子，吻我的戒指吧！”，而另外四个则说“杀死他，异教徒”
+\end{quote}
+
+语言设计者并不一定愉快。
+
+\subsubsection{Java的可移植性}
+Java的可移植性特别出色——毕竟，它是以“一次编写，到处运行”作为主要设计目标的。然而，可移植性仍非尽善尽美。麻烦主要是JDK 1.1及老AWT GUI工具包（一方面）和JDK 1.2及新Swing GUI包之间的版本兼容问题。这有几个重要的原因：
+\begin{itemize}
+\item Sun的AWT设计不完善，不得不用Swing来代替。
+\item 微软拒绝在Windows中支持Java开发并试图以C\#{}来取代Java。
+\item 微软决定继续保留IE中对JDK 1.1版的小应用程序的支持。
+\item Sun许可证授权让JDK 1.2的开源实现完全小可能，这延缓了它的部署进程（特别是在Linux世界）。
+\end{itemize}
+
+对于涉及GUI的程序，追求移植性的Java开发者在可预知的未来，时常面临一个选择：采用糟糕设计的JDK 1.1/AWT工具包取得最大可移植性（包括移植到Microsoft Windows），或者采用更好的工具包和JDK1.2功能而牺牲部分可移植性。
+
+最后，正如我们前面注意到的一样，Java对线程的支持也存在移植性问题。Java API，不像其它抱负较小语言的操作系统接口，它勇敢地去尝试弥补不同操作系统提供的不同进程模型之间的差异：但还没有掌握诀窍。
+
+\subsubsection{Emacs Lisp的可移植性}
+Emacs Lisp的可移植性相当好。Emacs安装往往频繁地升级，而严重的过时失效情况很少出现。相同的Lisp扩展到处都被支持，而所有的扩展都随Emacs本身一起发布。
+
+而且，Emacs的原语集相当稳定。几年前就获得了一个编辑器应有的完备性（缓冲区处理，shell脚本支持）。仅仅只是X的引入损害了这个优点，并且需要感知X的Emacs模式也非常少。可移植性问题通常表现在操作系统功能C层次接口上的格格不入；例如，邮件代理模式的从属进程控制大概是唯一这种表征经常出现的地方。
+
+\subsection{避免系统依赖性}
+一旦选定开发语言和支持库，下一个可移植性问题通常就是系统关键文件和目录的放置：邮件池同志文件目录等等。这类问题的原型一般就是邮件池目录到底是/var/spool/mail还是/var/mail。
+
+通常可以通过退一步重新架构这个问题来避免此类依赖性。为什么要打开邮件缓冲目录下的文件？如果需要写入，简单地触发本地邮件传输代理，来完成以获得正确的文件锁定不是更好吗？如果需要读入，通过POP3或IMAP服务器查询不是更好吗？
+
+同类的问题在别处同样适用。如果发现需要手动打开日志文件，为什么不使用\textit{syslog}(3)代替？通过C库函数调用的接口比起系统文件定位容易标准化得多。应当利用这个事实！
+
+如果必须在代码中使用系统文件定位，最好的选择取决于是发布源码还是采用二进制形式。如果发布的是源码，我们在下个部分讨论的autoconf工具能够提供很好的帮助。如果发布的是二进制形式，良好的实践是在程序运行期试探是否可以自动地适应本地条件——例如，实地检查/var/mail和/var/spool/mail是否存在。
+
+\subsection{移植工具}
+通常可以使用我们在第15章介绍的开源GNU \textit{autoconf}(1)来处理移植性问题，进行系统配置探查，定制出makefile文件。如今，从事源码编译软件的人们往往希望能够键入\verb+configure; make; make install+来干净利落地编译。  在\href{http://seul.org/docs/autotut/}{这里}有这些工具的优秀指导手册。即使是发布二
+进制码，\textit{autoconf}(1)工具也能够帮助自动化处理针对不同平台的条件代码问题。
+
+其它解决这个问题的工具中，其中两个较为知名的是与X window系统相关的\textit{Imake}(1)，以及由Larry Wall（后来的Perl语言发明者）编制的Configure工具，也被许多项目采用。所有的工具至少都跟autoconf套件一样复杂，使用也不如以往频繁。它们无法覆盖众多的目标系统。
+
+\section{国际化}
+软件代码的国际化设计使得接口容易适应多种语言和各种字符集，对于这方面的深入讨论超出了本书的范围。然而，在Unix经验中有一些良好实践的突出事例。
+
+首先，分离信息库和代码。良好的Unix实践应把程序使用的消息字符串同程序代码分离开来，这样不用修改代码就可以增加其它语言的消息字典。
+
+完成此项工作最知名的工具就是GNU的gettext，这个工具要求把需要进行国际化的原生语言字符串包装在一个特殊的宏中。该宏使用各个字符串作为各文件提供的各种语言字典主键。如果某种语言的字典不可访问（或者存在该字典但查询没有匹配返回），那么宏就简单地返回其参数，也就是隐式地退回到代码的本地语言。
+
+尽管在2003年中期，gettext本身一团乱麻，但其总体指导思想却是可靠的。对于许多项目，使用这种思想可以手工打造出这种国际化设想的轻量级版本，并收到良好的效果。
+
+其次，在现代Unix中有种清晰的潮流：抛弃所有历史上与多字符集相关的记法而让应用程序原生地使用UTF8，八位移位Unicode编码字符集（或者相反地说，让他们原生地使用16位宽字符）。UTF-8的前128个字符就是ASCII，前256个字符是Latin-1，这就意味着它向后兼容使用得最广泛的两个字符集。XML和Java事实上促进了这种选择，但是即使没有XML和Java，趋势也会如此。
+
+第三，使用正则表达式时，当心字符的范围。[a-z]元素并不必然包含所有的小写字母，如果脚本或是程序应用于（比如说）德语，β被认为是小写字母但并没有包含在上述范围之内；法语中的重音字母也存在类似的问题。安全的方式是使用\verb+[[:lower:]]+，以及其它在POSIX标准中拙述的符号范围。
+
+\section{可移植性、开放标准以及开放源码}
+可移植性需要标准。无论是发布传播一项标准还是敦促专有软件商遵循标准，开放源码基准实现都是已知最有效的方法。而对于开发者，已颁布标准的开源实现既极大地减轻了编码负担，也允许产品（有意或意外地）从他人的劳动中获益。
+
+让我们设想，例如，为数码相机设计一个图像捕捉软件。既然存在（正如我们第5章所提到的）功能齐全经过良好测试的PNG读写开源库，那为什么要编写自己的格式来存储图像数据或是购买专有代码呢？
+
+开放源码的新生（重生）同样给标准化过程带来了重要的影响。尽管并非正式要求，IETF自从大约1997年前后，愈发抵制连一个开源基准实现都没有的RFC成为预备标准。将来与某标准是否一致，似乎愈发有可能以“是否同已经得到标准作者们认可的开源实现相一致（或者完全使用该实现）”来判定。
+
+\begin{quote}[Henry Spencer]
+暗含的意思就是，成为标准的最好办法就是发布一个高质量的开源实现。
+\end{quote}
+
+最后，确保代码移植性最有效的一个环节就是不要依赖于专有技术。永远不会知道所依赖的闭源库/工具/代码生成器或网络协议何时会结束生命，接口何时会以某种非向后兼容的方式改变，从而崩溃掉已有的项目。而使用开源代码，即使前沿版本的改变方式足以崩溃已有的项目，也有前行之路；因为可以获取源码，如果需要，就可以向前移植项目到新的平台。
+
+直到1990年代晚期，这个建议都还是不切实际的。少数几个代替依赖专有操作系统和专有开发工具的软件还只是昂贵的实验品、学术上有待证实的观点或者小玩意。但互联网改变了一切；在2003年中期，Linux和其它开源Unix不但存在，并且已经证明了自身完全可以是出产高质量生产级软件的平台。现在开发者有了更好的选择，而不是依赖于为垄断而设计的短期商业决策。实施防御性设计——基于开放源码编程，便不会束手无策。
+
 
 
 \chapter{附录}
@@ -6768,49 +7116,49 @@ A superb anthology of Zen primary sources, presented just as they are.
 
 An excellent overview of Unix history, explaining many of the design decisions in the words of the people who made them.
 
-%[Schaffer-Wolf] Evan Schaffer and Mike Wolf. The Unix Shell as a Fourth-Generation Language. 1991.
-%
-%Available on the Web. An open-source implementation, NoSQL, is available and readily turned up by a Web search.
-%
-%[Schwartz-Christiansen] Randal Schwartz and Tom Phoenix. Learning Perl. 3rd Edition. O'Reilly & Associates. 2001. ISBN 0-596-00132-0.
-%
+\bibitem[Schaffer-Wolf]{Schaffer-Wolf} Evan Schaffer and Mike Wolf. The Unix Shell as a Fourth-Generation Language. 1991.
+
+\href{http://www.rdb.com/lib/4gl.pdf}{Available on the Web}. An open-source implementation, NoSQL, is available and readily turned up by a Web search.
+
+\bibitem[Schwartz-Christiansen]{Schwartz-Christiansen} Randal Schwartz and Tom Phoenix. Learning Perl. 3rd Edition. O'Reilly \&{} Associates. 2001. ISBN 0-596-00132-0.
+
 \bibitem[Spinellis]{Spinellis} Journal of Systems and Software. Diomidis Spinellis. “Notable Design Patterns for Domain-Specific Languages”. 56. (1). February 2001. p91-99. \href{http://www.catb.org/~esr/writings/taoup/html/apb.html}{Available on the Web}.
 
-%[Stallman] Richard M. Stallman. The GNU Manifesto.
-%
-%Available on the Web.
-%
-%[Stephenson] Neal Stephenson. In the Beginning Was the Command Line. 1999.
-%
-%Available on the Web, and also as a trade paperback from Avon Books.
-%
-%[Stevens90] W. Richard Stevens. Unix Network Programming. Prentice-Hall. 1990. ISBN 0-13-949876-1.
-%
-%The classic on this topic. Note: Some later editions of this book omit coverage of the Version 6 networking facilities like mx().
+\bibitem[Stallman]{Stallman} Richard M. Stallman. The GNU Manifesto.
+
+\href{http://www.gnu.org/gnu/manifesto.html}{Available on the Web}.
+
+\bibitem[Stephenson]{Stephenson} Neal Stephenson. In the Beginning Was the Command Line. 1999.
+
+\href{http://www.cryptonomicon.com/beginning.html}{Available on the Web}, and also as a trade paperback from Avon Books.
+
+\bibitem[Stevens90]{Stevens90} W. Richard Stevens. Unix Network Programming. Prentice-Hall. 1990. ISBN 0-13-949876-1.
+
+The classic on this topic. Note: Some later editions of this book omit coverage of the Version 6 networking facilities like mx().
 
 \bibitem[Stevens92]{Stevens92} W. Richard Stevens. Advanced Programming in the Unix Environment. 1992. ISBN 0-201-56317-7. Addison-Wesley.
 
 Stevens's comprehensive guide to the Unix API. A feast for the experienced programmer or the bright novice, and a worthy companion to Unix Network Programming.
 
-%[Stroustrup] Bjarne Stroustrup. The C++ Programming Language. Addison-Wesley. 1991. ISBN 0-201-53992-6.
-%
-%[Tanenbaum-VanRenesse] Andrew S. Tanenbaum and Robbert van Renesse. A Critique of the Remote Procedure Call Paradigm. EUTECO'88 Proceedings, Participants Edition. 1988. pp.775-783.
-%
+\bibitem[Stroustrup]{Stroustrup} Bjarne Stroustrup. The C++ Programming Language. Addison-Wesley. 1991. ISBN 0-201-53992-6.
+
+\bibitem[Tanenbaum-VanRenesse]{Tanenbaum-VanRenesse} Andrew S. Tanenbaum and Robbert van Renesse. A Critique of the Remote Procedure Call Paradigm. EUTECO'88 Proceedings, Participants Edition. 1988. pp.775-783.
+
 \bibitem[Tidwell]{Tidwell} Doug Tidwell. XSLT: Mastering XML Transformations. O'Reilly \&{}  Associates. 2001. ISBN 1-596-00053-7.
-%
-%[Torvalds] Linus Torvalds and David Diamond. Just for Fun. The Story of an Accidental Revolutionary. HarperBusiness. 2001. ISBN 0-06-662072-4.
-%
-%[Vaughan] Gary V. Vaughan, Tom Tromey, and Ian Lance Taylor. GNU Autoconf, Automake, and Libtool. New Riders Publishing. 2000. 390.. ISBN 1-578-70190-2.
-%
-%A user's guide to the GNU autoconfiguration tools. Available on the Web.
-%
-%[Vo] Software Practice & Experience. Kiem-Phong Vo. “The Discipline and Method Architecture for Reusable Libraries”. 2000. 30. p.107-128.
-%
-%Available on the Web.
-%
-%[Wall2000] Larry Wall, Tom Christiansen, and Jon Orwant. Programming Perl. 3rd Edition. O'Reilly & Associates. 2000. ISBN 0-596-00027-8.
-%
-%[Welch] Brent Welch. Practical Programming in Tcl and Tk. Prentice-Hall. 1999. ISBN 0-13-022028-0.
+
+\bibitem[Torvalds]{Torvalds} Linus Torvalds and David Diamond. Just for Fun. The Story of an Accidental Revolutionary. HarperBusiness. 2001. ISBN 0-06-662072-4.
+
+\bibitem[Vaughan]{Vaughan} Gary V. Vaughan, Tom Tromey, and Ian Lance Taylor. GNU Autoconf, Automake, and Libtool. New Riders Publishing. 2000. 390. ISBN 1-578-70190-2.
+
+A user's guide to the GNU autoconfiguration tools. \href{http://sources.redhat.com/autobook/}{Available on the Web}.
+
+\bibitem[Vo]{Vo} Software Practice \&{} Experience. Kiem-Phong Vo. “The Discipline and Method Architecture for Reusable Libraries”. 2000. 30. p.107-128.
+
+\href{http://www.research.att.com/sw/tools/vcodex/dm-spe.ps}{Available on the Web}.
+
+\bibitem[Wall2000] Larry Wall, Tom Christiansen, and Jon Orwant. Programming Perl. 3rd Edition. O'Reilly \&{} Associates. 2000. ISBN 0-596-00027-8.
+
+\bibitem[Welch]{Welch} Brent Welch. Practical Programming in Tcl and Tk. Prentice-Hall. 1999. ISBN 0-13-022028-0.
 
 \bibitem[Williams]{Williams} Sam Williams. Free as in Freedom. O'Reilly \&{} Associates. 2002. ISBN 0-596-00287-4.
 
@@ -6819,637 +7167,11 @@ Stevens's comprehensive guide to the Unix API. A feast for the experienced progr
 \bibitem[Yourdon]{Yourdon} Edward Yourdon. Death March. The Complete Software Developer's Guide to Surviving “Mission Impossible” Projects. Prentice-Hall. 1997. ISBN 0-137-48310-4. 
 \end{thebibliography}
 
-
-
-
-
-
 %这里空一行
 
 \end{common-format}  
 \end{document}
 
-\part{Community}
-
-
-
-
-Portability: Software Portability and
-Keeping Up Standards
-     The realiZation that the operating systems of the target machines were as great an
-obstacle to portability as their hardware architecture led us to a seemingly radical suggestion:
-to evade thatpart of the problem altogether by moving the operating system itself.
-    对于可移植性，目标机器的操作系统和其硬件结构都是障碍，意识到这一点，可能
-会导致相当激进的意见：完全规避问题的方法，就是移植操作系统本身。
--Portability of C Programs and the UNIX System  （ 1978 ）
-C程序的可移植性和Unix系统（1978）
-Unix是第一款移植到不同系列处理器上的生产级操作系统（Unix版本6，1976-
-1977）。现今，Unix可以被移植到每一款足够强大可以运行内存簪理单元的新机器上，
-这已经毫不稀奇了。应用程序也常常在差异极大的不同硬件上运行的Unix间移来移去；
-事实上，还没听说哪次移植失败过。
-
-    移植性一直是Unix的主要优势。Unix程序员往往设想硬件是易变的，只有Unix API
-才是稳定的，尽可能少地假定诸如字长、字节顺序和存储体系等机器的特殊细节。实际
-上，在Unix圈中，以任何方式超出C的抽象机器模型而依赖于硬件的代码，都会被认定
-为不良的形式，仅允许发生在诸如操作系统内核等极为特殊的情况下。
-    Unix程序员已经了解到，一旦设想软件项目的生命期很短，就非常容易犯错。1所以，
-Unix程序员往往尽量避免软件依赖于某种特殊易逝的技术，而严谨地遵循开放标准。这
-种考虑可移植性的编码习惯在Unix传统中根深蒂固，甚至应用于那些一次性小型单用途
-的代码中。这种习惯也始终贯穿于Unix开发工具的设计，以及例如Perl、Python和Tcl
-之类在Unix下发展起来的语言中。
-    可移植性最直接的效益是工具和应用程序无需每隔几年就重写，因为Unix软件比起
-原生的硬件平台来得长久，这是再正常不过的。今天，最初为Unix版本7（1979）所编
-写的应用程序，不仅用在其直系后裔中，也用在那些按照Unix规范编写操作系统API，
-但并没有从Bell实验室源码树共享代码的交种中，如Linux。
-    间接的益处并不明显但可能更为重要。可移植性的戒律往往在架构、接口和实现上
-施加了一种简单化的影响。这既提高了项目成功的几率也降低了生命期的维护成本。
-    本章概览Unix标准的范围和历史。我们将讨论哪些部分在今天仍然意义重大，并描
-述Unix API中或多或少变化的部分。我们将检视某些Unix开发者用来保持代码可移植
-性的工具和惯例，同时逐步展示出对良好实践的建议。
-7．  C语言的演化
-    C语言及其附带服务接口（挑明了，就是标准输入输出库函数及其友元）的稳定性
-一直以来都是Unix编程经历的主要核心事。诞生于1973年的一门语言，在三十年来的
-频繁使用中，只有很少的变动需求，这真是非常了不起：在计算机科学和工程领域中尚
-无人出其右。
-    在第4章，我们论述了C语言如此成功是因为它可以作为计算机硬件上的薄胶合层，
-近似于【BlaauwBrooks]的“标准架构”。当然，成功的因素并不仅止于此。为了理解其余
-的内幕，我们需要简要地回顾一下C语言的历史。
-1  PDP-7 Unix和Linux都是持久性出乎意料的例子。Unix最初是作为一个研究玩具由几个研究者在
-项目工程间编制而出，一半是为了实验文件系统的创意，一半悬为了运行一个游戏。而Linux则被其
-创造者总结为“长了腿的终端模拟器”【Torvalds]。
-
-
-
-\end{common-format}  
-\end{document}
-    C语言诞生在在1971年，最初作为Unix移植到PDP-Il的系统编程语言，基于Ken
- Thompson早期的B语言解析器，脱胎于BCPL （Basic Common Programming Language），
-于1966-1967在剑桥大学诞生2。
-    Dennis M. Ritchie的原始C编译器（也常常以他名字的首字母称为“DMR”编译器）
-在Unix版本5、6、7快速持续增长的社区中都有应用。版本6的C编译器派生了
-Whitesmiths C编译器，这个重新的实现成为了第一款商业的C编译器，也是软件通用型
-IDRIS的核心。但是多数现代的C语言实现都以Steven C．Johnson的“可移植C编译器
-（PCC）"为模型，该编译器在版本7中首次亮相，并在System V和BSD 4.x的发布中
-完全取代了DMR编译器。
-    在1976年，版本6的C语言引入了typedef、union和unsigned int声明。带初值的
-变量初始化语法和一些复合操作符也有改动。
-    最初C语言的参考手册是Brian Kernighan和Dennis M. Ritchie原创的《The C
-Programming Language》<C编程语言），即《白皮书》[Kernighan-Ritchie]。该书出版于
-】978年，同年Whitesmiths C编译器问世。
-    白皮书描述了增强的版本6C语言，包含一个涉及公用存储处理的重要例外。基于
-任何能够处理FORTRAN语言的机器都可以立即处理C语言的理论，Rithie原意是仿造
-FORTRAN语言中“COMMON”声明的规则。在公用块（common-block）模型中，公用
-变量也许会被声明好几次；相同的声明由链接器合并。但是两个早期的C移植（ Honeywell
-和IBM 360大型机）恰好是那种限制公用存储或链接器较为原始或两者兼有的机器。这
-样，C编译器版本6采用了在白皮书中描述的、较为严格的定义引用模型（要求任何公
-用变量至多只有一处声明，并在引用处使用关键字extern来标记）。
-    许多现存源码都依赖较为宽松的规则，所以这个决定在随着版本7发布的C编译器
-中被颠覆了。向后兼容的压力也阻碍了另一个转换尝试（1983年的System V Release l），
-直到1988年ANSI标准草案才最终解决了定义引用原则。公用块公共存储依然是标准许
-可的变体。
-2C语言中的“C’’因此代表“Common[通用）”——或者，代表“Christopher”。BCPL最初表示
-“Bootstrap CPL（引导性CPL）”-CPL的一个非常简化的版本，CPL是一种非常有趣但抱负过
-大而从未实现的牛津剑桥通用编程语言，也被亲切地称之为“Christopher's Programming Language
-（Christopher编程语言）”，以这门语言的主要贡献者，计算机科学的先驱Christopher Strachey命名。
-
-第17章可移植性：软件可移植性与遵循标准
-    C版本7引入了enum，并且将struct和union的值作为第一类对象，可被赋值，可
-作为参数传递，也可作为函数的返回值（而不是靠地址传递）。
-    V7中的另一个主要变化是Unix的数据结构写在了头文件中，并可以被包含。
-原先的Unix将这些结构（如目录）打印在手册中，人们需要将其复制到代码中。毋
-庸多言，这是个重要的移植性问题。
--Steve Johnson
-    System III C版本的PCC编译器（也随BSD 4.lc -起发布）改变了struct声明的处
-理，这样不同struct中的同名成员不会冲突。同时引入了void和unsigned char声
-明。函数内的extern声明，其作用域也限制在函数体中，而不再覆盖所有位于声明以
-后的代码。
-    ANSI C草案提议标准（The ANSI C Draft Proposed Standard）加入了const（只读存
-储）和volatile（表明在程序控制的线程中例如内存映射寄存器等需要异步修改的地
-方）。unsigned类型修饰符泛化了，可以应用于任何类型，同时加入了一个对称的
-signed修饰符。也加入了auto数组、结构初始化器以及union樊型的初始化语法。
-最重要的，加入了函数原型。
-    早期C语言最重要的变化就是，转型为定义引用和在ANSI C草案提议标准（Draft
-Proposed ANSI C Standard）中引入的函数原犁。自从1985-1986年X3JI1委员会关于标
-准草案的工作报告将委员会的意向传达给编译器的实现者之后，C语言在本质上一直都
-很稳定。
-早期C语言更详细的历史，可以参阅其设计者编写的《Ritchie93》。
-17.1.2  C语言标准
-    C语言标准的发展一直是个保守的过程，原始C语言的精髓得以小心留存，更认可
-现存编译器中的实验技术而不是发明新的特征。C9X宪章（charter）3文档很好地表述了这
-个任务。
-3可- rXib-问网页<http：//anubis．dkuug．dk/JTCI/SC22 /WG14 /www/charter>。
-
-    第一个官方C语言标准化工作在X3J1l ANSI委员会的赞助下始于1983年。主要的
-功能增加在1986年末就已经解决，在这一点上，对于编程者来说，区别“K&R C”和“ANSI
-C”变得很普遍。
-    许多人都没有意识到C语言标准化努力的工作是多么的不同寻常，尤其是最
-  初的ANSIC工作，它坚持只将经过测试的特征列入标准。很多语言的标准委员会
-  把大量时间花在新的语言特性上，而几乎不考虑应该如何实现。确实，极少数凭
-  空产生的ANSIC特征——例如，臭名昭著的“三字母操作符（Lrigraphs）”——就
-  是C89中最讨厌最不成功的特征。
-    -Hen哼Spencer
-    标准化努力的部分结果是发明了void指针，并且成为赢家。但是Henry的观
-点也被很好地接受了。
--Steve Johnson
-    尽管ANSI C的核心早就确定了下来，关于标准库内容的争论还是拖延了好几年。
-正式的标准直到1989年末才发布，那是在许多编译器都已经实现了1985年的建议之后。
-该标准最初称为ANSI X3.159，但在1990年国际标准组织（ISO）成为新的赞助方后重新设
-计为ISO/IEC 9899:1990。该标准描述的语言变体通带称为C89或C90。
-    第一本关于C语言和Unix可移植性的书籍，《Portable c and Unix Svstems
-Programming》（可移植的C语言和Unix系统编程）[Lapin]，于1987年出版（在那时追
-于雇主压力，此书以公司笔名出版）。第二版的《Kernighan-Ritchie》于1 988年出版。
-    C89 -个次要的修订，称作修订l/AMI/C93，在1993年付诸实施。该修正增加了对
-宽字符集和Unicode更多的支持。这就是ISOfIEC 9899-1:1994。
-    C89标准的修订始于1993年。在1999年，ISO/IEC 9899（通常称作C99）为ISO
-所采用。该协议集成了修订1并增加了许多次要的特征。其中也许对大多数编程者最重
-要的一个就是，具备了像C++一样可以在代码块任意点，而不是仅仅只能在开始处声明
-变量。同时也加入了参数个数可变的宏。
-    C9X  工作组的网页是<http：／／anubis．dkuug．dk／JTC1／SC22/WG14/
-www/proj ects>，但是在2003年中期还没有第三个标准化工作列入计划。正在为嵌入
-式系统发展一个C语言的补遗。
-    在c语言标准化工作开始烈前，可工作的兼容实现已经运行在广泛的不同系统上，
-这个事实极大地协助了c语言的标准化工作。但这也更难以论证究竟哪种特征应该加入
-
-第17章可移植性：软件可移植性与遵循标准
-到标准之中。
-17.2 Uni×标准
-    1973年用C语言重写后，Unix史无前例地容易移植和修改。结果，始祖的Unix分
-别发展出了一系列早期操作系统。发展Unix标准最初就是为统- Unix系列不同分支的
-API。
-    在1985年后发展的Unix标准在这方面相当成功——因此而成为了现代Unix实现极
-具价值的API文档。实际上，现实世界的诸多Unix都紧密地遵循公开标准，所以开发者
-能够（也常常这样做）更依赖诸如POSIX规格说明的文档，而不是手头使用中的变种
-Unix官方手册页。
-    实际上，在新近的开源Unix（例如Linux）中，就往往使用公开标准作为其操作系
-统功能特征的规格说明。我们在本章稍后审视RFC标准化过程时还会回到这一点来。
-17.2.1  标准和Unix之战
-Unix标准发展的原动力是第2章叙述过的AT&T和Berkeley阵线在发展上的分裂。
-    4.x BSD Unix源自1979年的版本7。在1980年4.IBSD发布后，BSD阵线很快赢得
-了Unix发展前沿的好名声。重要的新特性包括V1可视编辑器，从单一控制台管理多重
-前后台任务的作业控制功能，以及信号的改进[参见第7章）。迄今为止最重要的增加
-是TCPfIP网络，但是尽管Berkeley在1980年就获得了该合同，’rCPIP三年内都没能随
-对外发布的版本一起交付。
-    但是另一个版本，1981年的System III，成为了AT&T后来发展的基础。System III
-重编了版本7的终端接口，使之更简洁，更优雅，但同Berkeley的改进完全不兼容。它
-保留了老的（无重置）信号语义（也请参考第7章关于这点的讨论）。1983年1月发布
-的System V Release 1整合了某些BSD实用程序（如vi（1））。
-    在1983年2月，UniForum进行了架通两者的第一次尝试，这是一个很有影响的Unix
-用户组。它们的Uniforum 1983年标准草案（UDS 1983）描述了一个“核心Unix系统”，
-由System III核心的一个子集和函数库加上文件锁定原语构成。AT&T宣布支持USD 83，
-
-但是标准只是基于4.IBSD的发展实践的不完全子集。在1 983年4.2BSD发布的时候，
-这个问题加重了，它为该版本增加了许多功能（包括TCPfIP网络），也引入了许多跟原
-先版本7并不兼容的东西。
-    1984年Bell运营公司的剥离以及Unix战争的开始（参考第2章）使问题更加复杂。
-Sun Microsystems朝BSD方向领导着工作站产业；AT&T甚至一边继续向诸如SUfl的竞
-争对手授权操作系统，一边利用对Unix的控制作为战略武器并试图进入商务领域。为了
-保持竞争优势，所有商家作出的商业决策都是差异化他们的Unix版本。
-    在Unix内战中，在某种意义上，技术标准成为相互合作技术人员奋力推动的东西，
-而产品经理不是勉强接受就是积极反对。重大而重要的例外是AT&T，当它在1984年1
-月发布System V Release 2（SVr2）时，宣布了同用户组在标准设立上的合作计划。1984
-年的UniForum草案标准第二次修订版，追踪和影响了SVr2的APJ。后来的Unix标准中，
-除了某些BSD功能在效用上特别领先的领域，均倾向遵从System V（例如，现代Unix
-标准描述了System V晌终端控制而不是BSD同样功能的接口，就是这个原因）。
-    在1985年，AT＆T发布了System V接口定义（System V Interface Definition，SVID）。
-SVID结合UDS84为SVr2 API提供了一个更为正式的说明。后来的版本，SVID2以及
-SVID3遵从了System V release 3和4的接口。SVID成为了POSIX标准的基础，而POSIX
-最后在系统和C函数库上Berkeley/AT&T的分歧中，大多数都偏向了AT&T。
-    但趋势在好几年内都仍不明显；其间，Unix之争仍战事频繁。例如，1985年，网络
-共享文件系统就发布了两个竞争的API标准：Sun的网络文件系统（Network File System，
-NFS）以及AT&T的远程文件系统（Remote File System，RFS）。Sun的NFS更流行一些，
-因为Sun公司不仅愿意共享规格说明还愿意将代码公开。
-    这个成功的经验其实更应该值得指出，因为纯粹基于逻辑判断来说，RFS远远更加
-优秀。它支持更好的文件锁定语义以及在不同系统用户身份更好的映射，并且总的来说，
-作出了相当的努力以期获得Unix文件系统语义更好更淮确的细节，而不像NFS。然而这
-个成功的经验却往往被忽略，甚至在1987年，开源X window系统战胜了Sun专有网络
-视窗系统（ Networked Window System （NeWS》时，也不例外。
-    1985年后，主要的Unix标准化推进传递给了美国的电气电子工程协会（lnstitute of
-Electrical and Electronic Engineers，IEEE）。IEEE的1003委员会发展了一系列的标准，
-
-通常称作POSIX4。这些标准不仅描述系统调用和C函数库功能，还说明了具体的shell
-语义和最小命令集，并具体化了各种非C编程语言的接口。它首次发布于1990年，1996
-年发布了第二版。国际标准组织采用其作为ISOfIEC 9945。
-    关键的POSIX标准包括：
-1003.1 （1990年颁布）
-    函数程序库。描述了C系统调用API，大部分同版本7相同，除了信号机制与终端
-控制接口。
-1003.2 （1992年颁布）
-    标准shell和实用程序。Shell语义几乎同System V的Boume shell -模一样。
-1003.4 （1993年颁布）
-    实时Unix。二元信号量、进程内存锁、内存映射文件、共享内存、优先调度、实时
-信号、时钟和定时器、IPC消息传递、同步I/O、异步1/0、实时文件。
-    在1996年的第二版中，1003.4分成了1003.lb（实时）和1003.c（线程）两个部分。
-    尽管在几个关键的领域里（比如信号处理语义上）说明不足，也遗漏了BSD套接字，
-最初的POSIX标准还是成为了所有后来Unix标准化工作的基础。它仍然作为一个权威
-被引用，纵使许多都是通过POSIX Programmer's Guide（POSIX裎序员指南）[Lewine】等间
-接引用。实际上的Unix API标准仍然是“POSIX+套接字”，以后的标准主要是增加功
-能以及在不常见边界情况更紧密的一致性规定。
-    下一个参与者是X/Open（后来更名为Open Group），它是在1984年形成的Unix商家
-联盟。它们的X/Open Portability Guides （XPGs）最初与POSIX草案平行发展，而在1990
-年之后，XPGs整合扩展了POSIX。POSIX试图捕捉所有Unix的安全子集，而XPG更
-倾向前沿开发的普遍实现；即使是1985年的XPGI，就跨越了SVr2和4.2BSD，还包含
-了套接字。
-    1987年的XPG2增加了终端处理API，基本上是System V的curses（3）。1990年的
-XPG3融合了XII API。1992年的XPG4完全遵从了ANSI C 1989标准。XPG2、XPG3
-4最初1986年的试用标准叫做IEEE-IX。  “POSIX”的名称是Richard Stallman的建议。POSIX.I的
-介绍说：  “应该发[pahz-icks】的音，而不是[poh-six】或别的什么，公布发音方式是为了以尝试传播一
-种il用标准操作系统接口的标准化方法。”
-
-和XPG4极度关注国际化的支持，并描述了一套详尽的API来处理字符集和消息目录。
-    在阅读Unix标准的时候，也许会碰到“Spec 1170"（自1993年）、“Unix95"（自
-1995年）和“Unix 98”（自1998年）。这些认证标记都基于X/Open标准；现在仅仅只
-是历史的兴趣罢了。但是XPG4完成的工作成为了Spec 1170，而Spec 1170又转变成第
-一版的“单- Unix规范’’  （Single Unix Specification，SUS）。
-    1993年，包括每个主要Unix公司在内的75个系统和软件提供商对Unix战争作出
-了了断，宣布支持X/Open开发出Unix的通用定义。作为协商的一部分，X/Open组织获
-得了Unix商标权。整合的标准变成了单- Unix苏磋版本1。接下来就是1997年的版本
-2。在1999年X/Open并入了POSIX的活动。
-    在2001年，X/Open（现在的The Open Group）发布了单- Unix标准版本
-3<ht tp：／/wwW。unlx．org/version3 1>。所有Unix API的标准化流程最终汇合到一
-起。这反应了如今的现宴状况；不同种类的Unix已经会聚在～个通用API集合中。并且，
-至少对1980年代的动荡记忆犹新的老一辈人来说，这太令人愉悦了。
-17.2.2庆功宴上的幽灵
-    但很不幸地，有个尴尬的情况——支持整合努力的1日学派Unix商家处于新学派开源
-Unix的严峻压力之下，在某些时候不得不抛弃（有利于Linux）已经为确保一致性付出
-巨大努力的专有Unix。
-    单一Unix规范的一致性验证检测是个昂贵的任务。每个发布都需要做一次，但这超
-出了大多数开源操作系统发布者的能力。无论如何，Linux的变化如此之快，任何发布版
-本在获得认证时，可能都已经过时了5。
-    诸如单- Unix规范之类的标准并没有完全失去实用性，它们仍然对Unix实现者有
-很高的指导价值。但是Open Group以及其它旧学派Unix标准化机构如何适应开源发布
-的节奏（以及开源开发组低预算或零预算运作），还有待观察。
-5有个Linux发布商，英国的Lasermoon，确实获得了POSIX．】FIPS 151-2认证～一它已经倒闭了，
-因为潜在用户对此根本不关心。
-
-第1 7章可移植性：软件可移植性与遵循标准
-17.2.3开源世界的Unix标准
-    在1990年代中期，开源社区开始了自己的标准化努力。这些努力建立在由POSIX
-及其继承标准确保的源码级兼容性之上。特别是Linux，它从头到尾都是按POSIX之类
-类Unix API标准编写的。6
-    在1998年，Oracle把领先市场的数据库产品移植到了Linux上，这场运动正是Linux
-被大型机所接受的一次重大突破。在被记者问及Oracle必须战胜的困难是什么的时候，
-负责移植的工程师的回应很有说服力：API标准工作完成得相当出色。他回答：  “我们
-键入‘make'。
-    由此看来，新学派Unix的问题并不是在源码层次上API的兼容性。每个人都理所当
-然地认为在不同的Linux、BSD和专有Unix发布之间移植源码是轻而易举的。新问题不
-是源码而是二进制的兼容性。因为由于商业PC机硬件的胜利，Unix的底层基础已经发
-生了微妙的变化。
-    在旧时代，每种Unix都运行在实际上属于它自己的硬件平台上。存在许多种类的处
-理器指令集和机器体系，所以应用程序若要移植就必须在源码层次上完成。另一方面，
-又只有极少数几个Unix的重要版本，相对来说其有较长的生命期。而诸如Oracle之类的
-应用程序提供商能够为三到四个硬件／软件组合分别编译和提供独立的二进制发布版本，
-因为他们可以通过大量的使用人群和较长的产品生命期来摊低源码移植的成本。
-    但是后来小型机和工作站商家淹没在了基于386廉价的个人机中，而开源Unix改变
-了规则。商家发现再也不能找到一个稳定的平台来发售它们的二进制程序。
-    首先，表面的问题是，大量的Unix发布者——随着Linux发布市场的统一，越来越
-清楚真正的问题是时间变化率。API是稳定的，但是系统管理文件的预期位置、实用程
-序以及用户邮箱名和日志文件的前缀路径等常常发生变化。
-    首次标准化努力是新学派Linux和BSD社区自身中发展出来（始于1993）的文件系
-统层次标准（Fijesystem Hierarchy Standard，FHS）。此标准被集成到Linux标准基础（Linux
-Standards Base，LSB）中，它标准化了一套预期的服务库和辅助应用程序库。两个标准
-6进一步讨论请参考《Just for Fun》（玩玩而已）[Torvalds]。
-
-都成为了自由标准组织（Free Standards Group） <http:/／www．freestandards．
-org/>的行为，到2001年，该组织已经扮演了在旧学派Unix商家中X/Open的角色。
-17.3  IETF和RFC标准化过程
-    当Unix社区同互联网T程师文化相结合时，也继承了从互联网工程任务组（Intemet
-Engineering Task Force，IETF） RFC标准化过程中形成的思维方式。在IETF传统中，标
-准必须来自于一个可用原型实现的经验——但是一旦成为标准，同标准不一致的代码就
-被认定是不合规范的，必须无情地抛弃。
-    不幸地是，这并不是标准通常发展的方式。计算机历史充满了许多这样的例子，技
-术标准是别有企图研究的最糟糕特征与黑暗密室政治结合的产物——这样产生的规格说
-明在任何曾经的实现中都找不到踪影。更糟糕的是，许多规范不是严苛得无法实际实现，
-就是说明不够充分，解决的问题远不如产生的困惑多。这些规范随之被塞给软件商，它
-们如果发现什么地方不易实现，就忽略掉标准。
-    标准无用最臭名昭著的例子就是，1980年代同TCP/IP竞争的开放系统互联（Open
-Systems  Interconnect）扔议——它的七层模型乍看很优雅，但在实际中却被证明是过度复
-杂而不可实现的7。视频显示终端功能的ANSI X3.64标准是另～个恐怖故事：同标准保
-持一致的实现版本之间居然存在微妙的不兼容性，真是该死。即使在字符阵列终端大部
-分被位图显示终端所替代以后，这些也还是问题（特别地，这就是为什么xterm （1）中
-功能和热键偶尔会失效的原因）。串行通讯的RS232标准也是说明不够充分，有时候似
-乎没有两个串行线是相似的。关于标准类似的恐怖故事真是可以写一本厚厚的书。
-    IETF的哲学已经被概括为著名的“我们反对国王、总统和投票。我们信任大致的共
-识和可运行代码”8。首先，要求可工作实现将使其免于最糟的莽撞行为。实际上，它的
-规范更严格：
-7网络搜索可以找到一个流行的幽默帖子，将OSI七层模型和七层玉米卷比较一一前者还处于劣势。
-8这句最初是由IETF的高级干事Dave Clark在混乱的1992年会议上，IETF拒绝OSI协议时所说的。
-
-
-
-\end{common-format}  
-\end{document}
-第17章可移植性：软件可移植性与遵循标准
-    （任何）候选规范在被采用为互联网标准之前，必须得到实现，对操作的正确性
-    以及众多独立方的互操作性必须得到测试，以及必须已经使用在要求越来越高的
-    环境中。
-    互联网标准过程一一修订稿3（ RFC 2026）
-    所有的IETF标准都要经过RFC（请求评注）的阶段。RFC的提议过程故意地设置
-为非正式的。RFC可以提出标准、调查结果、建议后续RFC的哲学基础，或者甚至是玩
-笑。每年4月1日愚人节RFC年鉴的出现就是互联网玩家中最盛大的庆祝仪式，并且产生
-许多如宝石般的精华标准，例如Transmission of IP Datagrams on Avian Carriers （IP数据报
-的信鸽传递，RFC 1149）9、Hyper Text Coffee Pot Control Protocol（超文本咖啡壶控制协议，
-RFC 2324）10、Security Flag in the IPv4 Header （IPv4包头的安全标志位，RFC 3514）。11
-    但是搞笑RFC大概是唯一能够立即成为RFC的提议。严肃的提议实际上以“互联
-网草案（lntemet-Drafts）"开始，通过IETF在／L个著名主机上的目泵让公众评注。没有
-正式身份的互联网草案个体，其提出者在任何时候都可以改动或终止。如果他们既不撤
-销也不提升到RFC状态，在六个月后草案将被移除。
-    互联网草案并不是规范，而软件实现者和软件商被特别禁止宣称符合某条草案，并
-将其按规范对待。互联网草案通常是在一个由电子邮件列表联系在一起的工作组讨论的
-焦点。当工作组领导认为适合的话，就把互联网草案提交给RFC编辑，从而被分配～个
-RFC号码。
-    一旦互联网草案作为一个带编号的RFC发布，就成为其实现者可以宣称与之相符的
-规格。接下来，RFC的作者和社区将开始以实际实验来更正规格说明。
-    ～些RFC就到此为止了。一个未能吸引用户和经受现场测试的规格可能被默默遗忘
-了，而且最后被RFC编辑标记为“Not recommended（不推荐）”或“Superseded（被取代）”。
-失败的提议通常认为是进程的日常开销，相关的提议不会因此打上耻辱的印记。
-9 RFC 1149见网页<http：／／www. ietf .orgirfc/rfc1149．txt>。不仅如此，其实现参见
-<ht tp:  //www. blug. linux. no/rfc114 9 /wri t eup. html>.
-10 RFC 2324兄网页<http：／/www.ietf.org/rfc/rfc2324.txt>。
-‘1 RFC 3514见网页<http：／／www.ietf.org/rfc/rfc3514.txt>。
-
-    IETF的指导委员会（IESG，或者Internet Engineering Steering Group）负责将成功的
-RFC推向标准之路。他们将合格的RFC标明为“Proposed Standard（提倡标准）"。对
-于具备提倡标准资格的RFC，其规格必须稳定，经过同行评审，并且已经吸引了互联网
-社区的极大兴趣。当然，一个RFC成为提倡标准，并不绝对要求存在实现，如果有则最
-好不过；如果RFC改变或可能动摇互联网核心协议，IESG则有权要求RFC提供实现。
-    提倡标准仍可能被修订，如果IESG和IETF确实有更好的解决方案，甚至还会被撤
-消。它们并不推荐在“崩溃敏感环境”中使用——不要将他们使用在空中交通控制系统
-或是需要精心照料的设备上。
-    对于提倡标准，如果至少存在两个可工作的、完备的、独立发展出来的、可互用的
-实现，就能够由IESG提升到“草案标准”状态。如RFC2005所说：  “提升到草案标准
-阶段是个重要的进步，表明有充分理由相信规格是成熟而有用的。”
-    一旦RFC达到了草案标准状态，就只能更改规格说明中的逻辑错误。草案标准可随
-时被部署使用在崩溃敏感环境中。
-    当草案标准经道了实现的广泛测试并且达到了普遍接受的程度，就可以成为一个互
-联网标准（Internet Standard）。互联网标准保留自身的RFC编号，也可以申请一个STD
-序列号。在本书写作时，虽然有3000多个RFC，但仅仅只有60个STD。
-    尚未成为标准的RFC被标记为Experimental（实验性）、Informational（资料性）（搞
-笑RFC就被赋予该标记），或者Historic（历史性）。历史性的标记被用于过时标准。RFC
-2026注释为：  “（完美主义者建议这个词应该是“Historical（历史上的）”；但是，在这
-一点上，  “历史性”一词的使用是历史上的原因。）
-    IETF标准化过程有意提倡由实践而非理论驱动的标准化过程，并确保标准协议都经
-受过严格的同行评审和测试。这种模式的成功结果显而易见——全世界的互联网。
-17.4  规格DNA，代码RNA
-    甚至在PDP-7的旧石器时代，Unix程序员就比其他业界同行更倾向于认为代码是可
-弃的。这无疑是Unix传统注重模块性的产物，使其更容易在无损失的情况下抛弃和更换
-
-系统的各个子部分。Unix程序员已经从经验中认识到补救糟糕的代码或设计比起重新开
-始常常更费时费事。在其它编程文化中，被迫弥补大型单个程序是种本能的反应，因为
-从头再来需要太多太多的工作，而在Unix文化则主张干脆拆毁重来。
-    IETF传统反复教导我们将代码作为标准的从属物来思考。正是标准让程序可以协
-作，将各项技术结合起来成为比部分之和更大的整体。IETF向我们展示了，精细的标准
-化过程，瞄准获得最好的实践，其实是种强有力的形式，相比于无法实现的完美理想的
-信誓旦旦来说，能够获得更大的成功。
-    1980年后，Unix社区越发受到这个教训的影响。从1989年以来的ANSI/ISO C标准
-虽并非毫无瑕疵，但考虑到其长度和重要性，它的确异常简洁和实用。单- Unix规范在
-更广泛的领域中包含三十年来的实验和改进，比ANSI C更为凌乱。但是标准的组成相
-当良好。一个强有力的证明就是，Linus Torvalds通过它而成功从头开始编制了一个Unix。
-IETF强大的示范给Linus Torvalds的壮举创造了一个关键背景，并使其成为可能。
-    尊重已颁布标准和IETF过程已经在Unix丈化中根深蒂固；故意违反Internet STD
-就是不妥当的。这一点有时候往往会造成Unix背景的技术人员同其它技术人员之间相互
-不理解，其它技术人员往往设想最流行或最广泛配置的协议实现就是定义上的正确——
-即使定义严重地违反标准而不能与完全符合标准的软件进行协作。
-    Unix程序员可能大力反对其它种类的前规格说明，他们对已颁布标准的尊敬显得很
-有趣。当“瀑布模型”（首先详尽说明，然后实现，然后调试，在任何阶段都没有反向
-动作）在软件工程学中失宠时，在Unix程序员中成为笑柄其实已经好几年了。经验以及
-合作开发的浓厚传统，已经训练了Unix程序员，先原型然后循环不断地测试和演进才是
-更好的方法。
-    Unix传统清楚地意识到良好的规格说明具有巨大的价值，但是需要像“互联网草案，，
-和“提议标准”的方式那样，被视作是暂时的、需要订正的对象，必须通过在现场实验
-中的不断改进。在最好的Unix实践中，程序的文档就近似于规范主体的“提议标准”，
-需要不断修改订正。
-    与其它环境不同，在Unix开发中，文档常常在程序之前，或者至少同程序一
-起编写。对于X11，X核心标准在X第一版发布之前完成，并且自从那时起基本
-上就没有改动过。不同X系统间的兼容性更进一步地被严格的规格驱动测试所改
-善。
-    有了良好编写的规格说明，开发X测试套件便更加容易。在X规格说明中的
-每一项声明都转换成代码来测试其实现，在这个过程中发现了几个次要的、跟规
-格不一致的地方，其最终结果就成为了一个测试套件，覆盖了X实例库和服务器
-中重要的代码路径，并且不引用实现源码。
-    -Keith Packard
-    生成半自动化的测试套件被证实为～个主要优势。尽管图形艺术的现场实验和发展
-导致对X设计基础的许多批判，尽管X的某些部分（例如安全和用户资源模型）似乎笨
-拙而实现过度复杂，但X在稳定性和跨系统发布的互用性方面达到了非同一般的良好水
-平。
-    在第9章我们讨论了将编码尽量往上推以最小化常数缺陷密度效应。Keith Packard
-含蓄地说明X文档并不仅是期望功能列表，而是以高级代码形式来表述。另外一个X的
-关键开发者证实了这一点：
-    在X中，规格说明就是一切。有时规格存在缺陷需要修正，但是代码通常此
-  规格说明具备更多的bug（对任何值得着墨的规格说明）。
-—■im Gettys
-    Jim继续阐明X的过程实际很像IETF过程。它的功用并不是仅仅局限于构建优良的
-测试套件；它也意味着相关的系统行为争论可以在关于规格的功能层面解决，避免了太
-多实现问题的纠缠。
-    以考虑周全的规格说明来驱动开发可能会引起“bug还是功能”的小小争论；
-但没有正确实现规格说明的系统就是破损不全的，必须得到修正。
-我怀疑这在我们当中是如此的根深蒂固，有时反而忽略了它的威力。
-www.pdf365.com
-408
-第1 7章可移植性：软件可移植性与遵循标准
-    一个在Bellevue以东一家小公司工作的朋友奇怪，Linux应用程序开发者为
-什么可以随着应用程序发布版本同步地进行OS改动。在那个公司里，主要的系
-统级API频繁改动以容纳一些古怪念头，所以基本的OS功能必须常常随着每个
-应用程序一起发布。
-    我向他描述了规格说明所具有的威力以及实现应当如何遵从规格，然后接着
-断言，如果一个应用程序按接口文档得到一个非预期的结果，那么不是违反了规
-格，就是发现了bug。他认为这个观念非常令人吃惊。
-    分辨这类bug再简单不过了，只要检查接口实现是否违反了规格。当然，如
-果有实现的源码会更简单。
-    -Keith Packard
-    这种标准先行的态度对于最终用户同样有益。Bellevue以东的那个小公司变大了，
-它难以兼容以前发行的办公软件，而在1988年为X11编写的GUI应用程序在今天的X
-实现中仍然没有改变地运行着。在Unix世界中，这种长寿是很正常的——这也就是为什
-么将标准视作DNA的原因。
-    经验表明，遵从标准、喜欢抛弃重建的Unix文化，虽然花费额外时间，但相比于因
-为没有标准提供指导和连续性，而必须不停地对代码基础库缝缝补补，往往熊够产生更
-好的互用性。这真的或许是Unix最重要的教益。
-    Keith最后的评注直接引出一个问题，也是随开源Unix的成功而提到前台的问题
-—二开放标准和开放源码间的关系。我们将在本章末尾讨论这个问题——但在这之前，
-是讨论Unix程序员如何能够使用大量的标准和知识来获得软件可移植性的实践问题的
-时候了。
-17.5可移植性编程
-    软件可移植性通常是准空间问题：代码可以从其诞生的环境移到别的硬件和软件平
-台吗？但是几十年的Unix经验告诉我们时间上的持久性同样重要，甚至更重要。软件的
-未来如果可以详细地预测，最好现在就来预测——然而，在可移植性编程中，我们应该
-
-尝试考虑选定最可能持续的软件环境特征作为构建软件的基础，同时要避免不久的将来
-就可能消亡的技术。
-    Unix二十年对详述可移植性API问题的关注，在很大程度上解决了这个问题。在单
-- Unix规范中描述的功能今天几乎仍然存在于现代的Unix平台中，将来也不会不支持。
-    但并不是所有的平台依赖性都同系统和库函数API相关。实现语言也有关系；源系
-统和目标系统之间文件系统设计和配置的不同也是个问题。还好，Unix实践已经发展出
-解决方法。
-17.5.1  可移植性和编程语言选择
-    可移植性编程的首要问题是实现语言的选择。所有我们在第14章讨论过的主要编程
-语言，从在全部现代Unix上都有兼容实现的角度来说，均具有较高的可移植性；而大多
-数在Windows和MacOS下也有实现。在这里，可移植性问题往往并不在于核心的编程
-语言，而在于支持库以及同本地环境整合的程度（尤其是IPC、并发进程管理以及GUI
-的基础设施）。
-17.5.1.1  C的可移植性
-    C语言核心的可移植性非常高。标准的unix实现是GNU C编译器，它在开源Unix
-和现代专有Unix中普遍存在。GNU C也已经移植到了Windows和古典的MacOS申，
-但在那里使用并不普遍，因为缺少对本地GUI的可移植接口。
-    标准输入／输出库、数学例程以及国际化支持都可以移植到所有的C实现中。如果小
-心谨慎地只使用在“单- Unix规范”中描述的现代API，文件1/0、信号、进程控制也
-可以移植到各个Unix;老一些的C代码常常需要经过条件预处理宏才能移植，但使用
-POSIX之前接口的代码往往来自于古老专有的Unix，而且在2003年这些Unix如果不是
-已经废弃就是接近废弃了。
-    对于IPC、线程以及GUI接口，C的可移植性问题开始有些严重了。我们在第7章
-已经讨论过IPC和线程的移植问题。真正实际中的问题是GUI工具包。许多开源的GUI
-工具包可跨越各种现代Unix使用，还被移植到了Windows和传统的MacOS中-Tk、
-wxWindows、GTK和Qt是其中四个最著名的，可以通过网络搜索得到的源码和文档。
-但是它们中没有一个随所有平台一起发布，而且（更多的是法律而不是技术因素）没有
-
-第17章可移植性：软件可移植性与遵循标准
-一个能够提供所有平台原汁原味的GUI观感。我们已在第15章给出了处理这个问题的
-指导原则。
-    已经有大批关于如何编写可移植性C代码的书了，本书并不想成为其中的一本。我
-们推荐阅读Recommended C Style and Coding Standards（C的推荐风格和编码标
-准）[Cannon]以及《The Practice of Programming（程序设计实践）》[Kemighan-Pike99]）中关
-于可移植性的相关章节。
-17.5.1.2 C++的可移植性
-    在操作系统层次上，所有C语言的移植性问题C++都有，当然也存在一些自身的问
-题。其中一个增加的问题是开源的C++编译器已经落后于专有的实现；这样，在2003年
-年中，仍然没有一个统一的像GNU C-样能够成为事实标准的基础。更进一步，仍然没
-有一款C++编译器完全实现了C++99 ISO语言标准，尽管GNU C++是最接近的一个。
-17.5.1.3 Shell的可移植性
-    很不幸，shell脚本的可移植性非常糟。问题不在shell本身．bash（1）（开源的Bourne
-Again shell）已经普遍存在，所以纯shell卿本几乎可以到处运行。问题是大多数的shell
-脚本大量使用了其它可移植性差的命令和过滤器，而且绝不保证在任意指定的机器上它
-们都存在。
-    这个问题可以借助一些额外的工作来克服，比如autoconf （l）工具。但是这个问题
-很严重，所以大多数在shell中稍重量级的编程都转移到诸如Perl、Python、Tcl等第二代
-脚本语言中完成。
-    Perl的可移植性良好。Perl的核心版本甚至提供一套支持跨Unix、MacOS和Windows
-平台GUI的rk工具包接口。然而也有个问题很讨厌。Perl脚本常常要求来自CPAN
-（ Comprehensive Perl Archive Network）的插件库，无法保证它在每个Perl实现中都存在。
-17.5.1.5  Python的可移植性
-    Python可移植性极其出色。如同Perl -样，Python的主干版本甚至提供一个Tk包
-的可移植接口，可支持Unix、MacOS和Windows的GUI。
-
-    Python主干版本存在比Perl更丰富的标准函数库，但是没有等价于Perl程序员可以
-依靠的CPAN;重要的扩展模块常常随主干Python的次要版本的发布一起发布。这是以
-牺牲空间来换取时间，使得Python更少成为模块丢失效应的对象，代价是Python的次版
-本号要比Perl发布的版本级别重要得多。在实践中，权衡似乎对Python更为有利。
-17.5.1，6 Tcl的可移植性
-    Tcl的可移植性总的来说不错，但是随着项目复杂度的不同而有极大差异。为跨平台
-GUI编程而生的Tk包原生于Tcl。同Python -样，语言核心的发展相对顺利，很少存在
-版本不兼容问题。但不幸的是，Tcl甚至比Perl更依赖那些并不能保证随着每个实现一
-起发布的扩展功能——也没有像CPAN -样的地方来集中发布这些扩展功能。
-    因此，对于不依赖扩展的小项目，Tcl的移植性相当高。但是大项目往往大量依赖扩
-展，和（同shell编程一样）调用在目标机器可能存在也可能不存在的外部命令；这些东
-西的移植性相当糟。
-    具有讽刺意味地，Tcl也许吃够了容易增加扩展的苦头。当一个特殊的扩展开始引人
-注目，似乎可以成为标准发布中的一个部分时，一般都已经夺在好几个不同的版本了。
-在1995年的Tcl/Tk学术研讨会上，John Ousterhout对为什么没有在标准Tcl发布中加入
-00支持而解释道：
-    想想五位大学者围坐一圈，一起叫着“杀死他，异教徒”。如果我把某个特
-  殊的oo设计加入到内核中，其中一个就会说“祝福你，我的孩子，吻我的戒指
-  吧j”，而另外四个则说“杀死他，异教徒”
-    语言设计者并不一定愉快。
-17.5.1.7 Java的可移植性
-    Java的可移植性特别出色——毕竟，它是以“一次编写，到处运行”作为主要设计
-目标的。然而，可移植性仍非尽善尽美。麻烦主要是JDK l.1及老AWT GUI工具包（一
-方面）和JDK l.2及新Swing GUI包之间的版本兼容问题。这有几个重要的原因：
-●  Sun的AWT设计不完善，不得不用Swing来代替。
-UNIX编程艺术
-  www.pdf365.com
-412
-第1 7章可移植性：软件可移植性与遵循标准
-    ●  微软拒绝在Windows中支持Java开发并试图以C#来取代Java。
-    ●  微软决定继续保留IE中对JDK I.I版的小应用程序的支持。
-    ●  Sun许可证授权让JDK l.2的开源实现完全小可能，这延缓了它的部署进程（特
-    别是在Linux世界）。
-    对于涉及GUI的程序，追求移植性的Java开发者在可预知的未来，时常面临一个选
-择：采用糟糕设计的JDK l.1/AWT工具包取得最大可移植性（包括移植到Microsoft
-Windows），或者采用更好的工具包和JDKl.2功能而牺牲部分可移植性。
-    最后，正如我们前面注意到的一样，Java对线程的支持也存在移植性问题。Java API，
-不像其它抱负较小语言的操作系统接口，它勇敢地去尝试弥补不同操作系统提供的不同
-进程模型之间的差异：但还没有掌握诀窍。
-17.5.1.8  Emacs Lisp的可移植性
-    Emacs Lisp的可移植性相当好。Emacs安装往往频繁地升级，而严重的过时失效情
-况很少出现。相同的Lisp扩展到处都被支持，而所有的扩展都随Emacs本身一起发布。
-    而且，Emacs的原语集相当稳定。几年前就获得了一个编辑器应有昀完备性（缓冲
-区处理，shell脚本支持）。仅仅只是X的引入损害了这个优点，并且需要感知X的Emacs
-模式也非常少。可移植性问题通常表现在操作系统功能C层次接口上的格格不入；例如，
-邮件代理模式的从属进程控制大概是唯一这种表征经常出现的地方。
-17.5，2避免系统依赖性
-    一旦选定开发语言和支持库，下～个可移植性问题通常就是系统关键文件和目录的
-放置：邮件池同志文件目录等等。这类问题的原型一般就是邮件池目录到底是
-/var/ spool/mail还是/var/mail。
-    通常可以通过退一步重新架构这个问题来避免此类依赖性。为什么要打开邮件缓冲
-目录下的文件？如果需要写入，简单地触发本地邮件传输代理，来完成以获得正确的文
-件锁定不是更好吗？如果需要读入，通过POP3或IMAP服务器查询不是更好吗？
-
-    同类的问题在别处同样适用。如果发现需要手动打开日志文件，为什么不使用
-syslog（3）代替？通过C库函数调用的接口比起系统文件定位容易标准化得多。应当利用
-这个事实！
-    如果必须在代码中使用系统文件定位，最好的选择取决于是发布源码还是采用二进
-制形式。如果发布的是源码，我们在下个部分讨论的autoconf工具能够提供很好的帮助。
-如果发布的是_进制形式，良好的实践是在程序运行期试探是否可以自动地适应本地条
-件——例如，实地检查／var／rnail和／var/spool/rnail是否存在。
-17.5.3移植工具
-    通常可以使用我们在第15章介绍的开源GNU autoconf（1）来处理移植性问题，进
-行系统配置探查，定制出makefile文件。如今，从事源码编译软件的人们往往希望能够
-键入  configure;make;make  install  来干净利落地编译。  在
-<http：／/seul．org／docs／autotut／>处有这些工具的优秀指导手册。即使是发布二
-进制码，autoconf（1）工具也能够帮助自动化处理针对不同平台的条件代码问题。
-    其它解决这个问题的工具中，其中两个较为知名的是与X window泵统相关的
-Imake（l），以及由Larry Wall（后来的Perl语言发明者）编制的Configure工具，也被许
-多项目采用。所有的工具至少都跟autoconf套件一样复杂，使用也不如以往频繁。它们
-无法覆盖众多的目标系统。
-1 7。6  国际化
-    软件代码的国际化设计使得接口容易适应多种语言和各种字符集，对于这方面的深
-入讨论超HJJ了本书的范围。然而，在Unix经验中有一些良好实践的突出事例。
-    首先，分离信息库和代码。良好的Unix实践应把程序使用的消息字符串同程序代码
-分离开来，这样不用修改代码就可以增加其它语言的消息字典。
-    完成此项工作最知名的工具就是GNU的g已ttext，这个工具要求把需要进行国际化的
-原生语言字符串包装在一个特殊的宏中。该宏使用各个字符串作为各文件提供的各种语
-
-
-
-\end{common-format}  
-\end{document}
-第1 7章可移植性：软件可移植性与遵循标准
-言字典主键。如果某种语言的字典不可访问（或者存在该字典但查询没有匹配返回），
-那么宏就简单地返回其参数，也就是隐式地退回到代码的本地语言。
-    尽管在2003年中期，gettext本身一团乱麻，但其总体指导思想却是可靠的。对于许
-多项目，使用这种思想可以手工打造出这种国际化设想的轻量级版本，并收到良好的效
-果。
-    其次，在现代Unix中有种清晰的潮流：抛弃所有历史上与多字符集相关的记法而让
-应用程序原生地使用UTF8，八位移位Unicode编码字符集（或者相反地说，让他们原生
-地使用1 6位宽字符）。UTF-8的前128个字符就是ASCII，前256个字符是Latin-I，这
-就意味着它向后兼容使用得最广泛的两个字符集。XML和Java事实上促进了这种选择，
-但是即使没有XML和Java，趋势也会如此。
-    第三，使用正则表达式时，当心字符的范围。【a—z】元素并不必然包含所有的小写
-字母，如果脚本或是程序应用于（比如说）德语，B被认为是小写字母但并没有包含在
-上述范围之内；法语中的重音字母也存在类似的问题。安全的方式是使用【[．lower：】】，
-以及其它在POSIX标准中拙述的符号范围。
-17.7可移植性、开放标准以及开放源码
-    可移植性需要标准。无论是发布传播一项标准还是敦促专有软件商遵循标准，开放
-源码基准实现都是已知最有效的方法。而对于开发者，已颁布标准的开源实现既极大地
-减轻了编码负担，也允许产品（有意或意外地）从他人的劳动中获益。
-    让我们设想，例如，为数码相机设计一个图像捕捉软件。既然存在（正如我们第5
-章所提到的）功能齐全经过良好测试的PNG读写开源库，那为什么要编写自己的格式来
-存储图像数据或是购买专有代码呢？
-    开放源码的新生（重生）同样给标准化过程带来了重要的影响。尽管并非正式要求，
-IETF自从大约1997年前后，愈发抵制连一个开源基准实现都没有的RFC成为预备标准。
-将来与某标准是否一致，似乎愈发有可能以“是否同已经得到标准作者们认可的开源实
-现相一致（或者完全使用该实现）”来判定。
-
-暗含的意思就是，成为标准的最好办法就是发布一个高质量的开源实现。
--Henry Spencer
-    最后，确保代码移植性最有效的一个环节就是不要依赖于专有技术。永远不会知道
-所依赖的闭源库／工具／代码生成器或网络协议何时会结束生命，接口何时会以某种非向后
-兼容的方式改变，从而崩溃掉已有的项目。而使用开源代码，即使前沿版本的改变方式
-足以崩溃已有的项目，也有前行之路；因为可以获取源码，如果需要，就可以向前移植
-项目到新的平台。
-    直到1990年代晚期，这个建议都还是不切实际的。少数几个代替依赖专有操作系统
-和专有开发工具的软件还只是昂贵的实验品、学术上有待证实的观点或者小玩意。但互
-联网改变了一切；在2003年中期，Linux和其它开源Unix不但存在，并且已经证明了自
-身完全可以是出产高质量生产级软件的平台。现在开发者有了更好的选择，而不是依赖
-于为垄断而设计的短期商业决策。实施防御性设计——基于开放源码编程，便不会束手
-无策。
 
 文档：向网络世界阐释代码
 Documentation: Explainin  Your
