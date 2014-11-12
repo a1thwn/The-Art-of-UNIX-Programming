@@ -22,7 +22,7 @@
 \authorinfo{作者：埃里克·斯蒂芬·雷蒙（Eric Steven Raymond，著名黑客。）}
 \editor{德山书生}
 \email{a358003542@gmail.com}
-\editorinfo{\href{http://www.catb.org/~esr/writings/taoup/html/}{官方英文网站}，姜宏2005年翻译。}
+\editorinfo{\href{http://www.catb.org/~esr/writings/taoup/html/}{官方英文网站}，姜宏2005年翻译，有些小地方修改，以官方英文网站为准。}
 \version{0.01}
 \titleLC
 
@@ -128,15 +128,15 @@
 
 我要对Rob Landley和我的妻子Catherine Raymond致以特别感谢，他们都不厌其烦地逐行对本书手稿进行审阅。Rob的深富洞察力的细致评述激励我在最终稿中加入了一整章内容，他为本书的组织结构和取材范围贡献极多。如果他把所给予的改进意见落在笔端，那他无愧于本书的合著者。Cathy代表读者中非技术人员的一群，如果那些非程序员读者觉得本书并不难读，那全是她的功劳。
 
-This book benefited from discussions with many other people over the five years it took me to write it. Mark M. Miller helped me achieve enlightenment about threads. John Cowan supplied some insights about interface design patterns and drafted the case studies of wily and VM/CMS, and Jef Raskin showed me where the Rule of Least Surprise comes from. The UIUC System Architecture Group contributed useful feedback on early chapters. The sections on What Unix Gets Wrong and Flexibility in Depth were directly inspired by their review. Russell J. Nelson contributed the material on Bernstein chaining in Chapter 7. Jay Maynard contributed most of the material in the MVS case study in Chapter 3. Les Hatton provided many helpful comments on the Languages chapter and motivated the portion of Chapter 4 on Optimal Module Size. David A. Wheeler contributed many perceptive criticisms and some case-study material, especially in the Design part. Russ Cox helped develop the survey of Plan 9. Dennis Ritchie corrected me on some historical points about C.
+写作的五年间，本书从不少人的讨论意见中获益良多。Mark M. Miller使我对线程有了更深的认识。John Cowan教给我不少接口设计方式，并起草了wily和VM/CMS的学习案例。Jef Raskin告诉我the Rule of Least Surprise的由来。The UIUC System Architecture Group对前几章给出的反馈弥足珍贵，What Unix Gets Wrong和Flexibility in Depth两节是他们直接激励的结果。Russell J. Nelson提供了Bernstein chaining的素材。第三章中MVS学习案例大部分材料来自Jay Maynard。Les Hatton对语言一章给出很多有益的建议，并促使我写成第4章中Optimal Module Size的部分内容。David A. Wheeler贡献了很多发人深省的批判，以及一些学习案例（特别是设计部分中的）素材。Russ Cox帮助我对Plan 9的调查。Dennis Ritchie纠正了我的一些错误的C历史观念。
 
-Hundreds of Unix programmers, far too many to list here, contributed advice and comments during the book's public review period between January and June of 2003. As always, I found the process of open peer review over the Web both intensely challenging and intensely rewarding. Also as always, responsibility for any errors in the resulting work remains my own.
+成百上千的Unix程序员，人数太多以至于无法在此列出他们的名字，在2003年1月到6月间的公开审阅过程间给了我建议和评论。开放的同级复审这一过程让我觉得紧张刺激而回报极多。当然，任何最终书稿中残留的错误都是我自己的责任。
 
-The expository style and some of the concerns of this book have been influenced by the design patterns movement; indeed, I flirted with the idea of titling the book Unix Design Patterns. I didn't, because I disagree with some of the implicit central dogmas of the movement and don't feel the need to use all its formal apparatus or accept its cultural baggage. Nevertheless, my approach has certainly been influenced by Christopher Alexander's work\footnote{An appreciation of Alexander's work, with links to on-line versions of significant portions, may be found at \href{http://www.math.utsa.edu/sphere/salingar/Chris.text.html}{Some Notes on Christopher Alexander}.} (especially The Timeless Way of Building and A Pattern Language), and I owe the Gang of Four and other members of their school a large debt of gratitude for showing me how it is possible to use Alexander's insights to talk about software design at a high level without merely uttering vague and useless generalities. Interested readers should see Design Patterns: Elements of Reusable Object-Oriented Software \cite{GangOfFour} for an introduction to design patterns.
+“把事情说透”的风格，以及其它一些考虑因素，是受到了“设计模式运动”的影响；说实话，我对到处堆砌Unix设计模式这种做法深不以为然。我对此运动的中心教条不敢苟同，并且没觉得把设计模式严格付诸实用有什么必要，也不想背上这种思想的包袱。尽管如此，我的行事方法仍然受到Christopher Alexander工作成果\footnote{一篇对Alexander工作成果的肯定文章，包含其部分重要成果的在线链接，可以参考\href{http://www.math.utsa.edu/sphere/salingar/Chris.text.html}{Some Notes on Christopher Alexander}一文。}（特别是《The Timeless Way of Building》和《A Pattern Language》两文）的影响。Gang of Four和他们的信徒为我展示了如何用Alexander的思想，站在较高层面上，抛去含混不清的对设计通则的空话，来谈论软件设计，这一点我心存感激，永志不忘。对设计模式有兴趣的读者可以看看这本书《Design Patterns: Elements of Reusable Object-Oriented Software\cite{GangOfFour}》。
 
-The title of this book is, of course, a reference to Donald Knuth's The Art of Computer Programming. While not specifically associated with the Unix tradition, Knuth has been an influence on us all.
+本书标题毫无疑问是借鉴了Donald Knuth的《The Art of Computer Programming》一书的书名。Knuth和Unix传统文化没什么联系，但他影响了我们每一个人。
 
-Editors with vision and imagination aren't as common as they should be. Mark Taub is one; he saw merit in a stalled project and skillfully nudged me into finishing it. Copy editors with a good ear for prose style and enough ability to improve writing that isn't like theirs are even less common, but Mary Lou Nohr makes that grade. Jerry Votta seized on my concept for the cover and made it look better than I had imagined. The whole crew at Addison-Wesley gets high marks for making the editorial and production process as painless as possible, and for cheerfully accommodating my control-freak tendencies not just over the text but deep into the details of the book's visual design, art, and marketing.
+有先见之明和丰富想象力的编辑不多，好在Mark Taub就是一个，他从并不看好的项目中发现了闪光点，并极富技巧地促成了这本书的写作。文字编辑中，文笔好而又能帮助别人提高文笔的更少了，所幸Mary Lou Nohr是其中之一。Jerry Votta的封面设计领会了我的意图，而且做得比我的想像还要漂亮。Adisson-Wesley的编辑们让审稿和出版这一过程不再枯燥无味，我天生怕被人管，但是他们仍然极力配合我，使得文字、版面、图片和市场工作都达到极高的水准。
 
 %这里空一行。
 
@@ -144,7 +144,7 @@ Editors with vision and imagination aren't as common as they should be. Mark Tau
 
 
 \addchtoc{目录}
-\setcounter{tocdepth}{2}    
+\setcounter{tocdepth}{3}    
 \tableofcontents
 
 \begin{common-format}
@@ -408,9 +408,8 @@ GUI可以是个好东西。有时竭尽所能也不可避免复杂的二进制�
 无论以上哪种方式，最后每个人都是失败者。
 
 要避免这些陷阱，唯一的方法就是鼓励另一种软件文化，以简洁为美，人人对庞大复杂的东西群起而攻之——这是一个非常看重简单解决方案的工程传统，总是设法将程序系统分解为几个能够协作的小部分，并本能地抵制任何用过多噱头来粉饰程序的企图。
-    
-这就有点Unix文化的意味了。
 
+这就有点Unix文化的意味了。
 
 \subsection{吝啬原则：除非确无它法，不要编写庞大的程序}
 “大”有两重含义：体积大，复杂程度高。程序大了，维护起来就困难。由于人们对花费了大量精力才做出来的东西难以割舍，结果导致在庞大的程序中把投资浪费在注定要失败或者并非最佳的方案上。
@@ -1369,7 +1368,7 @@ API在模块间扮演双重角色。在实现层面，作为模块之间的滞�
 
 《程序员修炼之道》(The Pragmatic Programmer)\cite{Hunt-Thomas}一书中对正交性以及如何达到正交性有精彩的讨论。正如该书所指出的，正交性缩短了测试和开发的时间，因为那种既不产生副作用也不依赖其它代码副作用的代码校验起来要容易得多——需要测试的情况组合要少得多。如果正交性代码出现问题，把它替换掉而不影响系统其余部分也很容易做到。最后，正交性代码更容易文档化和复用。
 
-\textbf{重构}（refactoring）概念是作为“极限编程（Extreme Programming）”学派的一个明确思想首次出现的，跟正交性紧密相关。重构代码就是改变代码的结构和组织，而不改变其外在行为。当然，自从软件领域诞生之日起，软件工程师就一直在从事这项工作，给这种做法命名并把重构的一套技术方法确定下来，则非常有效地帮助了人们集中思路。因为重构概念与Unix设计传统关注的核心问题非常契合，所以Unix开发者很快就吸收了这一术语和它的思想\footnote{在这一概念的奠基性著作“重构》(Refactoring)\cite{Fowler}一书中，作者差一点就道出了“重构的原则性目标就是提高正交性”的天机。但是由于缺少这个概念，他只能从几个不同的方向接近这个思想：比如消除重复代码和各种“坏味道”，大部分就是指一些违背正交性的做法。}。
+\textbf{重构}（refactoring）概念是作为“极限编程（Extreme Programmin-g）”学派的一个明确思想首次出现的，跟正交性紧密相关。重构代码就是改变代码的结构和组织，而不改变其外在行为。当然，自从软件领域诞生之日起，软件工程师就一直在从事这项工作，给这种做法命名并把重构的一套技术方法确定下来，则非常有效地帮助了人们集中思路。因为重构概念与Unix设计传统关注的核心问题非常契合，所以Unix开发者很快就吸收了这一术语和它的思想\footnote{在这一概念的奠基性著作“重构》(Refactoring)\cite{Fowler}一书中，作者差一点就道出了“重构的原则性目标就是提高正交性”的天机。但是由于缺少这个概念，他只能从几个不同的方向接近这个思想：比如消除重复代码和各种“坏味道”，大部分就是指一些违背正交性的做法。}。
 
 Unix的基本API设计在正交性方面虽不完美，但也颇为成功。比如，我们理所当然地认为能够打开文件进行写入操作，而无需为此进行排他锁定。并不是所有的操作系统都如此优雅。老式（System III）的信号就不是正交的，因为信号接收的副作用是把信号处理器（signal handler）重置成缺省的“接收即崩溃”（die-on-receipt）。许多大幅修正也不是正交的，如BSD套接字API，还有一些更大的修正也不是正交的，如X window系统的绘图库。
 
@@ -2087,7 +2086,7 @@ Marshall Rose的RFC 3117《论应用协议的设计》(On the Design of Applicat
 
 风险也伴随这种优势而来：这意味着网页服务器和插件会越变越复杂，任何这些代码的破解都可能带来巨大的安全问题。要隔离并关闭出问题的服务也可能会更加困难。通常此时就要在安全和便利间做出折衷。
 
-RFC 3205《论使用HTTP作为底层》(On the Use of HTTP As a Substrate)\footnote{参见RFC 3205<http://www.fags.org/rfcs/rfc3205.html>}向正在考虑将HTTP作为应用协议底层使用的人提出了很好的设计建议，文中还总结了各种权衡方案和所涉及的问题。
+RFC 3205《论使用HTTP作为底层》(On the Use of HTTP As a Substrate)\footnote{参见\href{http://www.faqs.org/rfcs/rfc3205.html}{RFC 3205}}向正在考虑将HTTP作为应用协议底层使用的人提出了很好的设计建议，文中还总结了各种权衡方案和所涉及的问题。
 
 \subsubsection{实例分析：CDDB/freedb.org数据库}
 音频CD由一序列称为CDDA-WAV的数字格式音轨组成。在一般计算机拥有足够速度和声音处理能力来实时解码之前几年，音频CD是为让简单消费型电子产品能够播放而设计的。正因为如此，它没有提供相应的格式来记录甚至非常简单的一些元信息，如唱片专辑和歌曲音轨标题等。但是现代计算机中的CD播放器需要这些信息，这样用
@@ -2101,18 +2100,18 @@ RFC 3205《论使用HTTP作为底层》(On the Use of HTTP As a Substrate)\footn
 由于作了这种选择，所有现行各种编程语言的HTTP和Web访问程序库的基础代码都可以支持数据库的查询和更新。结果，在CD播放器中增加这样的支持功能几乎不费吹灰之力，而实际上现在每款CD播放软件都知道如何使用这些功能。
 
 \subsubsection{实例分析：互联网打印协议}
-互联网打印协议（IPP，Internet Printing Protocol）是一个非常成功、被广泛采用的网络访问打印机控制标准。指向RFC的链接、各种实现和大量的其它相关材料都可以在IETF的打印机工作组站点<http://www.pwg.org/ipp/>获得。
+互联网打印协议（IPP，Internet Printing Protocol）是一个非常成功、被广泛采用的网络访问打印机控制标准。指向RFC的链接、各种实现和大量的其它相关材料都可以在\href{http://www.pwg.org/ipp/}{IETF的打印机工作组站点}获得。
 
 IPP使用HTTP1.1作为传输层。所有的IPP请求都通过HTTP POST方法调用发送；响应是普通的HTTP响应。（《互联网打印协议模型和结构基本原理》(Rationale for the Structure of the Model and Protocol for the Internet Printing Protocot)，RFC 2568的4.2节很好解释了做出这种选择的理由，值得正在考虑编写新应用协议的所有人员研究）。
 
 在软件方面，HTTP1.1得到了广泛应用。HTPP1.1已经解决了许多传输层问题，不然，这些问题将使协议的设计者和实现者无法集中精力解决打印的域语义问题。HTTP1.1能够很干净地进行扩展，因此IPP还有足够的发展空间。人们非常熟悉处理POST请求的CGI编程模型，开发工具也很丰富。
 
-大多数具有网络能力的打印机已经内置了网页服务器，因为这是能人工远程查询打印机状态的一个自然的方法。这样，向打印机固件增加IPP服务的额外成本并不是很高。（这一点也适用于许许多多具有网络能力的硬件，包括自动售货机、自动咖啡机\footnote{参见RFC 2324<http://www.ietf.org/rfc/rfc2324.txt>和RFC 2325<http://www.ietf.org/rfc/rfc2325.txt>}和自动澡盆！）
+大多数具有网络能力的打印机已经内置了网页服务器，因为这是能人工远程查询打印机状态的一个自然的方法。这样，向打印机固件增加IPP服务的额外成本并不是很高。（这一点也适用于许许多多具有网络能力的硬件，包括自动售货机、自动咖啡机\footnote{参见\href{http://www.ietf.org/rfc/rfc2324.txt}{RFC 2324}和\href{http://www.ietf.org/rfc/rfc2325.txt}{RFC 2325}}和自动澡盆！）
 
 基于HTTP的IPP协议的唯一严重缺点就是协议完全由客户端的请求来驱动。这样，模型中就不存在可供打印机向客户返回异步报警信息的余地（然而，聪明的客户可以运行一个很小的HTTP服务程序，来接收打印机发送的HTTP请求格式报警信息）。
 
 \subsection{BEEP：块可扩展交换协议}
-BEEP（原先叫BXXP）是一种通用协议，对于通用底层这一角色来说和HTTP一样具有竞争力。之所以说竞争，是因为目前为止还没有一个制定较完善的元协议非常适合真正的对等网（P2P）应用，不像客户端-服务器应用——HTTP在这一领域游刃有余。访问<http://www.beepcore.org/beepcore/docs/sl-beep.jsp>项目网站可以找到有关标准以及数种语言的开源实现。
+BEEP（原先叫BXXP）是一种通用协议，对于通用底层这一角色来说和HTTP一样具有竞争力。之所以说竞争，是因为目前为止还没有一个制定较完善的元协议非常适合真正的对等网（P2P）应用，不像客户端-服务器应用——HTTP在这一领域游刃有余。访问\href{http://www.beepcore.org/beepcore/docs/sl-beep.jsp}{其项目网站}可以找到有关标准以及数种语言的开源实现。
  
 BEEP的特点是既支持客户端/服务器模式，又支持对等网模式（ peer-to-peer）。协议作者们对BEEP协议和支持库进行了良好设计。这样，只要选取正确组件就能省去很多杂务，如数据编码、流控、堵塞（congestion）处理、端对端加密支持和用多路传输组成长应答等。
 
@@ -2123,13 +2122,13 @@ BEEP的特点是既支持客户端/服务器模式，又支持对等网模式（
 \subsection{XML-RPC，SOAP和Jabber}
 应用协议设计的一种发展趋势是在MIME中使用XML来架构请求和有效数据载荷。BEEP用户端使用这种格式进行信道协商。有三个重要协议始终采用XML路线，包括XML-RPC，用于远程过程调用的SOAP（Simple Object Access Protocol，简单对象访问协议）和用于即时消息和在线状态报告（instant messaging and presence）的Jabber。这三个协议都基于XML文档。
 
-XML-RPC非常具有Unix精神（其作者宣称在二十世纪七十年代通过阅读原始的Unix源码学会了编程）。它着意追求最简化，但是仍然非常强大，对于绝大多数专为传送布尔/整数/浮点/字符串标量数据类型的各种RPC应用提供一种方法，使它们能够以一种轻量、易于理解和监控的方式来完成任务。XML-RPC类型实体比文本流丰富，但仍然简单而具有移植性，可被有效地用于检查接口复杂性。它有很多开源实现。XML-RPC主页<http://www/xmlrpc.com/>做得不错，提供了规格书和多个开源实现。
+XML-RPC非常具有Unix精神（其作者宣称在二十世纪七十年代通过阅读原始的Unix源码学会了编程）。它着意追求最简化，但是仍然非常强大，对于绝大多数专为传送布尔/整数/浮点/字符串标量数据类型的各种RPC应用提供一种方法，使它们能够以一种轻量、易于理解和监控的方式来完成任务。XML-RPC类型实体比文本流丰富，但仍然简单而具有移植性，可被有效地用于检查接口复杂性。它有很多开源实现。\href{http://www.xmlrpc.com/}{XML-RPC主页}做得不错，提供了规格书和多个开源实现。
 
-SOAP是一个较重量级的RPC协议，数据类型更为丰富，包括数组和类似C的结构。这个协议受到了XML-RPC的启发，但一直被批评为过分追求“第二系统效应”设计的受害者，这么说不无道理。直到2003年中，SOAP标准还在制定当中，但是在Apache上的试验版实现一直紧跟其设计草案。大家可以很容易地在网上搜索到Perl、Python、Tcl和Java中的开源客户端模块。W3C规范的草案可从<http://www.w3.org/TR/SOAP/>获得。
+SOAP是一个较重量级的RPC协议，数据类型更为丰富，包括数组和类似C的结构。这个协议受到了XML-RPC的启发，但一直被批评为过分追求“第二系统效应”设计的受害者，这么说不无道理。直到2003年中，SOAP标准还在制定当中，但是在Apache上的试验版实现一直紧跟其设计草案。大家可以很容易地在网上搜索到Perl、Python、Tcl和Java中的开源客户端模块。W3C规范的草案可从\href{http://www.w3.org/TR/SOAP/}{这里}获得。
 
 作为远程过程调用方法的XML-RPC和SOAP都会带来某种风险，我们将在第7章结尾部分予以讨论。
 
-Jabber是一个为支持即时消息和在线状态报告而设计的对等协议。Jabber作为应用协议的有趣之处在于：它支持XML表单和随时更新文档（live document）的输送。规格说明、文档和开源实现都可以通过Jabber款件基金会的站点<http://www.jabber.org/about/overview.html>获得。
+Jabber是一个为支持即时消息和在线状态报告而设计的对等协议。Jabber作为应用协议的有趣之处在于：它支持XML表单和随时更新文档（live document）的输送。规格说明、文档和开源实现都可以通过\href{http://www.jabber.org/about/overview.html}{Jabber款件基金会的站点}获得。
 
 
 \chapter{透明性：来点儿光}
@@ -2166,7 +2165,7 @@ Jabber是一个为支持即时消息和在线状态报告而设计的对等协�
 本书的通常做法是将实例分析贯穿在基本原理中。但我们在本章首先将分析几个展示透明性和可显性的Unix设计，在介绍全部实例后才尝试从中总结经验。本章后半部分的每个分析点都要用到这些实例，这种编排方式会避免在论述中引用读者还没有见到的实例。
 
 \subsection{实例分析：audacity}
-首先，我们看一看UI设计中展示透明性的一个例子。这就是audacity，运行在Unix系统、Mac OS和Windows上开源的声音文件编辑器。源码、可下载的二进制文件、文档和屏幕截图可以在该项目的站点<http://audacity.sourceforge.net/>处获得。
+首先，我们看一看UI设计中展示透明性的一个例子。这就是audacity，运行在Unix系统、Mac OS和Windows上开源的声音文件编辑器。源码、可下载的二进制文件、文档和屏幕截图可以在\href{http://audacity.sourceforge.net/}{该项目的站点}获得。
 
 这个程序支持对音频采样的剪切、粘贴和编辑操作，支持多声道编辑和混音。UI部分相当简洁：audacity窗口显示声音波形图，可以剪切和粘贴波形图。对波形图的操作在实施的同时直接反映在音频采样中。
 
@@ -2433,7 +2432,7 @@ terminfo目录的布局在大多数Unix文件系统上都很浪费空间。每�
 
 
 \subsection{实例分析：Freeciv数据文件}
-Freeciv是一款受到Sid Meier经典的\textit{Civilization Ⅱ}启发而制作的开源策略游戏。在该游戏中，每个玩家从一群到处流浪的新石器游牧民开始缔造一个文明。玩家的文明可以探索并拓殖世界，参与战争，从事贸易和研究先进技术。有些玩家实际上可能是人工智能；和这些电脑玩家玩单机游戏很有挑战性。如果谁统治了整个世界，或者第一个研制出先进技术从而获得宇宙飞船飞往半人马座阿尔法星(Alpha Centauri)，谁就是游戏的胜利者。源码和文档可以在<http://www.freeciv.org/>处获得。
+Freeciv是一款受到Sid Meier经典的\textit{Civilization Ⅱ}启发而制作的开源策略游戏。在该游戏中，每个玩家从一群到处流浪的新石器游牧民开始缔造一个文明。玩家的文明可以探索并拓殖世界，参与战争，从事贸易和研究先进技术。有些玩家实际上可能是人工智能；和这些电脑玩家玩单机游戏很有挑战性。如果谁统治了整个世界，或者第一个研制出先进技术从而获得宇宙飞船飞往半人马座阿尔法星(Alpha Centauri)，谁就是游戏的胜利者。源码和文档可以在\href{http://www.freeciv.org/}{该项目站点}获得。
 
 我们还会在第7章把Freeciv这个策略游戏作为客户端/服务器划分的一个例子提出，在这个游戏里，服务器维持共享状态而客户端专注GUI表现。但是这个游戏还有另外一个值得注意的体系特征：游戏的大部分固定数据，没有编入服务器的代码中，而是在属性登记表中说明，由游戏服务器在启动时读取。
 
@@ -2621,8 +2620,7 @@ Unix最具特点的程序模块化技法就是将大型程序分解成多个协�
 
 专门程序通常借由文件系统与父进程进行通信，方法是在指定位置读取或修改文件；编辑器或邮件器的shellout就是这样工作的。
 
-这种模式的常见变形是专门程序可以接受标准输入，用C库的\verb+popen(…  ,"w")+或作为shell脚本的一部分进行调用。或者专门程序也可以有标准输出，用\verb+popen(…  , "r")+或作为shell脚本的部分加以调用（如果它既从标准输入读入又向标准输出写出，则可以通过批量方式完成，即完成全部读操作之后才进行写操作）。通常不把这种子进程称为shellout；目前还没有一个标准术语称呼这个子进程，但完全可以称其为“bolt-on”（栓
-合）。
+这种模式的常见变形是专门程序可以接受标准输入，用C库的\\ \verb+popen(…  ,"w")+或作为shell脚本的一部分进行调用。或者专门程序也可以有标准输出，用\verb+popen(…  , "r")+或作为shell脚本的部分加以调用（如果它既从标准输入读入又向标准输出写出，则可以通过批量方式完成，即完成全部读操作之后才进行写操作）。通常不把这种子进程称为shellout；目前还没有一个标准术语称呼这个子进程，但完全可以称其为“bolt-on”（栓合）。
 
 这些情态的要点在于专门程序在运行时并不需要跟父进程交流。只有在任意一方（主进程或从进程）接受了另外一个程序的输入，还必须能够对此解析这个意义上来说，它们之间才存在关联协议。
 
@@ -2780,7 +2778,7 @@ qmail-popp命令行中指定的程序要从文件描述符3处读取三个以nul
 
 如果应用程序需要setuid或setgid优先权来初始化连接或获得某些认证，然后放弃这些权限让后续代码无须被信任，这时Bernstein链非常有用。在exec后，子程序无法把用户真实ID设置回root用户。同时，这样做也比单进程灵活，因为可以在程序链中插入另一个程序来修改系统的行为。
 
-例如，rblsmtpd（前面已提到）可以插进Bernstein链，放在tcpserver（来自ucspi-tcp包）和真正的SMTP服务器（通常是qmail-smtpd）之间。当然，它也跟\textit{inetd}(8)和\textbf{sendmail -bs}合作得很好。
+例如，rblsmtpd（前面已提到）可以插进Bernstein链，放在tcpserv-er（来自ucspi-tcp包）和真正的SMTP服务器（通常是qmail-smtpd）之间。当然，它也跟\textit{inetd}(8)和\textbf{sendmail -bs}合作得很好。
 
 
 \subsection{从进程}
@@ -2837,7 +2835,7 @@ BSD 4.x版本的Unix变成了“可靠”的信号，除非用户明确要求，
 \subsubsection{系统守护程序和常规信号}
 许多著名的系统守护程序都接受\textbf{SIGHUP}（最初，这个信号在有串行线事件时发送给程序，比如挂断调制解调器连接的操作就产生这个信号）作为重新初始化的信号（也就是说，重新载入配置文件）：例子包括Apache和Linux的\textit{bootpd}(8)、\textit{gated}(8)、\textit{inetd}(8)、\textit{mountd}(8)、\textit{named}(8)、 \textit{nfsd}(8)和\textit{ypbind}(8) 实现。在一些例子中，\textbf{SIGHUP}作为其对话关闭信号的最初意义被程序接收（特别是Linux的\textit{pppd}(8)），但是这种作用现在通常都交给\textbf{SIGTERM}了。
 
-\textbf{SIGTERM}（”终止“）常常扮演温和的关闭信号（区别于\textbf{SIGKILL}，立即杀死进程，而且本身不能被阻塞或另外处理）。\textbf{SIGTERM}的行为通常包括清除临时文件和强制把最新更新刷回数据库以及其它一些类似行为。
+\textbf{SIGTERM}（”终止“）常常扮演温和的关闭信号（区别于\textbf{SIGKILL}\linebreak ，立即杀死进程，而且本身不能被阻塞或另外处理）。\textbf{SIGTERM}的行为通常包括清除临时文件和强制把最新更新刷回数据库以及其它一些类似行为。
 
 在编写守护程序时，请遵循最小立异原则：使用这些约定，阅读手册来寻找现有模型。
 
@@ -2934,7 +2932,7 @@ Streams和STREAMS\footnote{STREAMS要复杂得多。据传闻Dennis Ritchie曾�
 
 Streams最早是整理所谓“行守则”——另一种处理串行终端和早期局域网字符流的模式——内核凌乱特性的一种尝试。但随着串行终端从人们视野中淡出，以太局域网到处存在，TCP/IP逐出其他协议栈而归并到Unix内核，STREAMS所提供的特别灵活性越来越无用武之地。在2003年，System V Unix仍然支持STREAMS，一些System V/BSD的混和Unix操作系统，如Digital Unix和Sun Microsystem的Solaris也同样支持STREAMS。
 
-Linux和其它开源Unix实际上已经抛弃了STREAMS。LiS（Linux Stream）项目的Linux内核模块和程序库可从<http://www.gcom.com/home/linux/lis/>获得，但是（直到2003年中期）它们还没有整合到Linux内核主干中。其他非Unix操作系统并不支持它们。
+Linux和其它开源Unix实际上已经抛弃了STREAMS。LiS（Linux Stream）项目的Linux内核模块和程序库可在\href{http://www.gcom.com/home/linux/lis/}{这个网页}获得，但是（直到2003年中期）它们还没有整合到Linux内核主干中。其他非Unix操作系统并不支持它们。
 
 
 \subsection{远程过程调用}
@@ -2978,7 +2976,7 @@ Andrew S. Tanenbaum和Robbert van Renesse在《对远程过程调用范式的批
 雪上加霜的是，线程的性能成本削弱了其对常规进程分解的优势。尽管线程没有快速转换进程上下文的开销，但是锁定共享数据结构以防互相干涉的开销同样昂贵。
 
 \begin{quote}[Jim Gettys]
-X server的执行速度能够达到数百万次/秒(ops/second)，但不是基于线程实现的；它使用poll/select循环。创造多线程实现的种种努力都没有产生好结果。对于图形服务器这种对性能敏感的程序来说，锁定和解锁操作的成本太高了。
+X server的执行速度能够达到数百万次/秒(ops/second)\linebreak ，但不是基于线程实现的；它使用poll/select循环。创造多线程实现的种种努力都没有产生好结果。对于图形服务器这种对性能敏感的程序来说，锁定和解锁操作的成本太高了。
 \end{quote}
 
 这个问题是根本性的，也一直是Unix内核的对称多处理设计的长期问题。由于资源锁定变得越来越琐细，锁定导致的延迟也迅速增加，足以超过只锁定更少的核心内存所获得的收益。
@@ -3137,10 +3135,10 @@ regexp符号还存在一些小变种：
 [...]  & 全部 & 在括号内的任何字符。\\{}
 [\^{} ...] & 全部 & 除开括号内字符之外的任何字符\\
 * & 全部 & 次数不定的重复前一元素 \\
-? & egrep/Emacs  Perl/Python & 0次或1次重复前一元素 \\
-+ &  egrep/Emacs  Perl/Python & 1次或多次重复前一元素  \\
-\{n\} & egrep  Perl/Python Emacs中为\textbackslash{}\{ n  \textbackslash  \}  & 只n次重复前一元素，一些较老的regexp引擎不支持。\\
-\{n, \} & egrep  Perl/Python  Emacs中为\textbackslash{}\{ n , \textbackslash  \}  & n次或n次以上重复前一元素，一些较老的regexp引擎不支持。 \\
+? & egrep/Emacs Perl/Python & 0次或1次重复前一元素 \\
++ &  egrep/Emacs Perl/Python & 1次或多次重复前一元素  \\
+\{n\} & egrep Perl/Python Emacs中为\textbackslash{}\{ n  \textbackslash  \}  & 只n次重复前一元素，一些较老的regexp引擎不支持。\\
+\{n, \} & egrep Perl/Python Emacs中为\textbackslash{}\{ n , \textbackslash  \}  & n次或n次以上重复前一元素，一些较老的regexp引擎不支持。 \\
 \{m,n\} & egrep  Perl/Python Emacs中为\textbackslash{}\{ m , n \textbackslash  \}  & 最少重复m次、最多重复n次。一些较老的regexp引擎不支持。 \\
 | &  egrep  Perl/Python Emacs中为\textbackslash{}|  & 接受左边或者右边的元素。通常用于一些模式分类分隔符形式。\\
 ( ... ) &  Perl/Python  老一点的版本为\textbackslash ( ... \textbackslash )  &  在较新的regexp引擎中，如Perl和Python把这种模式作为组。较老的regexp引擎，如Emacs和grep中，要求\textbackslash ( ... \textbackslash ) 。
@@ -3239,7 +3237,7 @@ XSLT和m4都是纯声明性和完备图灵的语言，但XSLT只支持递归，�
 
 在这里简单了解XSLT，部分原因是举例说明“声明性”并不一定意味着“简单”或“薄弱”，更主要是因为如果必须处理XML文档，则总有一天必须面对XSLT的挑战。
 
-XSLT: Mastering XML Transformations （XSLT：精通XML转换）\cite{Tidwell}很好地介绍了这种语言。也可在网上找到带实例的简明教程。\footnote{如XSL Concepts and Practical Use （XSL的概念和实际应用），参见<http://nwalsh.com/docs/tutorials/xsl/xsl/slides.html>。}
+XSLT: Mastering XML Transformations （XSLT：精通XML转换）\cite{Tidwell}很好地介绍了这种语言。也可在网上找到带实例的简明教程。\footnote{如XSL Concepts and Practical Use （XSL的概念和实际应用），参见\href{http://nwalsh.com/docs/tutorials/xsl/xsl/slides.html}{这个网页}。}
 
 
 \begin{Verbatim}[label=例 8.3 XSLT程序实例]
@@ -3473,7 +3471,7 @@ JavaScript是充分的图灵完备的解释性语言，和Python一样，具有�
 
 随着时间的推移，JavaScript语言变得更加通用了，而且对其客户端环境的约束也放松了。这是任何一个成功的专用语言随着其能力在开发者和用户的头脑中逐渐展现时可预期的结果。客户端JavaScript现在也可以通过在一个叫做浏览器DOM（文件对象模型）的单个对象中读写值而与环境交互。虽然这个语言仍然给浏览器遗留了一些DOM无法支持的API，但这些API都己过时，没有列入JavaScript的ECMA-262标准中，而且在将来的版本中可能也不会支持。
 
-JavaScript的标准参考书是《JavaScript: The Definitive Guide》 （JavaScript：权威指南）\cite{FlanaganJavaScript}，源码可下载。\footnote{JavaScript的开源c和Java实现可在\href{http://www.mozilla.org/js/}{这里}获取。}JavaScript成为一个有趣的实例有两个理由。首先，它是我们无需真正进入但可尽量接近的通用语言。其次，客户端JavaScript及其通过单个DOM对象的浏览器环境之间的结合是个非常棒的设计，能够作为其它嵌入情形的借鉴模型。
+JavaScript的标准参考书是《JavaScript: The Definitive Guide》 （JavaScript：权威指南）\cite{FlanaganJavaScript}，源码可下载。\footnote{JavaScript的开源c和Java实现可在\href{http://www.mozilla.org/js/}{这里}获取。}JavaS-cript成为一个有趣的实例有两个理由。首先，它是我们无需真正进入但可尽量接近的通用语言。其次，客户端JavaScript及其通过单个DOM对象的浏览器环境之间的结合是个非常棒的设计，能够作为其它嵌入情形的借鉴模型。
 
 
 
@@ -3626,7 +3624,7 @@ C预处理器的解决方法是，无论何时只要包括扩展或进行多行�
 数据驱动编程，最复杂的情形是为p-code或我们在第8章讨论过的那些简单微型语言编写解释器。对于其它情形，它类似于代码生成器和状态机编程。区别其实并非那样重要，重要的是把程序逻辑从硬编定的控制结构转移到数据中。
 
 \subsection{实例分析：ascii}
-我维护着一个叫ascii的程序，它非常简单，把命令行参数按ASCII（American Standard Code for Information Interchange，美国信息交换标准编码）字符的名称解释，并报告其它所有等价形式的名称。这个工具的代码和文档可以在项目主页<http://www-catb.org/\~{}esr/ascii>处获得。以下是直观的屏幕截图：
+我维护着一个叫ascii的程序，它非常简单，把命令行参数按ASCII（American Standard Code for Information Interchange，美国信息交换标准编码）字符的名称解释，并报告其它所有等价形式的名称。这个工具的代码和文档可以在\href{http://www.catb.org/~esr/ascii}{其项目主页}处获得。以下是直观的屏幕截图：
 
 \begin{Verbatim}
 esr@snark:~/WWW/writings/taoup$ ascii 10
@@ -4259,9 +4257,9 @@ GNU风格使用前面有两个连字符的选项关键字（而不是关键字�
 
 \item[-o] 输出(output)（带参数）。当程序要求根据命令行的名字指定输出文件名或设备名时，可以交给-o选项来完成。示例：\textit{as}(1)、\textit{cc}(1)和\textit{sort}(1)。在带有类似编译器接口的程序中，看到这个选项用于其它用途都将让人极其意外。支持-o选项的程序（如gcc）逻辑是允许把-o选项放在常规参数的前面或后面进行识别。
 
-\item[-p] 端口(port)（带参数）。特别用于要求指定TCP/IP端口号的选项。示例：\textit{cvs}(1)、PostgreSQL工具、\textit{smbclient}(1)、\textit{snmpd}(1)和\textit{ssh}(1)。
+\item[-p] 端口(port)（带参数）。特别用于要求指定TCP/IP端口号的选项。示例：\textit{cvs}(1)、PostgreSQL工具、\textit{smbclient}(1)、\textit{snmpd}(1)和\\ \textit{ssh}(1) 。
 
-协议(protocol)（带参数）。示例：\textit{fetchmail}(1)和\textit{snmpnetstat}(1)。
+协议(protocol)（带参数）。示例：\textit{fetchmail}(1)和\textit{snmpnetstat}(1)\linebreak 。
 
 \item[-q] 安静(quite)（通常不带参数）。禁止正常的结果输出或诊断输出。这种用法相当普遍。示例：\textit{ci}(1)、\textit{co}(1)和\textit{make}(1)。也参见-s选项的“缄默”选项。
 
@@ -4286,7 +4284,7 @@ GNU风格使用前面有两个连字符的选项关键字（而不是关键字�
 
 \item[-V] 版本(version)（不带参数）。在标准输出上显示程序版本并退出（通常也打印编译的配置细节）。示例：\textit{gcc}(1)、\textit{flex}(1)、\textit{hostname}(1)和很多其它程序。把这个选项挪做它用特别突兀。
 
-\item[-w] 宽度(width)（带参数）。特别用于指定输出格式的宽度。示例：\textit{faces}(1)、\textit{grops}(1)、\textit{od}(1)、\textit{pr}(1)和\textit{shar}(1)。
+\item[-w] 宽度(width)（带参数）。特别用于指定输出格式的宽度。示例：\\ \textit{faces}(1)、\textit{grops}(1)、\textit{od}(1)、\textit{pr}(1)和\textit{shar}(1)。
 
 警告(warning)（不带参数）。启用或禁用警告诊断。示例：\textit{fetchmail}(1)、\textit{flex}(1)和\textit{nsgmls}(1)。
 
@@ -4327,7 +4325,7 @@ HOME值通常用于查找.fetchmailrc点文件，该文件包含的描述配置�
 
 fetchmail没有专用的/etc/fetchmailrc或其它系统级文件。通常此类文件包含并非针对个体用户的配置信息。fetchmail确实使用在这个范围内一个很小的属性集——特别是本地邮件管理员名称和几个描述本地邮件传输设置（如本地SMTP监听程序的端口号）的变量值。然而，在实践中，这些编译进来的默认值很少改变。当发生变化时，它们往往以用户专用的方式进行修改。因此就没有必要存在一个系统级的fetchmail运行控制文件。
 
-fetchmail可以从.netrc文件检索主机/登录/口令(host/login/password)三元组。这样，它以一种最小立异的方式获得验证者信息。
+fetchmail可以从.netrc文件检索主机/登录/口令(host/login/passwo-rd)三元组。这样，它以一种最小立异的方式获得验证者信息。
 
 fetchmail具有一个精心设计的命令行选项集，但重复了大部分（但不是全部）.fetchmailrc所能够表达的内容。这个选项集本来并不大，但随着时间推移，新功能不断增加到.fetchmailrc微语言中，从而自觉或不自觉地增加相应的命令行选项，使得这个选项集越变越大。
 
@@ -4513,7 +4511,7 @@ SQL还适合作解说另一个问题的例子。最强大的CLI并不是命令�
 
 1984年后对GUI兴趣的爆发，很不幸地掩盖了CLI的优点。尤其是消费类软件的设计，已经变得严重倾向于GUI。尽管对于由初学者和随意用户构成的大多数消费市场来说，这未尝不是个好的选择，但同时也被迫支付隐性成本，当有经验的用户遇到GUI表达限制时，成本随着用户处理要求更高的问题而稳步上升。这么多的代价都来自于GUI根本就不能脚本化——所有交互都需要由人来驱动。
 
-Gentner \&{} Nielsen在《反Mac接口》(The Anti-Mac Interface)\cite{Gentner-Nielsen}中很好地总结了这种权衡：“（可视接口）在处理小数量物体简单行为的情况下，工作得很好，但是当行为或是物体的数目增加时，直接操作很快就变成了机械重复的苦差。一个可以直接操作的接口，其缺点是一切都必须亲自操作。同一个发布高级指令的执行者相反，用户降格成了装配工，必须一遍又一遍地执行同样的任务”。著名科幻小说家，Neal Stephenson，在《一开始就是命令行》(In the Beginning Was the Command Line \cite{Stephenson})这篇精妙散文中，同样指出了这一点，只不过没有直截了当，而是调侃而谈。
+Gentner \&{} Nielsen在《反Mac接口》(The Anti-Mac Interface)\\ \cite{Gentner-Nielsen}中很好地总结了这种权衡：“（可视接口）在处理小数量物体简单行为的情况下，工作得很好，但是当行为或是物体的数目增加时，直接操作很快就变成了机械重复的苦差。一个可以直接操作的接口，其缺点是一切都必须亲自操作。同一个发布高级指令的执行者相反，用户降格成了装配工，必须一遍又一遍地执行同样的任务”。著名科幻小说家，Neal Stephenson，在《一开始就是命令行》(In the Beginning Was the Command Line \cite{Stephenson})这篇精妙散文中，同样指出了这一点，只不过没有直截了当，而是调侃而谈。
 
 从不太理论的角度，一个典型的Unix老手这样阐述这个问题：
 \begin{quote}[Mike Lesk]
@@ -4775,10 +4773,10 @@ xcdroast也调用其它CLI工具：\textit{cdda2wav}(1)（一个声音文件转�
 
 术语“驱动”和“引擎”使用并不普遍，但是在Unix社区已经习用。
 
-\begin{fig}{xcdr-read}
+\begin{linefig}[0.9]{xcdr-read}
 \caption{Xcdroast图形界面}
 \label{fig:xcdr-read}
-\end{fig}
+\end{linefig}
 
 \subsubsection{客户端/服务器组合}
 客户端/服务器组合类似驱动，然而引擎部分是一个不需要交互、运行在后台、不需要自身用户界面的程序。通常，设计后台程序来调度对某种共享资源的访问——数据库、事物流，或专门的共享硬件，如声音设备。另一个这样设计的理由是可以避免在程序每次启动时的操作过于复杂。
@@ -5090,10 +5088,10 @@ Gabreil自己尽管坚持“坏的”更具感染性而往往能取得最后胜�
 \subsection{映射复杂度}
 迄今为止，我们已经发展出考虑复杂度的两个不同等级。这些等级实际上彼此正交。图13.1或许可以帮助澄清它们之间的关系。该图共有九个方框，每一个都列出了某种特殊复杂度种类的常见来源。
 
-\begin{fig}{complexity}
+\begin{linefig}[0.8]{complexity}
 \caption{复杂度种类及其来源}
 \label{fig:complexity}
-\end{fig}
+\end{linefig}
 
 在本书的稍早部分我们已经接触过各类复杂度，特别是属于偶然复杂度的那种。在第4章中，我们注意到偶然复杂度常常缘于接口设计并非正交——即没有仔细地分解接口操作以使得每个操作只完成一件事情。偶然代码复杂度（比能够完成工作所需的更复杂）常常来自于过早的优化。臃肿的偶然代码库往往缘于对SPOT原则的违背、重复的代码或糟糕的组织，以至于重用机会渺茫。
 
@@ -5124,7 +5122,7 @@ Gabreil自己尽管坚持“坏的”更具感染性而往往能取得最后胜�
 \begin{itemize}
 \item 从编辑器内部可以驱动版本控制系统，无须离开编辑器到一个shell窗口或独立的公用程序就可以实施文件的检入检出(checkin/checkout)。
 \item 编辑器可以作为符号调试器的前端，当发生那些诸如调试程序运行停止在某个断点上之类的情况时，编辑器可以自动访问恰当的文件及其文本行。
-\item 通过识别指向另一个主机的文件名（比如符合\verb+/user@host:/path/to-firle+语法），可以在编辑器内编辑远程文件。假设拥有访问权，这类编辑器可以自动运行诸如\textit{scp}(1)或\textit{ftp}(1)的公用程序获取本地的一个拷贝，然后在保存文件时自动地将编辑后的版本传回远程位置。
+\item 通过识别指向另一个主机的文件名（比如符合\\ \verb+/user@host:/path/to-firle+语法），可以在编辑器内编辑远程文件。假设拥有访问权，这类编辑器可以自动运行诸如\textit{scp}(1)或\textit{ftp}(1)的公用程序获取本地的一个拷贝，然后在保存文件时自动地将编辑后的版本传回远程位置。
 \end{itemize}
 \end{itemize}
 
@@ -5508,7 +5506,7 @@ Unix版本7的"Bourne shell"(sh)是Unix第一个（而且在很多年中也是Un
 
 即使程序不完全使用shell编写，但包含大量对\textit{sort}(1)之类的C过滤器或\textit{sed}(1)、\textit{awk}(1)之类的标准文本处理微型语言的使用，则也可称为“用shell”编写而成。然而，这类程序在过去数年内逐渐式微，现在此类复杂的胶合层通常用Perl或Python编写，而shell只是为最简单的包装器（那些语言使用在包装器上是大材小用）和系统启动时的初始化脚本（不能假设已经安装了什么语言）而保留。
 
-任何入门级Unix书籍都对此类基本的shell编程作了充分的说明。The Unix Programming Environment（Unix编程环境）\cite{Kernighan-Pike84}仍然是最好的中高级shell编程参考书之一。每个Unix上都有Korn shell的实现或翻版。
+任何入门级Unix书籍都对此类基本的shell编程作了充分的说明。The Unix Programming Environment（Unix编程环境）\\ \cite{Kernighan-Pike84}仍然是最好的中高级shell编程参考书之一。每个Unix上都有Korn shell的实现或翻版。
 
 复杂的shell脚本经常产生可移植性问题，主要原因并不在于shell本身而在于shell使用了某些它假定存在的程序。尽管偶尔可在非Unix操作系统中发现Bourne和Korn shell变种，shell程序（实际上）根本无法移植到Unix之外。
 
@@ -5644,7 +5642,7 @@ imgsizer最初使用Perl编写，几乎是Perl擅长的那种小型、模式驱�
 动态字符串处理和复杂正则表达式匹配的需求让使用C或C++来编写imgsizer变得异常痛苦；而且相应的版本也会更加庞大、更加难读。Java当然也可以解决隐含的内存管理问题，但在文本模式匹配方面几乎不会比C或C++更有表达力。
 
 \subsubsection{中型Python案例分析：fetchmailconf}
-在第11章，作为分离实现和接口的例子我们分析了fetchmail/fetchmailconf程序对。fetchmailconf很好地展示了Python的优势。
+在第11章，作为分离实现和接口的例子我们分析了fetchmail/fetchm-ailconf程序对。fetchmailconf很好地展示了Python的优势。
 
 fetchmailconf使用Tk工具包来实现多面板GUI配置编辑器（Python中也有GTK+和其它工具包的，但每个发布Python解释器中都包含Tk工具包。）
 
@@ -5680,7 +5678,7 @@ Java库存在一个特别令人反感的问题，和Windows DLL hell问题非常
 如何权衡Java和我们本章描述的其它语言，目前还不清楚，可能主要取决于项目的规模。我们可以设想Java的正确使用范围和Python比较相近。同Python一样，Java无法和C或C++在原始执行速度方面竞争，也无法和Perl在大量使用模式引导编辑的小项目竞争。Java对小项目是大材小用（这一点比Python更确定）。我们可以认为，
 Python在小一些的项目上具有优势，而Java在大一些的项目上具有优势，但这并非定论。
 
-最好的参考书可能是Java In A Nutshell（Java技术手册）\cite{FlanaganJava}，但这不是最好的入门级指导材料；最好的入门级指导可能是Thinking in Java（Java编程思想）\cite{Eckel}。对全球所有Java网站的链接始于\href{http://java.sun.com/}{Sun公司的Java站点}，该站点也具有可免费下载的完整HTML文档。\href{http://dmoz.org/Computers/Programming/Languages/Java/}{开源目录Java网页}(Open Directory Java Page)也汇集了许多有用的Java链接。
+最好的参考书可能是Java In A Nutshell（Java技术手册）\\ \cite{FlanaganJava}，但这不是最好的入门级指导材料；最好的入门级指导可能是Thinking in Java（Java编程思想）\cite{Eckel}。对全球所有Java网站的链接始于\href{http://java.sun.com/}{Sun公司的Java站点}，该站点也具有可免费下载的完整HTML文档。\href{http://dmoz.org/Computers/Programming/Languages/Java/}{开源目录Java网页}(Open Directory Java Page)也汇集了许多有用的Java链接。
 
 所有的Unix操作系统、Microsoft操作系统、MacOS和其它很多平台都有Java实现。
 
@@ -5723,7 +5721,7 @@ Emacs Lisp也非常适合构建必须和文本编辑器紧密整合在一起的�
 
 Emacs Lisp是一种Lisp语言。它自动进行内存管理，就像黑夜之后是白天一样自然，因而比大多数传统语言更雅致、更有效，或者，确切地说，也比大多数新兴语言都更雅致、更有效；在这个方面它可以同Java或Python竞争，更远超C/C++、Perl、shell或Tcl。Lisp缺少标准的可移植OS规范，这个老毛病已由Emacs内核解决，实际上Emacs内核就是其OS规范。
 
-Lisp另外一个老毛病——狂吃资源一一在现代机器上也不再是个问题。"\textbf{E}macs \textbf{M}akes \textbf{A} \textbf{C}omputer \textbf{S}low"（Emacs让计算机变慢）和"\textbf{E}ventually \textbf{M}unches \textbf{A}ll \textbf{C}omputer \textbf{S}torage"（最终吃光所有计算机内存）之类的调侃曾经非常流行（实际上Emacs发布本身就包含这样的一个笑话列表）。但现在其它许多经常使用的程序（如网页浏览器）都比Emacs更大、更复杂，所以比较而言，反而Emacs似乎变得比较适中了。
+Lisp另外一个老毛病——狂吃资源一一在现代机器上也不再是个问题。"\textbf{E}macs \textbf{M}akes \textbf{A} \textbf{C}omputer \textbf{S}low"（Emacs让计算机变慢）和"\textbf{E}ventu-ally \textbf{M}unches \textbf{A}ll \textbf{C}omputer \textbf{S}torage"（最终吃光所有计算机内存）之类的调侃曾经非常流行（实际上Emacs发布本身就包含这样的一个笑话列表）。但现在其它许多经常使用的程序（如网页浏览器）都比Emacs更大、更复杂，所以比较而言，反而Emacs似乎变得比较适中了。
 
 Emacs Lisp的权威参考是The GNU Emacs Lisp Reference Manual （GNU Emacs Lisp参考手册），可在Emacs的"info"帮助系统中浏览。如果没有，可从\href{ftp://ftp.gnu.org/pub/gnu}{FSF的FTP站点}下载。如果觉得太深，《Writing GNU Emacs Extensions》（编写GNU Emacs扩展编写）\cite{Glickstein}可能会有帮助。
 
@@ -5971,7 +5969,7 @@ GNU make的DOS和Windows移植的版本可以从FSF获取。
 
 Unix的\textit{make}(1)程序，是所有这些程序的鼻祖，专门设计来帮助C程序员管理这些命令。可以在一个或多个makefile中书写项目文件之间的依赖关系。每个makefile都由一组“生成物”构成；其中每项都告知make给定的某个目标文件会依赖哪些源文件集，并且告知make如果那些源文件比目标文件更新时该做什么。实际上并非必须将所有的依赖关系都写下来，make程序可以通过文件名和扩展名推导出一些显然的依赖关系。
 
-例如：如果需要在makefile中说明二进制可执行文件"myprog"依赖三个目标文件myprog.o、helper.o和stuff.o。如果确实存在文件myproq.c、helper.c和stuff.c，不用说，make也会知道每个.o文件都依赖相应的.c文件，并且应用它自己的标准解决方案将.c文件编译成.o文件。
+例如：如果需要在makefile中说明二进制可执行文件"myprog"依赖三个目标文件myprog.o、helper.o和stuff.o。如果确实存在文件myproq.c\linebreak 、helper.c和stuff.c，不用说，make也会知道每个.o文件都依赖相应的.c文件，并且应用它自己的标准解决方案将.c文件编译成.o文件。
 
 \begin{quote}[Stuart Feldman]
 Make程序最初来源于Steve Johnson（yacc等程序的作者）的一个拜访，那天他风风火火的闯进我的办公室，诅咒命运女神让他浪费了一个早上来调试一个正确的程序（bug改了但是文件还没有编译，因此cc *.o无效）。而我也花了前一晚上的部分时间在我参与的项目中解决同样的灾难，这样，编写一个工具来解决这个问题的想法就诞生了。最开始是精细的依赖关系分析器，浓缩为更简单的东西后，周末就出炉了Make。新兴工具的使用也是Unix文化的一个部分。Make文件都是文本的，不是神秘的二进制编码，因为这就是Unix的精神：可打印、可
@@ -5999,7 +5997,7 @@ make并不仅仅只是对C/C++的有用。如同在第14章所述的一样，脚
 和编程一样，使用makefile来完成制作文档的任务也非常普遍。经常会看到使用这种方法从一个某标记语言编写的主文本（比如HTML或是我们将在第18章讨论的Unix文档宏语言）来自动生成PostScript或其它派生文档。实际上，这种用法相当普遍，值得我们用一个案例来演示。
 
 \subsubsection{案例分析：make用于文档转换}
-在fetchmail的makefile中，例如，会发现三个生成文件，名为FAQ、FEATURES和NOTES，同HTML的源文件fetchmail-FAQ.html、fetchmail-features.html和design-notes.html相关。
+在fetchmail的makefile中，例如，会发现三个生成文件，名为FAQ、FEATURES和NOTES，同HTML的源文件fetchmail-FAQ.html、\\ fetchmail-features.html和design-notes.html相关。
 
 HTML文件是从fetchmail的主页上阅读的，但是不使用网页浏览器浏览那些HTML标记非常别扭。因此FAQ、FEATURES和NOTES纯文本文件在需要阅读fetchmail源码本身（或者，可能在并不支持网页访问的FTP站点）时，可以通过编辑器或分页程序来快速阅览。
 
@@ -6090,7 +6088,7 @@ autoconf文档以GNU信息格式的在线手册存在。脚本源码可以从FSF
 
 尽管缺乏对依赖派生的直接支持，并且尽管它的方法很特殊，但在2003年年中，autoconf毫无疑问地是最流行的makefile生成器，并且已经流行了数年。它已经蚕食了Imake的份额，并至少废掉了一个主要竞争者(metaconfig)。
 
-参考书籍请阅《GNU Autoconf, Automake and Libtool\cite{Vaughan}》。另外，我们将在第17章从一个略微不同的角度讨论autoconf更多的细节。
+参考书籍请阅《GNU Autoconf, Automake and Libtool》\\ \cite{Vaughan}。另外，我们将在第17章从一个略微不同的角度讨论autoconf更多的细节。
 
 \subsubsection{automake}
 automake尝试在\textit{autoconf}(1)上增加一个Imake式的依赖派生关系。用广泛的Imake式的表示法编写Makefile.am模板；\textit{automake}(1)编译成Makefile.in文件，然后该文件供autoconf的configure脚本操作。
@@ -6150,7 +6148,7 @@ VCS自身存在一些问题。最大的问题就是每次使用VCS编辑文件�
 
 然而SCCS本身现在已被废弃；它是贝尔实验室的专有软件。更好的开源替代品已经开发出来，而且Unix世界中的大多数都已经转而采用了它们。SCCS在一些商业公司中仍然用于管理某些古老的项目，但新项目并不推荐使用。
 
-SCCS没有完整的开源版本实现。存在一个克隆产品，叫做CSSC(Compatibly Stupid Source Control)在FSF的赞助下进行开发。
+SCCS没有完整的开源版本实现。存在一个克隆产品，叫做CSSC(Co-mpatibly Stupid Source Control)在FSF的赞助下进行开发。
 
 \subsubsection{修订控制系统(Revision Control System, RCS)}
 更好的开源替代品从RCS（修订控制系统）开始，在SCCS的几年后在普渡(Purdue)大学诞生，最初发布在4.3BSD Unix上。它在逻辑上与SCCS相似，但是具有更简洁的命令接口，还可以通过符号名将整个项目发布组合在一起。
@@ -6647,7 +6645,7 @@ Unix标准发展的原动力是第2章叙述过的AT\&{}T和Berkeley阵线在发
 
 下一个参与者是X/Open（后来更名为Open Group），它是在1984年形成的Unix商家联盟。它们的X/Open Portability Guides（XPGs）最初与POSIX草案平行发展，而在1990年之后，XPGs整合扩展了POSIX。POSIX试图捕捉所有Unix的安全子集，而XPG更倾向前沿开发的普遍实现；即使是1985年的XPG1，就跨越了SVr2和4.2BSD，还包含了套接字。
 
-1987年的XPG2增加了终端处理API，基本上是System V的\textit{curses}(3)。1990年的XPG3融合了X11 API。1992年的XPG4完全遵从了ANSI C 1989标准。XPG2、XPG3和XPG4极度关注国际化的支持，并描述了一套详尽的API来处理字符集和消息目录。
+1987年的XPG2增加了终端处理API，基本上是System V的\\ \textit{curses}(3)。1990年的XPG3融合了X11 API。1992年的XPG4完全遵从了ANSI C 1989标准。XPG2、XPG3和XPG4极度关注国际化的支持，并描述了一套详尽的API来处理字符集和消息目录。
 
 在阅读Unix标准的时候，也许会碰到"Spec 1170"（自1993年）、"Unix95"（自1995年）和"Unix 98"（自1998年）。这些认证标记都基于X/Open标准；现在仅仅只是历史的兴趣罢了。但是XPG4完成的工作成为了Spec 1170，而Spec 1170又转变成第一版的“单一Unix规范”（Single Unix Specification，SUS）。
 
@@ -6676,7 +6674,7 @@ Unix标准发展的原动力是第2章叙述过的AT\&{}T和Berkeley阵线在发
 
 首先，表面的问题是，大量的Unix发布者——随着Linux发布市场的统一，越来越清楚真正的问题是时间变化率。API是稳定的，但是系统管理文件的预期位置、实用程序以及用户邮箱名和日志文件的前缀路径等常常发生变化。
 
-首次标准化努力是新学派Linux和BSD社区自身中发展出来（始于1993）的文件系统层次标准（Filesystem Hierarchy Standard，FHS）。此标准被集成到Linux标准基础（Linux Standards Base，LSB）中，它标准化了一套预期的服务库和辅助应用程序库。两个标准都成为了自由标准组织（\href{http://www.freestandards.org/}{Free Standards Group}）的行为，到2001年，该组织已经扮演了在旧学派Unix商家中X/Open的角色。
+首次标准化努力是新学派Linux和BSD社区自身中发展出来（始于1993）的文件系统层次标准(Filesystem Hierarchy Standard, FHS)。此标准被集成到Linux标准基础(Linux Standards Base, LSB)中，它标准化了一套预期的服务库和辅助应用程序库。两个标准都成为了自由标准组织（\href{http://www.freestandards.org/}{Free Standards Group}）的行为，到2001年，该组织已经扮演了在旧学派Unix商家中X/Open的角色。
 
 \section{IETF和RFC标准化过程}
 当Unix社区同互联网工程师文化相结合时，也继承了从互联网工程任务组（Internet Engineering Task Force，IETF）RFC标准化过程中形成的思维方式。在IETF传统中，标准必须来自于一个可用原型实现的经验——但是一旦成为标准，同标准不一致的代码就被认定是不合规范的，必须无情地抛弃。
@@ -7075,10 +7073,10 @@ DocBook被称作XML方言，这句话的含义是，DocBook实际上是个DTD—
 验证解析器要么抛出错误并给出文档哪处结构违反了规则，要么将文档转变成XML元素和文本流，并由解析器后端将样式单的信息整合在一起产生格式化后的输出。
 
 图18.1揭示了整个过程。
-\begin{fig}{docflow1}
+\begin{linefig}[0.8]{docflow1}
 \caption{结构化文档处理过程}
 \label{fig:docflow1}
-\end{fig}
+\end{linefig}
 
 图中虚线框内的部分就是格式化软件或工具链。除了明显可见的输入以外（待格式化的文档原件），请牢记：格式器还需要两个隐含的输入（DTD和样式单），这样才能理解随后的过程。
 
@@ -7114,10 +7112,10 @@ foo.ps
 \end{Verbatim}
 
 将文档转换成HTML或者PostScript，需要一个引擎，将DocBook DTD和针对文档的恰当样式单组合起来，应用到你的文档上。图18.2说明了开源工具是如何完成协作过程的。
-\begin{fig}{docflow2}
+\begin{linefig}[0.8]{docflow2}
 \caption{如今的XML-DocBook工具链}
 \label{fig:docflow2}
-\end{fig}
+\end{linefig}
 
 有三个程序可以解析文档并应用样式单进行转换。最常用的是xsltproc，同Red Hat Linux一起发布的解析器。剩下的两个是Java程序，Saxon和Xalan。
 
@@ -7139,7 +7137,7 @@ FOP（FO-to-PostScript）会优雅得多，这是由Apache项目开发的从FO�
 \label{fig:docflow3}
 \end{fig}
 
-也存在同FOP的竞争者。另一个叫做xmlroff\footnote{}项目的目标同FOP一样，但以C++完成（因此速度较Java快也无需依赖Java环境）。在2003年年中，xmlroff也处于未完成的alpha状态。
+也存在同FOP的竞争者。另一个叫做xsl-fo-proc项目的目标同FOP一样，但以C++完成（因此速度较Java快也无需依赖Java环境）。在2003年年中，xsl-fo-proc也处于未完成的alpha状态。
 
 \subsection{移植工具}
 DocBook第二严重的问题是，需要大量努力将旧风格的表示层标记转换为DocBook标记。人们通常可以自动地将文本的表示解析成逻辑结构，因为（例如）可以从上下文中判断一个斜体部分是“强调”还是“外来词”或别的什么。
@@ -7149,7 +7147,7 @@ DocBook第二严重的问题是，需要大量努力将旧风格的表示层标�
 下面总结了从其它格式到DocBook的转换工具。所有这些工具都不是彻底完美的；在转换后需要检查，甚至需要人工编辑。
 \begin{description}
 \item[GNU Texinfo] 自由软件基金尝试将DocBook作为交换格式来支持。TexInfo具有足够的结构标记来进行良好的自动转换（人工编辑仍然需要，但不会太多），4.x版本的makeinfo有个功能开关\verb+--docbook+，可以生成DocBook。更多的信息参见\href{http://www.gnu.org/directory/texinfo.html}{makeinfo项目主页}。
-\item[POD] \href{http://www.cpan.org/modules/by-module/Pod/}{POD::DocBook}将Plain Old Documentation标记转换为DocBook。它宣称除了L<>斜体标签，可以将所有的POD标签都转换成DocBook。手册又说“嵌套的=over/=back列表在DocBook中不支持”，但注意这个模块是经过大量测试的。
+\item[POD] \href{http://www.cpan.org/modules/by-module/Pod/}{POD::DocBook}将Plain Old Documentation标记转换为DocBook\linebreak 。它宣称除了L<>斜体标签，可以将所有的POD标签都转换成DocBook。手册又说“嵌套的=over/=back列表在DocBook中不支持”，但注意这个模块是经过大量测试的。
 \item[LATEX] 一个叫做\href{http://www.lrz-muenchen.de/services/software/sonstiges/tex4ht/mn.html}{TeX4ht}的项目，按照PassiveTEX作者的说法，可以从LATEX生成DocBook。
 \item[man pages和其它基于troff的标记方式] 这通常被认为是最大最令人厌烦的转换问题。的确，基本\textit{troff}(1)标记的表示层太低，自动完成转换的工具简直就是吃力不讨好。然而如果我们考虑从使用\textit{man}(7)之类宏命令包编写的文档源进行转换，前景就光明了许多。这些宏具备足够的结构性特征以利
 于自动转换。
@@ -7205,12 +7203,747 @@ Norman Walsh的DocBook: The Definitive Guide（DocBook权威指南）的印刷�
 2003年年中，最前沿的实践中，还有几个重要的习惯应该养成：
 \begin{enumerate}
 \item 使用XML-DocBook维护主文档。即使手册页是DocBook RefEntry文档。关于如何编写用户期望看到的手册页来解释内容和组织，这里有个非常有用的\href{http://www.tldp.org/HOWTO/mini/Man-Page.html}{HOWTO}。
-\item 发布XML主文档。同时，需要发布troff源码，对主文档运行\verb+xmlto man+就可以得到它，以备用户的系统上没有装载\textit{xmlto}(1)。软件的安装程序应该以常规方式进行，如果有人需要编写或者编辑文档，请引导他们使用XML文件。
+\item 发布XML主文档。同时，需要发布troff源码，对主文档运行\\ \verb+xmlto man+就可以得到它，以备用户的系统上没有装载\textit{xmlto}(1)。软件的安装程序应该以常规方式进行，如果有人需要编写或者编辑文档，请引导他们使用XML文件。
 \item 让项目的安装包支持ScrollKeeper。
 \item 从主文档生成XHTML（使用命令\verb+xmlto xhtml+）并放到项目的网页上以供访问。
 \end{enumerate}
 
 无论是否使用XML-DocBook作为主格式，都应该找到某个方法将文档转换为HTML。无论软件是开源的还是专用的，用户越来越愿意通过网络找到它。将文档放在网上，其直接效应就是能够让知道软件的潜在用户和消费者更容易阅读，更容易了解软件。而其间接效应就是软件被网络搜索找到的机会更多。
+
+
+
+\chapter{开放源码：在Unix新社区中编程}
+\begin{flushright}
+\begin{notecard}{15em}
+ 软件和性一样——越自由越好。
+ 
+{\hfill —Linus Torvalds}
+\end{notecard}
+\end{flushright}
+
+在第2章，作为总结，我们评述了Unix历史中最大规模的模式；当Unix实践最接近开放源码时，就欣欣向荣，反之则停滞不前。然后在第16章，我们又断言开源开发工具往往具备高等级质量。至于本章，我们将以简要说明开源开发怎样工作且为何这样工作作为开始。实际上，其大多数行为都只不过是Unix传统长期实践的强化而已。
+
+随后我们将从抽象领域下到具体，转而描述一些Unix从开源社区借鉴而来的最重要的大众习惯的——特别是由社区发展的、关于如何成为良好源码发布的指导原则。其它现代操作系统的开发者同样可以沿袭大多数这些习惯并从中受益。
+
+我们将假设你用开放源码进行开发而描述这些习惯；当然，即使是编写专有软件，多数习惯仍不失价值。基于开放源码的设想在历史上也是有用的，许多习惯在专有Unix中都能找到痕迹，像无处不在的工具例如\textit{patch}(1)、Emacs和GCC等等都是。
+
+
+\section{Unix和开放源码}
+开源开发利用了这样的事实，甄别和修改bug的任务适合分解成多个并行的子任务——这和实现某个特殊算法不一样。围绕某个原型设计进行邻域开发，也很适合并行处理。所以，随着正确技术和社会机制的到位，通过网络松散连接的庞大开发团队可以把工作做到出色得让你吃惊。
+
+是的，这会让你吃惊，如果还抱守那种把秘密开发和专有控制视为必然的话。从《人月神话》\cite{Brooks}直到Linux的兴起，软件工程的正统观念都是关于如何在重量级组织，例如企业和政府中，构建小型而管理紧密的团队。而实践却是紧密管理的大型团队。
+
+在AT\&{}T拆分以前的早期Unix社区的运作实际就是开源的典型例子。尽管拆分前的Unix代码在技术上和法律上是专有的，但在用户和开发者社区中，却被视作共享的。那些人们的自愿努力，受到解决问题强烈愿望的推动而自觉迸发出来。而在这些努力之中，优秀者层出不穷。的确，开源开发的方法和技术在Unix社区作为一种无意识的群众实践而发展，其实在1990后期被分析和标记之前，就已经持续了四分之一个世纪。（参考《The Cathedral and the Bazaar（大教堂和集市）》\cite{Raymond01}和《Understanding Open Source Software Development（理解开源软件开发）》\cite{Feller-Fitzgerald}）。
+
+回顾过去，令人惊讶的是我们对自己的行为意味着什么是多么茫然无知。有些人的理解却很透彻；Richard Gabriel在文章“差即是好”\cite{Gabriel}(1990)中表达的思想是其中最著名的，在Brooks\cite{Brooks}(1975\linebreak )也可以找到预示，甚至远到Vyssotsky和Corbató在Multics的设计中的思考(1965)。在1990年代中期被Linux唤醒之前，多达20年的软件开发观察中，我也没有意识到这一点。这样的经历应该让任何有见解而谦逊的人知道，是不是还有其它什么重要的统一理念依旧暗含在我们的行为中，潜藏在我们集体的眼皮底下未被发掘，不是因为复杂而是因为太简单。
+
+开源开发的规则很简单：
+\begin{enumerate}
+\item \textbf{源码公开}。别隐藏秘密。公开代码以及产生代码的过程。鼓励第三方的同行复审。确保其他人能够自由地修改和重新发布代码。尽可能地发展合作开发者。
+\item \textbf{尽早发布，经常发布}。快速的发布节奏意味着反馈迅速而有效。每次递进发布间隔越小，回应真实世界反馈的修改过程就越容易。
+
+确保第一次的发布能够编译和运行，所有允诺的功能都可运作。通常，一个开源程序的启动版本通过至少完成最终目标的某个部分来展示项目的前景，这充分表明发起人确实可以继续这个项目。例如，字处理器的启动版本应该支持文本的输入以及文本在屏幕上的显示。
+
+不能编译或是运行的第一次启动发布会毁掉整个项目（例如大家都知道，这差点就在Mozilla浏览器身上发生）。不能编译的发布表明项目开发者不能够完成项目，同样地，不能运行的程序也难以吸引其他开发者的参与，因为任何改动对程序是好是坏都不确定。
+
+\item \textbf{给贡献以表扬}。如果不能够给合作开发者以物质奖励，就给予精神表扬。即使可以给予物质的奖励，也不要忘记人们往往是为展示才华而不是为钱努力工作。
+\end{enumerate}
+
+\begin{quote}[Henry Spencer]
+规则2的必然推论就是，单一发布不应该视为重大的事件，无需伴随太多的附带许诺和准备。将发布过程无情地精简非常重要，这样就不再为经常发布而感到痛苦。在发布准备期，其余工作都必须停止的安排是个可怕的错误（值得一提的是，如果使用CVS或者类似的版本控制，处于准备期的发布应该同主干开发线分开，这样就不至于阻塞主线开发过程。）总的来说，不要把发布当作什么特别的大事；而应该当作是例行公事。
+\end{quote}
+
+牢记：频繁发布的原因是为了缩短和加速同用户和开发者间的反馈循环。因此，精工细作，等一切完美了才发布的想法是要不得的。不要许太多愿。一步一步地来，承认和公布现有的bug，并有信心随着时间的推移，一定会达到完美。发布点多一点儿不是坏事，不必为版本号的增加而烦恼。
+
+开源开发利用散布在互联网上，而且主要通过email和网络文档交流的大型程序员团队。典型地，任何项目的多数贡献者都是为了提高软件对自身效用的回报以及声誉激励而自愿工作。一般由一个核心开发者或核心开发组来指导项目；其他贡献者可以零星地加入或离去。为了鼓励志愿者，重要的是避免在他们和核心团队之间产生社会壁垒。因此需要最小化核心团队的特权，努力模糊界限。
+
+开源项目遵循Unix传统尽可能自动化的建议。使用\textit{patch}(1)工具分发递进更改。许多项目（以及所有大型的）都拥有使用诸如CVS（回顾第15章的讨论）等版本控制系统的网络访问代码库。Bug和补丁自动追踪系统的使用也很普遍。
+
+1997年，在黑客文化之外几乎没人能明白，这样管理大型项目并同样获得高质量的开发结果是完全有可能的。在2003年，这已不再是新闻；诸如Linux、Apache和Mozilla项目都已经获得了巨大的成功和非常高的公共上镜率。
+
+抛弃秘密开发的习惯，转而支持过程的透明化和同行复审是炼金术成为化学学科最关键的一步。同样你也开始发现，开源开发标志着软件开发终于长成为一门学科。
+
+\section{与开源开发者协同工作的最佳实践}
+开源社区最佳开发实践实际上便是对分布式开发自然而然的适应；在本章中可以了解到许多行为准则，用来同其他开发者进行良好沟通。有些Unix约定是偶然的（例如文件的标准命名表达关于发布源的元信息），这常常可以上溯到1980年代早期的Usenet，或者GNU项目的约定和标准。
+
+\subsection{良好的修补实践}
+多数人在发布自己的项目之前，都是从修补他人的软件而开始接触开源软件开发的。假定已经为某个基准源代码更改了一些代码，现在需要设身处地去想想，别人该怎样判断是否可以采纳这个补丁呢？
+
+代码的质量很难判断，所以开发者往往通过提交的质量来评估补丁，在提交者的风格和交流行为中寻找线索——该提交者是否设身处地为他们着想，是否知道评估和合并新的补丁究竟该怎样。
+
+这是鉴定代码质量相当可靠的方法。在许多年处理来自数以百计陌生人补丁的过程中，我很少看到一个考虑周全、尊重我的时间的补丁会是技术上的赝品。反过来看，经验告诉我们，看起来马马虎虎或是打包很疏懒的补丁往往实际上就是赝品。
+
+这里有一些怎样让补丁能够被接受的技巧：
+
+\subsubsection{发送补丁而不是完整档案包或文件}
+如果改动包含了一个源代码中并不存在的新文件，当然就必须发送整个新文件。但如果修改的只是已有文件，无须发送整个文件。只须发送diff就行：运行\textit{diff}(1)命令，将基准发布版本与修改版本进行比较，并提交输出。
+
+\textit{diff}(1)命令及其对偶命令\textit{patch}(1)，是开源开发最基本的工具。差异文件要比整个文件好，因为自从获得旧拷贝之后，接受补丁的开发者可能已经更改了主干版本。呈送开发者以一个diff文件，节省了别人将改动从其中分离出来的精力；也表示了对别人时间的尊重。
+
+\subsubsection{发送针对当前版本代码的补丁}
+如果发送给维护者的补丁是针对好几个版本以前的，并期望维护者会判断补丁中哪些改动已经完成，哪些是新颖独创，这样做既不能达到预期目标也有些粗鲁无礼。
+
+追踪源码状态以及把主线代码库需要做什么的最小化补丁提交给维护者，是补丁提交者必须承担的责任。这也意味着应该发送针对当前版本的补丁。
+
+\subsubsection{不要包含可生成文件的补丁}
+在发送补丁之前需通览一遍，对于一旦维护者采用补丁、重新make后就能重新生成的文件，其补丁段应予删除。犯错的经典例子就是Bison或Flex产生的C文件。
+
+当今最常见的错误就是，发送的diff文件只包含有巨大的更改段来表明你的configure脚本和维护者的差异。其实这个文件可以由autoconf产生。
+
+这是有欠考虑的。它把接收者置于麻烦之中，需要把补丁的真实内容从一大堆乌七八糟的干扰里分离出来。当然它只是个次要的错误，同我们将要进一步探讨的内容相比，并非那般严重——但也是不好的。
+
+\subsubsection{不要发送与只是优化RCS或者的补丁段}
+有些人喜欢在源码文件中放置一些特殊符号，在登入版本系统时会自动扩展：例如RCS和CVS使用的构造。
+
+如果使用自己本地的版本控制系统，更改可能会改变这些符号。这并非真正有害，因为当接收者在采用补丁而登回代码时，特殊符号可以按照维护者版本控制系统的状态设置重新扩展。但这些特殊的补丁段是干扰物，会让人分心。不发送它们更能体现考虑的周全。
+
+这是另外一个次要的错误。如果别的大事没弄错，这是可以原谅的。但最好避免。
+
+\subsubsection{使用-c或-u格式而不是缺省的(-e)格式}
+\textit{diff}(1)默认的(-e)格式非常脆弱。它不包含任何上下文，因此在得到用来修改的拷贝之后，如果基准代码中插入或者删除了任何一行，patch工具无法得到正确结果。
+
+拿到-e格式的diff文件令人恼火，表明发送者如果不是位新手或马大哈，就是个菜鸟。大多数这种补丁想都不用想便可抛弃掉。
+
+\subsubsection{在补丁中包含文档}
+这非常重要。如果补丁增加了用户可见的部分或者改变了软件的功能特征，请在补丁中包含相应手册页和其它文档文件。不要期望补丁接收者会乐于为此代码编写文档，或是在代码中隐藏没有文档说明的功能特征。
+
+针对改动做好文档体现了一些好习惯。首先，已经为试图说服的维护者设身处地考虑过了。其次，表明对改动后的效果了如指掌，可以向其余不能查看代码的人解释清楚。第三，表示了对软件最终用户的关心。
+
+良好的文档常常是区分“可靠的贡献”和“匆忙而邋遢的改动”最显著的特征。如果花费了足够的时间和心思来做好文档，最后就会发现让多数开发者接受补丁的道路已经走完了85\%{}。
+
+\subsubsection{在补丁中包含解释}
+补丁应该包含一份说明，来解释为什么补丁是必须和有用的。这个说明并不直接给软件用户而是给接受补丁的维护者。
+
+说明可以很短——实际上，我见过的一些最有效的说明仅仅是“请参看补丁中的文档更新”。但必须表明正确的态度。
+
+正确的态度非常有帮助，是对维护者时间的尊重，也是从容而谦逊的自信。表现出对所修补的代码充分理解，展示对维护者问题的认同，这些都是有益的。对于觉察到的应用补丁风险预先说明同样大有裨益。下面是一些经验丰富的开发者所发送的各种解释示例：
+
+“我已经发现代码中有两个问题，X和Y。我改掉了X，但是我并没有试图去解决Y问题，因为我对牵涉到的代码还不理解。”
+
+“修改了一个当输入过长时的coredump。我在修改的时候，试图寻找另外的溢出错误。我发现有一个可能在blarg.c中，在第666行附近。你能确定在每个传输中发送端产生的字节不会多于80？”
+
+“你是否已经考虑使用Foonly算法来解决这个问题？在\\ <http://www.example.com/~jsmith/foonly.html>处有个好的实现。”
+
+“补丁解决了当前的问题，但我意识到内存分配被不恰当地复杂化了。在我这里可以工作，但在发布前你应该进行重负荷测试。”
+
+“这可能太过于花哨，但无论如何我还是提交了。也许你会知道一个实现这种功能的更简洁的方法。”
+
+\subsubsection{在代码中包含有用的注释}
+在合并补丁之前维护者希望能够对更改有准确的理解。当然，这并不是一成不变的法则；如果确实同维护者存在很好的合作工作记录，他也许在半自动化地检查前就只会随意地瞄上一眼。但是任何帮助维护者理解代码和降低不确定性的作为都会提高补丁被接受的几率。
+
+代码中良好的注释可以帮助维护者理解代码。糟糕的则不然。
+
+以下是个糟糕的注释例子：
+\begin{Verbatim}
+/* norman newbie fixed this 13 Aug 2001 */
+\end{Verbatim}
+
+这没有任何用处。只是在维护者的代码中间，无端地加入了践踏领土的泥泞靴印。如果维护者接受了补丁（不太可能），他几乎肯定会抛弃这段注释。如果希望获得声望，应该在工程的News或History文件中包含一个补丁段。这样维护者更可能接受。
+
+以下是良好的注释例子：
+\begin{Verbatim}
+/*
+ * This conditional needs to be guarded so that crunch_data() never
+ * gets passed a NULL pointer.  <norman_newbie@foosite.com>
+ */
+\end{Verbatim}
+
+这样的注释表明，不仅理解了维护者的代码，也理解了维护者对接受你的改动所需要的信心。这种注释正好给予维护者对于更改的信心。
+
+\subsubsection{如果补丁被拒绝，别往心里去}
+存在许多理由，一个补丁可能会遭到拒绝，这并不存在怀疑和责备的意思。记住多数软件维护者都处于相当沉重的时间压力之下，并很保守地接受补丁，生怕一不小心项目代码就会崩溃。有时候重新提交改进后的补丁会有所帮助，有时候不会。大家都不容易。
+
+\subsection{良好的项目、档案文件命名实践}
+随着诸如ibiblio、SourceForge以及CPAN维扩者工作量的增加，一个不断发展的趋势就是，项目提交部分或整体会由程序来处理（而不是完全由人来处理）。
+
+对于项目和档案文件的命名而言，更重要的是需要采用更适合计算机程序可以解析和理解的规则模式。
+
+\subsubsection{使用GNU风格的命名法：主干加major.minor.patch的编号法}
+如果档案文件都是类似GNU风格的名称，主干前缀全小写且只包含字母和数字，后接连字号，后再接版本号、扩展和其它后缀，对大家都有帮助。
+
+具备这些部分的名称，其良好的通用形式顺序如下：
+\begin{enumerate}
+\item 项目前缀
+\item 横杠
+\item 版本号
+\item 点
+\item "src"或"bin"（可选）
+\item 点号或横线（更倾向点号）
+\item 二进制类型和选项（可选）
+\item 归档和压缩扩展名
+\end{enumerate}
+
+这种风格的名称主干可以包含连字号或下划线来分隔音节；横线实际上更常用些。把相关的项目联合成组，给予一个通用的主干名前缀，并以连字符结束，也是个良好的实践。
+
+假设正好有个叫做"foobar"的项目，主版本号为1，次版本号或发布号为2，补丁级别为3。如果只有一个档案部分（假定为源代码），则文件名称看起来应该像这样：
+
+\textbf{foobar-1.2.3.tar.gz}
+
+源文件档案。
+
+\textbf{foobar.lsm}
+
+LSM文件（假定提交到ibiblio）
+
+不要使用如下这样的命名方式：
+
+\textbf{foobar123.tar.gz}
+
+这让许多程序看起来像一个叫做"foobar123"没有版本号的项目档案。
+
+\textbf{foobar1.2.3.tar.gz}
+
+这对许多程序而言像是"foobar1"项目版本2.3的档案。
+
+\textbf{foobar-v1.2.3.tar.gz}
+
+许多程序误认为这是称作"foobar-vl"的项目。
+
+\textbf{foo\_{}bar-1.2.3.tar.gz}
+
+下划线给人们带来发音、打字和记忆的困难。
+
+\textbf{FooBar-1.2.3.tar.gz}
+
+除非喜欢看起来像出售的熏肠，否则不要这样。这也给人们带来发音、打字和记忆的困难。
+
+如果必须区分源码和二进制档案，或是区分不同的二进制码，或是表达某种文件名的编译选项，请紧接在版本号之后加上文件扩展名。也就是，像这样做：
+
+\textbf{foobar-1.2.3.src.tar.gz}
+
+源码。
+
+\textbf{foobar-1.2.3.bin.tar.gz}
+
+二进制，类型没有指定。
+
+\textbf{foobar-1.2.3.bin.i386.tar.gz}
+
+i386二进制。
+
+\textbf{foobar-1.2.3.bin.i386.static.tar.gz}
+
+i386静态链接二进制。
+
+\textbf{foobar-1.2.3.bin.SPARC.tar.gz}
+
+SPARC二进制。
+
+请不要使用像"foobar-i386-1.2.3.tar.gz"之类的名字，因为程序难以从名字主干中识别出类型的插入词（如"-i386"）。
+
+区分主要和次要发布的约定很简单：补丁号为修正错误和次要功能：次版本号为兼容的新功能，而主版本号为不兼容的更改。
+
+\subsubsection{尊重适当的本地约定}
+有些项目和社区，对于命名和版本号有良好的约定，并不需要遵从以上的建议。例如，Apache模块就像\verb+mod_foo+一样命名，并配有自身的版本号以及协同工作的Apache版本。同样地，Perl模块的版本号可以像浮点数一样命名（例如，可能会发现1.303而不是1.3.3的版本号），Foo::Bar模块的1.303发行版通常命名为Foo-Bar-1.303.tar.gz。（另一方面，Perl自身，在1999下半年转换回使用19.2.2.1中描述的约定。）
+
+查询和尊重特殊社区和开发者的约定；而对于一般的使用，遵守如上19.2.2.1中的指导。
+
+\subsubsection{努力选择唯一且容易键入的名称前缀}
+主干前缀应该适用于整个项目文件，并且应该容易读写和记忆。所以，不要使用下划线。没有极特殊的理由，也不要大写或双大写——这会弄乱人眼自然的浏览顺序，并且看起来像自作聪明的销售小花招。
+
+如果两个不同的项目存在相同的主干名称会让人们感到迷惑。因此在第一次发布前就尝试检查是否存在冲突。两个地方可以完成此项检查任务，一个是\href{http://metalab.unc.edu/pub/Linux}{ibiblio的索引文件}，一个是\href{http://www.freshmeat.net/}{Freshmeat的应用程序索引}。另一个检查的好地方是\href{http://www.sourceforge.net/}{SourceForge}；做一个名称搜索。
+
+\subsection{良好的开发实践}
+这里有些作法，可以让项目有别于不起眼而易于湮没的项目，能吸引众多奉献者，从而成为成功项目。
+
+\subsubsection{不要依赖专有代码}
+不要依赖专有语言、函数库或者其它代码。即使在最有利的情况下这样做都充满风险；而在开源社区中，这是彻头彻尾的无礼行为。开源开发者不相信他们无法评审的源码。
+
+\subsubsection{使用GNU自动工具}
+配置选择应该留到编译期。开源发布的一个巨大优势就是允许软件包适应编译期发现的环境。这至关重要，因为这可以让软件包运行在连开发者都从未预见的平台上，并且允许软件社区的用户定制自己的移植。只有最大规模的开发组才买得起所有硬件，以及雇用足够的员工来支持种类有限的平台。
+
+因此：使用GNU自动化工具来处理移植性问题，进行系统配置探测，以及量身定制makefile文件。今天，人们在编译源码时期望能够键入\verb+configure; make; make install+就可以得到一个简洁的编译——并且是正确的。关于这些工具的优秀指南可参考\href{http://seul.org/docs/autotut/}{这个网页}。
+
+autoconf和autoheader都是成熟的软件。automake如前所述，在2003年年中仍然脆弱，到处是bug；可能必须维护自己的Makefileiin。幸运的是，它是自动化工具中重要性最小的一个。
+
+无论使用何种配置方法，编译时软件不应向用户咨询系统的信息。安装软件包的用户并不一定知道问题的答案，这种方法从一开始就注定是失败的。在编译或安装时软件必须能够自己决定所需的全部信息。
+
+但是autoconf不应该认为是对一团乱麻式设计的许可。如果可能，编程应遵循POSIX标准以及尽可能少地向系统询问配置信息。应尽量保持最少的"ifdef"——或者，最好根本不要有。
+
+\subsubsection{先测试再发布代码}
+良好的测试套件使得团队在发布前能够非常容易地执行回归测试。建立强大而便于使用的测试框架，以便逐步把测试增加到软件之中，测试套件就不那么专用和错综复杂，开发者也就无需培训了。
+
+测试套件的发布也使得，社区用户可以在将贡献发转回制作组之前能够测试他们的代码片段。
+
+鼓励开发者在他们的桌面和测试机上使用迥异的平台，这样在日常开发中，代码的移植性就可以不断得到检验。
+
+代码随着自己使用的测试套件一起发布，并且测试套件可以由\verb+make test+来运行，这是非常好的实践，并且可以增强对自己代码的信心。
+
+\subsubsection{发布前对代码进行健全检查}
+“健全检查(sanity check)”的意思是：使用可以获得的每一款工具来检查每个人类易犯的错误。使用工具捕捉到的错误越多，用户和自己需要对付的就越少。
+
+如果正用GCC编写C/C++，带-Wall选项测试编译，并且在每个发布之前清除掉所有的警告信息。使用能够找到的每一款编译器编译代码——不同的编译器常常会发现不同的问题。特别地，在一个真正的64位机器上编译软件。底层的数据类型在64位机器上可能有所改变，所以常常会发现新的问题。寻找商业Unix系统并且对软件运行lint程序以进行检查。
+
+使用查找内存泄漏和运行期错误的软件；Electric Fence和Valgrind就是其中两款可以开源获得的优秀软件。
+
+对于Python项目，\href{http://sourceforge.net/projects/pychecker}{PyChecker}是个很有用的检查工具。它常常能捕捉到许多不平凡的错误。
+
+如果编写Perl程序，可使用\verb+perl -c+（或是-T，如果可用的话）检查代码。并虔诚地使用\verb+perl -w+以激活警告以及"use strict"来限制不安全的结构和语句。（进一步的讨论参考Perl文档。）
+
+\subsubsection{发布前对文档和README进行拼写检查}
+对软件的文档、README文件和软件中的错误信息进行拼写检查。马虎的代码，编译时产生警告信息的代码以及README文件或报错信息里的拼写错误，都会让用户认为软件加工草率、不负责任。
+
+\subsubsection{推荐的C/C++移植性实践}
+如果编写C程序，应完全使用ANSI功能特征。特别应使用函数原型，可以帮助发现跨模块冲突。旧式风格的K\&{}R编译器早就成为历史了。
+
+不要用编译器的专门特征，例如GCC的-pipe选项或支持嵌套函数的功能。这会导致其他人在移植到非Linux、非GCC系统时遇到麻烦。
+
+需要移植的代码应被隔离在一个单独区域的一组源文件（例如，一个os子目录）中。涉及不同编译器、库以及操作系统接口的移植码应该抽象到该目录的文件中。
+
+移植层是一个库（或者可能仅仅就是头文件中的一套宏），抽象了程序使用到的某个操作系统的一些API。移植层使软件更容易被移植到新的平台。开发团队中往往没人了解移植的目标平台（例如，存在成百上千种不同的嵌入式操作系统，没有人知道它们之间的重要冲突）。通过创造一个分离的移植层，了解平台的专家就有可能无需理解任何移植层之外的事情而进行软件移植。
+
+移植层也简化了应用程序。软件很少需要全功能的、更为复杂的系统调用，例如\textit{mmap}(2)和\textit{stat}(2)，并且配置如此复杂的接口也往往让程序员错漏百出。一个具备抽象接口的移植层（例如，某个叫做一\verb+file_exists+的\textit{stat}(2)调用替代物）使你可以从系统导入有限的、必需的功能，从而简化了应用程序中的代码。
+
+基于所需功能而不是平台来编写移植层。尝试为每个支持的平台创建单独的移植层会导致多重更新的维护梦魇。一个“平台”至少总是基于两方面来选择：编译器和库/操作系统发布版本。在某些情况下，应该是三方面，就像当Linux商家选择一个独立于操作系统发布版本的C语言库的时候。M个商家、N个编译器以及O个操作系统发布版本，平台的数目很快就增大到任何最大开发团队都力所不及的地步。另一方面，通过利用语言和系统标准，例如ANSI和POSIX 1003.1，功能特征集总是相对有限的。
+
+移植性的选择既可以基于代码行数也可以基于编译文件。在同一个平台上，真正的实现是选择备选代码中的某几行，或是几个不同的文件中的某一个并没有本质区别。经验原则是，当实现存在重大不同时（例如在Unix和Windows中的共享内存映射），应把为不同平台的移植代码分离到不同的文件中，而当区别比较微小时（例如，是使用\verb+gettimeofday, clock_gettime, ftime+ 还是time来获取当前时间），将移植代码放在单一文件中。
+
+在移植层之外的任何地方，注意这条建议：
+\begin{quote}[Doug McIlroy]
+\#{}ifdef和\#{}if是最后一招，这通常是思路不当、产品过度差异化，无理由“优化”或是无用垃圾聚集的先兆。在代码中，它们就是诅咒。GNU的/usr/include/stdio.h就是典型的悲剧。
+\end{quote}
+
+在移植层\#{}ifdef和\#{}if的使用是允许的（如果控制得当）。在此之外，应该尽量限制使用，只用于有条件地触发\#{}include。
+
+决不要占用系统其它部分的命名空间，包括文件名、错误返回值以及函数名。若有共享命名空间的地方，应做好文档说明。
+
+选择一个编码规范。有关规范选择的争论会永无休止地进行下去——但无论如何，在编写软件过程中支持多重编码规范是太困难太昂贵了，难以达到，所以必须选择某个通用的规范。严格地坚持编码规范，代码的一致和干净优先级最高；而编码规范自身的细节倒远在其次。
+
+\subsection{良好的发行制作实践}
+这些指导描述了软件的发行应该如何去做，以供他人更好地下载、获取以及解包。
+
+\subsubsection{确保打包文件总是解包到单一的新目录下}
+初出茅庐的奉献者最要避免的错误就是编制的打包文件，在解包时往往将发行版本中的文件和目录解包到当前目录中，这很可能会覆盖已经存在的文件。决不要这样做。
+
+相反地，应确保所有的档案文件都有一个共同的、以项目名命名的目录部分，如此一来它们可以解包到一个直接位于当前目录下的顶级目录。为了方便，该目录名应该同tarball的主干名相同。这样，例如，一个叫做foo-0.23.tar.gz的文件包，希望能够解压到一个叫做foo-0.23的子目录中。
+
+例19.1展示了一个makefile技巧，假设发行的目录名为"foobar"，而SRC包含一系列发布文件，可以这样来完成：
+
+\begin{Verbatim}[label = 例19.1  tar文件包制作过程]
+foobar-$(VERS).tar.gz:
+	@ls $(SRC) | sed s:^:foobar-$(VERS)/: >MANIFEST
+	@(cd ..; ln -s foobar foobar-$(VERS))
+	(cd ..; tar -czvf foobar/foobar-$(VERS).tar.gz `cat foobar/MANIFEST`)
+	@(cd ..; rm foobar-$(VERS))
+\end{Verbatim}
+
+\subsubsection{包含README文件}
+在源码发行版本中包含一个路标文件README。按照古老的习俗（从1980年以前发端于Dennis Ritchie本人，而80年代早期在Usenet上传播开来），这是勇敢的开拓者在解包源码之后阅读的第一个文件。
+
+README文件应该短小精简容易阅读。确保只是一份介绍，而不是长篇累牍。在README文件中应该包括如下的良好内容：
+\begin{enumerate}
+\item 项目的简短描述。
+\item 指向项目站点的链接（如果存在）。
+\item 开发者编译环境的注意事项以及潜在的移植性问题。
+\item 描述重要文件和子目录的路标。
+\item 编译及安装的指令或者指向同样内容的文件（通常是INSTALL文件）。
+\item 维护者光荣榜列表或者指向同样内容的文件（通常是CREDITS文件）。
+\item 项目的最近新闻或者指向同样内容的文件（通常是NEWS文件）。
+\item 项目邮件列表地址
+\end{enumerate}
+
+曾经有段时间，该文件通常命名为READ.ME，然而这与浏览器存在严重的不兼容问题，所有的浏览器往往都假定.ME后缀表示该文件并非文本，只能下载而不能浏览。这种做法已被废除。
+
+\subsubsection{尊重和遵从标准文件命名实践}
+甚至在阅读README文件之前，勇敢的开拓者可能已经快速浏览了软件解包后顶级目录中的文件名。这些文件名本身也承载了信息。坚持一定标准的命名习惯，可以让开拓者得到有价值的线索，以得知接下来该浏览什么样的文件。
+
+这里是些标准的顶级文件名及其含义。当然，并不是每个发行版本都需要所有文件。
+\begin{description}
+\item[README] 最先被阅读的路标文件。
+\item[INSTALL] 配置、编译和安装指导。
+\item[AUTHORS] 项目贡献者列表（GNU惯例）。
+\item[NEWS] 最近的项目新闻。
+\item[HISTORY] 项目历史。
+\item[CHANGES] 修订版本之间重大更改的日志。
+\item[COPYING] 项目许可证条款（GNU惯例）。
+\item[LICENSE] 项目许可证条款。
+\item[FAQ] 项目常见问题解答的纯文本文档。
+\end{description}
+
+注意整体上的习惯，文件名一律大写表明是关于软件包的供人阅读的元信息，而不是关于编译构件的。README文件源自早期自由软件基金的开发经验。
+
+拥有FAQ文件可以让你省很多力气。当关于项目的某个问题经常出现时，就加到FAQ文件中；然后引导用户在发送问题或者错误报告之前首先阅读FAQ文件。一个发展良好的FAQ可以减少项目维护者一个数量级的负担，甚至更多。
+
+为每个发布编写一份标有时间戳的HISTORY或NEWS文件是非常有价值的。别的不说，这可以帮助确定在专利侵犯诉讼案中的先前证明（虽然还未在任何人身上发生，但最好先预备着）。
+
+\subsubsection{为可升级性设计}
+随着新版本的不断发布，软件也不断变化着。有些更改无法向后兼容。相应地，设计软件的安装布局时，应认真考虑，以确保多个软件版本能在同一系统中共存。对于库来说这尤其重要——不能强求所有的客户端程序都同API的更改保持同步的升级速度。
+
+Emacs、Python以及Qt项目对此有个良好的实践：以版本号来命名目录（另一项被FSF作为惯例的实践）。Qt库安装后的层次类似这样（\verb+${ver}+）是版本号）：
+\begin{Verbatim}
+/usr/lib/qt
+/usr/lib/qt-${ver}
+/usr/lib/qt-${ver}/bin          # Where you find moc
+/usr/lib/qt-${ver}/lib          # Where you find .so
+/usr/lib/qt-${ver}/include      # Where you find header files
+\end{Verbatim}
+
+正是由于这种组织，多重版本才可共存。客户端程序必须指定其需要的版本，当然，需要付出点小的开销，不要弄乱相关接口。这个良好实践避免了象Windows臭名昭著的“DLL地狱”的失败模式。
+
+
+\subsubsection{在Linux提供RPM}
+在Linux下可安装二进制软件包的事实标准格式是Red Hat Package Manager，即RPM。在多数流行的Linux发行中均得到支持，其它所有的Linux的发行版本实际也有支持（除了Debian和Slackware；Debian可以从RPM安装软件）。相应地，在项目站点同时提供可安装的RPM和源码包是个绝佳的主意。
+
+在源码包文件中包含RPM的spec文件，并设置一个选项可以从makefile生成RPM，这也是个好主意。spec文件应该具备.spec扩展名；这样才能让\verb+rmp -t+选项在压缩包中找到它。
+
+额外的风格要点，编写可以自动生成spec文件的shell脚本，自动分析项目的makefile或version.h文件而插入正确的版本号。
+
+注意：如果应用源码RPM，应使用BuildRoot让程序在/tmp或\\ /var/tmp下编译。如果不这样，在运行make install的过程中，安装过程将会把文件安装到最终的位置。即使文件有冲突或是并未想要实际安装时，这个过程也会发生。在完成以后，文件已经安装而系统的RPM数据库却毫不知晓。此类糟糕的SRPM行为，是个雷区，应该远离。
+
+\subsubsection{提供校验和}
+提供二进制文件的校验和（压缩包、RPM等等）。这将允许人们验证文件是否损坏或是否被木马程序侵入。
+
+尽管有好几个命令来干这个（例如\textbf{sum}以及\textbf{cksum}），但最好还是使用一个密码安全的哈希函数。GPG软件包的\verb+--detach-sign+选项提供这种能力：也可以使用GNU命令\textbf{md5sum}。
+
+对于发布的每个二进制文件，项目网页应该列出校验和及其生成命令。
+
+
+\subsection{良好的交流实践}
+软件和文档，如果除自己之外无人知晓它们的存在，那将毫无益处。要是将项目放到互联网上，则可以帮助招揽用户和合作开发者。这里是一些标准的做法。
+
+\subsubsection{在Freshmeat上发布通告}
+可以在\href{http://www.freshmeat.net/}{Freshmeat}上发布通告。这个组织的读者群众多，也是网络技术新闻的主要提供者。
+
+不要设想用户从头一直阅读自己的通告。所以在通告中应该一直保留至少一句关于软件目的的说明。糟糕的说法像这样：“宣告FooEditor最新的发布版，现在速度快了十倍。”优秀的例子是：“宣告最新的FooEditor发布版，为盲打者设计的文本编辑器，现在速度快了十倍。”
+
+\subsubsection{在相关的主题新闻组上发布通告}
+找到一个直接与应用程序相关的Usenet主题组，然后在那儿发布通告。但应该克制，只在与代码实现功能相关的地方张贴。
+
+如果（例如）正发布使用Perl语言编写的IMAP服务器查询程序，就一定应该张贴到comp.mail.imap。而不应该张贴到comp.lang.perl上，除非程序也同样是Perl前沿技术的启发实例。
+
+通告应包含项目网站的URL。
+
+\subsubsection{建立一个网站}
+如果试图围绕项目建立坚实的用户和开发者社区，那应该拥有一个项目网站。网站上需要包含如下一些标准的东西：
+\begin{itemize}
+\item 项目说明（项目存在的理由、项目受众等等）。
+\item 项目源码的下载链接。
+\item 如何加入项目邮件列表的指导。
+\item 常见问题回答列表（FAQ）。
+\item 项目文档的HTML版本。
+\item 相关或竞争项目的链接。
+\end{itemize}
+
+优秀项目网站的实例请参考第16章。
+
+建立网站的一个简单方法就是将项目放到那种专门提供免费主机服务的站点上。在2003年年中，最重要的两个站点是SourceForge（这是专有合作工具的展示和测试站点）以及Savannah（作为一种意识形态的声明，它存放了很多开源顼目）。
+
+\subsubsection{提供项目邮件列表}
+私有的开发用途的邮件列表可以让项目合作者以此交流和交换补丁，这是个标准的惯例。一些人希望能尽早得到项目进展信息，你应该为他们准备一个通告列表。
+
+如果正在管理一个名为"foo"的项目，开发者列表应该是foo-dev或foo-friends；通告列表应该是foo-announce。
+
+一个非常重要的决策是“私有”开发列表到底应该有多私有。在设计讨论中更广泛的参与常常是件好事，但是如果列表相对开放，迟早就会有些用户在其上询问一些初级问题。如何最好地解决这个问题的答案各种各样。仅有文档告知新用户不要在开发列表中询问初级问题不是个办法；必须以某种方式加以强调。
+
+通告列表应严格控制。通信量最多一月几条；这个列表的整体目标是，向希望知道某些重要事情何时发生的人们提供信息，但并不需要知道日常繁冗的细节。如果这个列表在他们的邮箱中开始带来严重的混乱，许多人会立刻取消订阅。
+
+\subsubsection{发布到主要的档案站点}
+关于主要开源存档站点的详细说明参考第16章“何处找”部分。应该将软件包发布到这些站点上。
+
+其它重要的站点包括：
+\begin{itemize}
+\item The \href{http://www.python.org/}{Python} Software Activity site (for software written in Pyth-on).
+\item The \href{http://language.perl.com/CPAN}{CPAN}, the Comprehensive Perl Archive Network (for software written in Perl).
+\end{itemize}
+
+\section{许可证的逻辑：如何挑选}
+许可证条款的选择涉及这样的决定，软件作者是否希望对人们怎样处理软件施加某些限制。
+
+如果根本就不想做任何限制，应该把软件放到公共域里去。在每个文件头都包含如下的文本是很恰当的做法：
+\begin{Verbatim}
+Placed in public domain by J. Ramdom Hacker， 2003. Share and enjoy!
+\end{Verbatim}
+
+这样做就等于放弃了版权。任何人都可以对代码的任何地方做任意改动。再也没有比这更自由的了。
+
+但是很少有开源软件是真正像这样发布在公共域的。一些开源开发者希望能够使用他们对代码的所有权来确保代码可以保持开放的状态（这往往采取GPL）。而另外一些仅仅期望控制代码的合法公开；所有开源许可证共通的一点就是对软件不作任何担保。
+
+\section{为什么应使用某个标准许可证}
+同开放源码定义保持一致并广泛为人所知的许可证，已经具备长期建立的传统默认解释。开发者（以及他们关心的用户）知道这些许可证究竟意味着什么，并且理性地承担所涉及的风险和折衷。因此，如果可能，应使用OSI站点所载的许可证之一。
+
+如果必须编写自己的许可证，请确保得到OSI的认证。这可以避免许多的争论和额外开销。除非曾经亲身经历过，不然你无法想象Usenet上许可证谴责战的激烈程度；许可证被认为是涉及开源社区核心价值近似神圣的盟约，人们的情绪都变得非常激动。
+
+更进一步，如果许可证在法庭上当作证词，已经确立的传统解释的存在或许就非常重要。到本书写作时（2003年年中）还没有案例支持或反对任何开源许可证。然而，法律原则是（至少是在美国，并且或许其它存在习惯法的国家，例如英国和其余的英联邦国家），法庭应按照产生许可证和契约的社区所能预料的行为和实践来解读许可证和契约。这样，就有充分的理由相信，当最后不得不由法庭系统来处理的时候，开源社区的实践将有决定意义。
+
+\section{各种开源许可证}
+\subsection{MIT或者X Consortium许可证}
+最宽松的自由软件讦可证是这样的，授予无限权利的拷贝、使用、修改和对修改拷贝的再发行，只要在所有修改的版本中保留版权和许可证条款。接受这种许可证就意味着放弃控告维护者的权利。
+
+可以在\href{http://www.opensource.org/licenses/mit-license.html}{OSI站点}找到标准X Consortium许可证的模板。
+
+\subsection{经典BSD许可证}
+比上面稍严一点的许可证，授予无限权利的拷贝、使用、修改，以及对修改拷贝的再发行，只要在所有修改的版本中保留版权和许可证条款，并且在广告和软件包相关的文档中包含致谢。受让者也必须放弃控告维护者的权利。
+
+最初的BSD许可证是这类许可证最著名的。在血统上可以追溯回BSD Unix的自由软件文化中，这个许可证甚至使用在离伯克利数千英里之外的地方编写的自由软件上。
+
+BSD许可证的次要变种更改了版权所有人和删除了对广告的要求（实际上等价于MIT许可证），也并非不常见。注意在1999年年中，加州大学技术转让办公室（Office of Technology Transfer of the University of California）废除了BSD许可证中的广告条款。所以BSD软件中的许可证的限制已经更宽松了。如果选择BSD方式，我们强烈推荐使用新式（没有广告条款的）而非旧式许可证。广告条款被废除了，因为这导致了确定授权广告构成时，在法律和过程上的极端复杂性。
+
+可以在OSI站点找到\href{http://www.opensource.org/licenses/bsd-license.html}{BSD许可证的模板}。
+
+\subsection{Artistic许可证}
+下一个稍严点的许可证授予无限的拷贝、使用和本地修改的权利。允许再发行修改后的二进制版本，但是限制修改源码的再发行以保护作者和自由轶件社区的利益。
+
+Artistic许可证为Perl而设计，广泛使用在Perl开发者社区，它就是此类许可证。它要求被修改的文件包含“显著声明”，表示已经被修改过。也要求发布更改者让更改可以自由获取，并努力将其传播回自由软件社区。
+
+可以在OSI站点找到\href{http://www.opensource.org/licenses/artistic-license.html}{Artistic许可证的拷贝}。
+
+\subsection{通用公共许可证}
+GNU通用公共许可证（及其派生，Library或"Less"GPL）是最广泛使用的单一自由软件许可证。如同Artistic许可证一样，若修改后的文件带有“显著声明(prominent notice)”则允许修改源码再发布。
+
+GPL要求，如果程序包含了任何处于GPL涵盖下的部分，则整个程序都处于GPL涵盖之下。（触发这项要求的确切情况并不会让每个人都能清晰理解）。
+
+实际上这些特殊的要求使得GPL比其它常用的许可证都要严格。（在针对同样的目标问题时，Larry Wall编写的Artistic许可证回避了这个问题。）
+
+可以在\href{http://www.gnu.org/copyleft.html}{FSF的copyleft站点}找到指向GPL的链接以及如何应用的指导。
+
+\subsection{Mozilla公共许可证}
+Mozilla公共许可证支持开源软件，但是可以链接闭源的模块和扩展。它要求发行的软件（被涵盖代码，Covered Code）仍然保持开源，但附加软件，如果通过良好定义的API来调用，允许保持闭源。
+
+可以在OSI站点找到\href{http://www.opensource.org/licenses/MPL-1.1.html}{MPL许可证的模板}。
+
+
+\chapter{未来：危机与机遇}
+\begin{flushright}
+\begin{notecard}{15em}
+预测未来最好的方法就是去创造未来。
+
+{\hfill —Alan Kay 1971年在XEROX PARC会议上的发言}
+\end{notecard}
+\end{flushright}
+
+历史远未结束。Unix将继续成长变化。围绕Unix的社区和传统也将继续演进。试图预见未来有些投机，但我们也许可以从两个方面预测：首先，看看Unix是如何应对过去的设计挑战的：其次，确定需要解决的问题和有待开拓的机会。
+
+\section{Unix传统中的本质和偶然}
+为了理解Unix的设计在未来会如何变革，我们可以先看看Unix编程风格在过去的日子里是如何随时间而变化的。这种努力将我们直接引领到理解Unix风格的一个挑战面前——区分本质属性和偶然属性。也就是说，分辨出哪些特征是从暂时的技术中发展而来的，而哪些又是紧密联系于核心的Unix设计挑战——如何正确地模块化和抽象化的同时而保持系统的透明和简洁的。
+
+这种区分可能是困难的，因为那些偶然发展而来的特征有时会变成本质功用。作为实例，考虑我们在第11章讨论过的“沉默是金”的Unix接口设计原则；该原则最初是为了适应缓慢的电传打字机，但因为输出简明扼要的程序更容易跟脚本组合而流传至今。今天，在大多数程序都通过GUI可视运行的普遍环境下，又有了第三个用处：寡言的程序不会分散或浪费用户的注意力。
+
+另一方面，一些曾经是Unix本质的特征由于特定成本比例的变化而成为了偶然属性。例如，旧学派Unix偏爱的程序设计（以及像\textit{awk}(1)的微型语言），逐行处理输入流或者逐条记录地处理二进制文件，并需要在块与块之间维护上下文，由精心制作的状态机代码实现。另一方面，新学派Unix的设计就幸福多了，可以假定程序把全部输入读进内存而可以在需要时随机访问。实际上，现代各种Unix提供\textit{mmap}(2)操作允许程序员将整个文件映射到虚拟内存中，而I/O序列化操作的读盘写盘操作则完全被隐藏了。
+
+这种变革以存储操作的经济性换取更简单透明的代码。这是出于内存成本比程序员时间廉价的调整。1970-1980年代旧学派Unix设计同1990年后新学派Unix设计之间的许多差别都可以回溯到相对成本的巨大转变上，今天，所有的机器资源相对于程序员时间来说，比起1969年要廉价好几个数量级。
+
+回顾过去，我们可以甄别出三个特殊的技术变化驱动了Unix设计风格中的重大变革：网络互联、位图图形显示以及个人计算机。在每场革新中，Unix传统都通过抛弃不再合适的偶然属性、寻找新方法来适应新技术的核心观念，从而成功战胜了挑战。生物进化也以同样的方式。进化生物学家有个法则：“不要以为历史起源确定了当前效用，反之亦然”。概要地看看Unix是如何适应这些变化的，或许会提供一些线索，让我们认识到Unix将如何适应未来我们预测不到的技术变迁。
+
+第2章描述了第一个变化：互联网的兴起，并从历史文化的角度，讲述了在1980年后TCP/IP如何将最初的Unix和ARPANET文化融合为一体。在第7章，有关诸如System V STREAMS之类的过时IPC和网络互连方法的材料，表明在接下来的十年里，许多错误的开始、失足以及死胡同迷惑了Unix开发者。关于协议、关于不同机器间的网络互连与同一机器上不同进程的通讯之间到底是什么样的关系，那时有太多混乱。\footnote{有好几年似乎ISO的七层互联网标准可能战胜TCP/IP。ISO标准由欧洲标准委员会提出，他们在政治上言怕采用任何诞生自五角大楼的技术。唉，意气用事盖过了技术的敏锐。结果证明是过度复杂和十分无用的，请细节有关参考\cite{Padlipsky}。}
+
+最后当TCP/IP胜出以及BSD套接字重申Unix本质上一切都是字节流的隐喻时，迷惑便一扫而空。IPC和网络互联都普遍使用BSD套接字，而两者的老方法大部分弃而不用，同时，通信双方是否位于同一主机对Unix软件来说也就更无关紧要了。1990～1991年间万维网的发明便是合乎逻辑的结果。
+
+1984年，TCP/IP出现的几年之后，位图图形以及Macintosh机登场时，带来了一个更加困难的挑战。最初来自Xerox PARC和苹果公司的GUI非常漂亮，但是系统的太多层次都捆绑在一起，让Unix程序员对这种设计感到很不舒服。Unix程序员当下的反应就是让分离机制与策略成为一个明确准则；到1988年，X窗口系统将其确立下来。通过将X窗口构件与完成底层图形操作的显示管理器分离，他们创造了一种架构，按Unix的标准是模块化的、清晰的，并且随着时间，可以很容易在此基础上发展出更好的策略来。
+
+但那只是问题较为容易的部分。困难部分在于决定Unix是否应该拥有统一的界面策略；而如果是，又是什么。通过专有工具包（例如Motif）来建立统一界面策略的几个不同努力已经宣告失败。如今，在2003年里，GTK和Qt彼此争当这个角色。而在2003年这个问题的争论也还没有结束，我们在第11章讨论过的各种UI风格同时并存的持续状态似乎很明显。新学派Unix设计保留命令行方式，并通过编写许多在两种风格都可以使用的CLI引擎+GUI界面组合，来解决GUI和CLI方式之间的冲突。
+
+个人计算机作为技术本身并没有带来什么主要的设计挑战。386以及后来的芯片，性能足够强大，所以围绕其设计的系统在成本比例上同Unix非常成熟的小型机、工作站和服务器相似。真正的挑战是Unix潜在市场的变化：硬件价格的全面走低，让个人计算机吸引了更广泛的、不太懂技术的用户群。
+
+专有Unix软件商习惯了把更强大系统卖给高深技术买家的丰厚利润，从未对这个实际上更广泛的市场表示出兴趣。理所当然，朝终端用户桌面系统努力的第一次重大启动产生于开源社区，并由于本质的意识形态原因而不断增加。到了2003年年中，市场调查显示Linux已经占到大约4\%{}～5\%{}的份额，接近了苹果分司的Macintosh。
+
+无论Linux是否会充分地做得更好，Unix社区反应的本质已经很清楚。我们在第三章Linux的分析中检视了这一点。这包括采取一些取自别处的新技术（例如XML），并且付出了许多努力将GUI移植到Unix世界。但是在主题GUI和安装包之下，主要的重心依然是模块化和清晰的代码一一为严肃、高度可靠的计算和通信提供正确的基
+础设施。
+
+诸如Mozilla和OpenOffice.org的大规模桌面开发始于1990年代末，其发展历史很好地展示了我们所说的重点。在上述两个开发例子中，社区反馈中最重要的议题并不是要求增加新特征，也不是安排发布日期——而是对巨大的单体程序的厌恶以及一致感觉在那些巨大程序成为障碍之前，必须瘦身、重构、分解成块。
+
+尽管伴随着许多创新，但所有对这三个技术的响应都保持着Unix的设计准则——模块化、透明性、机制同策略分离及其它我们在本书早前描绘的品质。Unix程序员在30年风雨中学到最有经验的回应，就是回到最初的准则——优先从流、命名空间、进程等Unix基本抽象中得到更多效用，而不是增加新的东西。
+
+\section{Plan 9：未来之路}
+我们知道Unix的未来看起来会怎样。它被称作“来自贝尔实验室的Plan 9”\footnote{名字来源于1958年的电影，《Plan 9 from Outer Space》（外层空间第九计划），该片被当作“最糟糕的”而写进历史。（不幸的是，榜单似乎并不正确，1966年有部甚至更糟的影片叫做《Manos: The Hands of Fate can attest》（Manos：命运之手），少数看过的人可以作证）。文档，包括描述架构的技术文件，以及可以安装在PC机上的完整源码和发布包，都可以通过搜索短语"Plan 9 from Bell Labs"得到。}，由在贝尔实验室编制了Unix的研究组设计。Plan 9尝试重做Unix，做更好的Unix。
+
+设计者在Plan 9中尝试应对的核心设计挑战是整合图形和无处不在的网络互联，使它们成为好用的Unix式框架。他们保留了Unix的选择，尽可能多地通过单一大型文件层次命名空间来访问系统服务。实际上，他们是在此基础上改进；许多在Unix中需要通过不同专用接口的功能，比如BSD套接字、\textit{fcntl}(2)以及\textit{ioctl}(2)，在Plan 9中都可通过在类似设备的专用文件上使用最普通的读写操作来完成。为了可移植性和易访问性，几乎所有设备接口都是文本的而非二进制的。许多系统服务（包括视窗系统在内）都是文件服务器，以特殊文件或目录树来表示服务资源。通过将所有的资源都表示成文件，Plan 9把访问不同服务器资源的问题转变成访问不同服务器文件的问题。
+
+Plan 9将这种“比Unix更Unix”的文件模式和一个全新的概念整合在一起：私有命名空间(private namespace)。每个用户（实际上，每个进程）都可以拥有自己的系统服务视图，通过创建自己的文件服务器装配树(mount tree)。有些文件服务器的装配树将由用户手动设置，其它的在登录时自动建立。这样（如同Plan 9 from Bell Labs的技术资料指出的一样）“/dev/cons总是指终端设备，而/bin/date则指date命令正确的运行版本，但是这些名字代表的文件依赖于环境，例如执行date机器的架构等等”。
+
+Plan 9最重要的特征是，无论何种实现，所有挂载的文件服务器都具备相同的类文件系统接口。有些可能相对于本地文件系统，有些相对于通过网络访问的远程文件系统，有些相对于在用户空间运行的系统服务器实例（比如窗口系统或另一种网络栈），还有些相对于内核接口。对于用户和客户端程序而言，它们没有区别。
+
+Plan 9技术资料中的有个例子就是实现FTP访问远程站点。在Plan 9下并没有\textit{ftp}(1)命令，而存在一个ftpfs文件服务器，每个FTP连接看起来就像是挂载一个文件系统。在挂载点下，对于文件和目录的open、read以及write命令，都由ftpfs自动地转换为FTP协议事务。这样，所有普通的文件处理工具，例如\textit{ls}(1)、\textit{mv}(1)以及\textit{cp}(1)都可以正常工作：无论是在FTP装配点下，还是跨越到其它用户眼中的命名空间。用户（或是脚本和程序）能够注意到的唯一不同就是不尽一致的检索速度。
+
+Plan 9还有许多其它值得推荐的地方，包括一些问题重重Unix系统调用接口的再造、摒弃了超级用户概念的，以及许多其它有趣的再思考。它的血统没有污点，设计优雅，而且揭露了Unix设计中的一些严重错误。
+
+同大多数二次系统不同，在许多地方Plan 9都创造了比其前身更简洁更优美的体系。但它为什么没有统治世界呢？
+
+有人会提出许多特殊的理由——缺乏重大的市场努力、文档的稀少、许可证和费用的困惑和阻碍。对于那些不熟悉Plan 9的人，似乎它的主要功能就是作为关于操作系统研究有趣论文的题材。但在先前，Unix自身已经就超越了各种障碍吸引了无数为之献身的追随者，最后遍布全球。但为什么Plan 9没有呢？
+
+深入到历史长河的调查也许会揭开一个不同的故事，但是在2003年，看起来Plan 9的失败仅仅是它的改进尚不足以取代它的前任。对比Plan 9，Unix似乎明显嘎吱作响，锈迹斑斑，但是Unix的工作完成得很棒足以保持它的地位。这是个教训，提示雄心勃勃的系统架构师：更优秀解决方案的最危险敌人，就是一个现存的、足够优秀的代码库。
+
+一些Plan 9的思想已被吸收进现代的Unix，尤其是在更革新的开源版本中。FreeBSD具备—个/proc文件系统，几乎完全借Plan 9的模型，可以用来查询或控制运行的进程。FreeBSD的\textit{rfork}(2)以及Linux的\textit{clone}(2)系统调用也借自Plan 9的\textit{rfork}(2)。Linux的/proc文件系统，除了当前进程信息，也附加保存了许多类Plan 9设备文件的综合信息，几乎全部使用文本接口来查询和控制内核。Linux 2003年的实验性版本也实现了逐进程的装配点，这是迈向Plan 9私有命名空间的一大步。不同的开源Unix版本现在朝着系统范围内支持UTF-8的方向努力，而UTF-8正是一种实际上为Plan 9而发明的编码。\footnote{UTF-8如何诞生的传说涉及\href{http://www.cl.cam.ac.uk/~mgk25/ucs/utf-8-history.txt}{Ken Thompson、Rob Pike、一次新泽西的午餐以及彻夜疯狂的编程}。}
+
+随着时间的推移，可能就会那样，随着Unix内部架构某些部分的渐渐老化，越来越多的Plan 9思想将整合进Unix中。这是Unix未来一个可能的发展路线。
+
+\section{Unix设计中的问题}
+Plan 9洗涤了Unix，但在Unix的基础设计概念集上真正所加的全新的概念足有一个（私有命名空间）。但是还有别的基本设计概念存在严重问题吗？在第1章，我们接触了几个Unix存在争论的失败之处。既然开源运动已经将Unix的未来设计交回到程序员和技术员手中，那些问题就不再是我们必须永远忍受的定局了。我们将重新检视它们以更好应对Unix未来应该如何发展的问题。
+
+\subsection{Unix文件就是一大袋字节}
+Unix文件仅仅是个字节大袋子，而没有其它文件属性。特别是没有能力存储有关文件类型的信息，以及指向文件实际数据之外相关应用程序的指针。
+
+更普遍地，一切都是字节流，甚至包括硬件设备也是字节流。这种隐喻在早期的Unix中取得了巨大的成功，而且，在某些地方，例如，被编译的程序不能够产生传递回编译器的输出，的的确确是个真正的进步。管道和shell编程也正是从这个隐喻上发轫的。
+
+但是Unix的字节流隐喻太过重要，以至于如果软件对象的某些操作不是特别适合字节流或是文件操作（创建、打开、读写删除）的话，那么Unix就存在整合的困难。GUI对象尤其是个问题，例如图标，窗口，以及正在操作的文档。在Unix世界经典的模型中，“一切都是字节流”这个隐喻的唯一扩展方式就是ioctl调用，使用内核空间声名狼藉的后门。
+
+Macintosh系列操作系统的发烧友往往对此咆哮不已。他们提倡一种模型，其中，单一文件名可以既有数据“分支”又有资源“分支”。数据分支对应于Unix的字节流，而资源分支则是名/值对的集合。而Unix支持者更喜欢文件数据自描述的方式，这样，同种类的元数据都有效地存放在该文件中。
+
+Unix方法的问题在于写文件的每个程序都必须清楚自描述的方式。这样，例如，如果我们需要文件携带类型信息在其中，涉及该文件的每个工具都得小心，要么原封不动地保留该类型域，要么解析之后重写。尽管这在理论上可以实现，但在实践中太脆弱了。
+
+另一方面，支持文件属性会产生难以应付的问题，什么样的文件操作应该保留文件属性。很明显，具名文件的复制应该拷贝源文件的数据及属性。但是如果我们\textit{cat}(1)文件，将其输出重定向到一个新的名字又该如何？
+
+答案依赖于属性实际上是否真是文件特性，还是以某种特殊方式作为不可见的前编码或后编码与文件数据捆绑在一起。这样问题又变为：属性对何种操作可见？
+
+远在七十年代，Xerox PARC文件系统设计就在这个问题中不断挣扎。它们创造了一个序列化打开(open serialized)调用，返回同时包含内容和属性的字节流。如果应用在目录上，就返回目录属性和目录中所有文件的序列化结果。这种方法是不是一直都有改善，并不清楚。
+
+Linux 2.5已经支持附带任意名/值对来作为文件特性，但在写作本书时，并没有为太多的应用程序所用。Solaris最近的版本也有几乎等价的特征。
+
+\subsection{Unix对GUI的支持孱弱}
+Unix的经历证明了使用众多隐喻作为框架的基础是个威力巨大的策略（回忆我们在第13章关于框架和共享上下文的讨论）。现代GUI核心的可视隐喻（文件由图标表示，打开靠点击，点击会激发某个设计好的处理程序，通常能够创建和编辑这些文件）也证明了是成功而持久的。自从Xerox PARC在七十年代先驱性开拓以来，这些就紧紧地抓住了用户和界面设计者。
+
+尽管最近做出了相当多的努力，在2003年，Unix仍然只是蹩脚地、勉强地支持这种隐喻——层次太多，约定太少，构建程序太过于简陋。Unix老手典型的反应就是怀疑这折射出GUI隐喻本身更深层次的问题。
+
+\begin{quote}[Steve Johnson]
+我认为产生这样的问题部分是由于我们仍未正确理解隐喻。例如，在Mac上，把一个文件拖到垃圾桶去是删除，但把文件拖到某个磁盘上却又是复制，而打印时却又不能把文件拖到打印机的图标上去，那需要通过菜单才能完成。我还能够继续举例下去。它像OS/360上的文件操作，那会儿还没有Unix简单（但不简陋）的文件思想。
+\end{quote}
+
+对于类似的效应，在第11章我们引用了Brain Kernighan和Mike Lesk的话。但是这个疑问并不能简单归罪于GUI就停止了，因为尽管GUI存在许多缺点，但终端用户却有巨大的需要。设想，如果我们能够在设计用户交互层面上，把隐喻弄正确明白，Unix就能够优雅地支持它了？
+
+答案是：也许不能。我们在思考字节袋子模型是否先天不足时就接触到这个间题。Macintosh风格的文件属性或许可以帮助提供一种机制，支持更为丰富的GUI。然而这似乎并不是完整的答案。我们需要仔细思考，才能得出结论，一个真正强大的GUI框架究竟是什么样的一一而且，同样重要地，又如何同现存的Unix框架整合在一起。这是个难题，需要基础性的顿悟，但在喧闹而令人困惑的大众软件工程或学术研究中还未出现。
+
+\subsection{文件删除不可撤销}
+有过VMS经验的人，或是还记得TOPS-20的人，往往怀念这些系统的文件版本功能。删除或打开并修改现存文件，实际上只是以一种包含版本号的可预知方式重命名文件，只有对版本文件明确的删除操作才会真正地删除数据。
+
+Unix没有这种功能，其小小代价是，在因打字疏忽或shell通配符结果不符而错误删除文件，把用户惹怒。
+
+这个问题好像并没什么可预见的前景，会在操作系统级别上得到更改。Unix开发者喜欢清晰、简单的操作，用户告诉什么他们就做什么，即使用户指令等于“向我开枪”的命令。Unix开发者本能的辩解就是重申：保护用户免受自我损害，应该是GUI或应用程序级别的事，而非操作系统。
+
+\subsection{Unix假定文件系统是静态的}
+某种角度上，Unix世界的模型完全是静态的。程序的运行总被设想为暂时的，所以文件和目录环境在整个执行中都可以当成静态的。如果某个指定的文件或目录发生了改变，没有标准的、良好的方式来让系统通知应用程序。当编写长期运行的用户界面软件，如果又希望知道环境的改变时，这就会成为重大的问题。
+
+Linux具有文件和目录更改通知功能\footnote{在\textit{fcntl}(2)下查找\verb+F_NOTIFY+。}，有些BSD的版本也复制了这个功能，但尚无法移植到其它Unix。
+
+\subsection{作业控制设计拙劣}
+除了挂起进程（在本身，微不足道地增加了调度程序负担，并不是那么令人讨厌）的能力之外，作业控制就是在多重进程中切换终端。不幸地，操作系统只做了最简单的部分——确定触发了哪个键——而把所有难题当皮球似地踢给了应用程序，例如保存和恢复屏幕的状态。
+
+该功能真正良好的实现对于用户进程应该完全不可见：没有专用的信号，不需要保存和恢复终端模式．不需要应用程序定时重绘屏幕。其模型应该是，虚拟的键盘必要时连接到真正的键盘（如果没有连接，在请求输入时会遭到阻塞），以及一个虚拟屏幕，必要时可以显示在真正的屏幕上（当没有显示时，无所谓阻塞不阻塞输出）：而以同样的多路复用方式，系统应该可以多路复用磁盘、处理器等等，而用户程序根本就不受影响。\footnote{本段基于Henry Spencer在1984年的分析。他继续注意到作业控制对于POSIX及后来的Unix标准是需要和适合认真考虑的，因为它渗透到了每个程序，所以在任何应用程序到系统的接口都必须考虑。因此，POSIX认可了这个错误设计，而正确的解决方案却因“不在讨论范围”而甚至没有考虑过。}
+
+正确的做法要求Unix tty驱动跟踪整个当前屏幕的状态，而不仅仅只是支持行缓存区，并且当一个挂起的进程恢复到前台运行时，需要在内核级知道终端的类型（可以求助于一个后台进程）才可以正确地恢复。如果没有做好，Unix内核不能够从一个终端分离某个对话，例如xterm或Emacs作业，然后又将其配接到另一个终端（可能是不同类型的）。
+
+随着Unix的使用已经转向X显示和终端模拟器，作业控制就变得相对不那么重要了，而也就没有曾经那样的破坏力了。然而，仍然讨厌的是没有suspend/attach/detach等操作，这种功能对于在不同登录中保留终端对话的状态非常有用。
+
+叫做\textit{screen}(1)的通用开源程序解决了这些问题中的好几个\footnote{\href{http://www.math.fu-berlin.de/~guckes/screen/}{\textit{screen}(1)的项目站点}。}。然而，必须显式地由用户调用，既然这样，就不能保证在每个终端对话都拥有其功能；同时，在功能上与之重叠的内核级代码也还没有移除掉。
+
+\subsection{Unix API没有使用异常}
+C语言缺乏抛出附带数据的命名异常的机制。因此，Unix API中的C函数用与众不同的的返回值（通常是。−1或NULL）并设置全局变量ermo来报告错误。\footnote{对于非程序员，异常抛出是程序从函数过程中间跳出的一种方法。它并不是真正的退出，因为在某个封装的过程中，抛出的异常可以被捕获代码中途拦截。异常往往用来表示错误或是不希望的情形，意味着试图继续正常处理逻辑是毫无意义的。}
+
+回顾过去，这的确是许多微妙错误的发源之地。匆匆忙忙的程序员常常忽略返回值检查。因为没有异常抛出，补救原则也被破坏了；程序流程继续进行，直到错误情形在后来的执行中表征出某种失败或数据损失。
+
+异常的缺失也意味着某些理应简单的任务——例如在具备Berkeley风格信号的Unix版本上，从信号处理程序中退出——不得不由复杂的代码来实现，从而成为移植的障碍，和众多错误的渊薮。
+
+这个问题也可能（且通常是）隐藏在Unix API对诸如Python和Java之类具备异常的语言的接口中。
+
+异常机制的缺乏实际上也牵连出一个更大的问题：由于C语言是弱类型语言，所以使用C语言实现的高级语言之间，其通信也是问题多多。多数现代的语言都将诸如链表和字典作为基本数据类型——但是，因为这些在通用C语言中没有规范的表示，所以在类似Perl和Python之间尝试传递链表就是一个非自然的行为，需要许多胶合代码。
+
+存在解决更大规模问题的技术，例如CORBA，但是却往往涉及运行期的转换，并且太过重量级，令人不舒服。
+
+\subsection{\textit{ioctl}(2)和\textit{fcntl}(2)是个尴尬}
+\textit{ioctl}(2)和\textit{fcntl}(2)机制提供一种在设备驱动中插入钩子的方法。原始的、历史的\textit{ioctl}(2)用法，就是设置波特率以及设置串行通信驱动中的帧比特，所以就产生了这个名字（“I/O控制”）。后来，其它驱动函数可以使用ioctl调用，而\textit{fcntl}(2)作为一个钩子函数增加到了文件系统中。
+
+年复一年，ioctl和fcntl调用不断增加新的用法。但常常缺乏文档，也常常产生移植性问题。每一个都带来一大堆繁杂的宏定义来描述操作类型和特殊的参数值。
+
+根本的问题同“字节大袋子”一样；Unix的对象模型孱弱不堪，没有留下自然的空间放置太多增加的辅助操作。设计者不得不在不满意的解决方案中胡乱选择：fcntl/ioctl在/dev中检查设备、新的专用系统调用、或是通过特殊用途虚拟文件系统钩子加载进内核里去（例如，在Linux以及别的地方的/proc）。
+
+还不清楚在未来，Unix的对象模型是否会得到加强或如何加强。如果类MacOS的文件属性成为Unix的通用特征，在设备驱动上调节各式具名属性就可以接替ioctl/fcntl现在的作用（这样至少不需要在接口可以使用前定义一堆宏）。我们已经看到Plan 9使用具名文件服务器或文件系统作为基础对象，而不是文件/字节流，这提供了另外的可能方法。
+
+\subsection{Unix安全模型可能太过原始}
+或许root用户权限太大，对于系统管理功能，Unix应该具备粒度更细的能力或是ACL（Access Control Lists，访问控制列表），而不是只有一个什么都能做的超级用户。站在这一边的人们或许会辩解，许多系统程序通过set-user-ID就会拥有永久的root用户权限；一处被攻破，就意味着全面沦陷。
+
+然而论据是小充分的。现代Unix允许指定用户帐户分属多个安全权限组。通过使用执行许可以及在程序可执行时set-group-ID，每个组的作用就可以像文件程序的ACL。
+
+理论可行，却很少使用，可以这样认为，对ACL的需求在实践上远比理论少。
+
+\subsection{Unix名字种类太多}
+Unix统一了文件和本地设备——都是字节流。但是通过套接字访问的网络设备在不同的命名空间却具有不同的语义。而Plan 9展示了文件同本地及远程（网络）设备可以平滑地统一在一起，并且所有这些事情都可以通过一个命名空间来管理，当然，命名空间可以根据每个用户甚至是每个程序动态地调整。
+
+\subsection{文件系统可能有害论}
+拥有文件系统根本就是个错误？自从1970年代晚期起就一直存在有趣的研究，研究持续对象存储，研究根本没有全局共享文件系统，而将磁盘存储当作巨大交换区，做任何事情都通过虚拟对象指针来完成的操作系统。
+
+这条阵线上现代的努力（例如EROS\footnote{\href{http://www.eros-os.org/}{http://www.eros-os.org/}}）提示这样的设计可以提供大量的好处，包括被证实的安全策略一致性以及更高的性能。然而必须注意到，如果Unix是个失败，它所有的竞争者都同样是失败；没有作为主要产品的操作系统都跟随EROS的领导。\footnote{Apple Newton、AS/400小型机以及Palm手持设备上的操作系统可以认为是例外。}
+
+\subsection{朝向全局互联网地址空间}
+也许URL扬名得还不够。关于Unix未来的方向，我们把最后的话留给Unix的发明者；
+\begin{quote}[Ken Thompson]
+我未来的理想就是开发一个文件系统的远程按口（也就是Plan 9），然后使其在互联网成为标准实现，取代现在的HTML。那实在是酷毙了。
+\end{quote}
+
+\section{Unix的环境问题}
+Unix旧有的文化在开源运动中大部分进行了自我再造，在灭亡的边缘挽救了我们，但这也意味着开放源码的问题现在就是我们自己的问题。
+
+问题之一就是如何让开源开发获得持续的经济支持。我们重新植根于Unix早期的合作开放进程。我们已经在很大程度上，在抛弃私用专有系统的技术争论上取得胜利。我们已经想出了许多方法，在比1970～1980年代更平等的地位上，同市场和管理人员合作，并且在许多地方我们的革新都获得了成功。在2003年，开源Unix和它的核心开发组，达到了如大型机般受人尊敬和权威的地位，这在1990年代中期是不敢想象的。
+
+我们已经走过了很长的路，但是我们还有更长的路要走。我们知道哪种商业模式在理论上管用，而且我们现在甚至可以指出一些零星的成功，展示了那些商业模式在实践中也确实运营良好；当然，现在我们必须显示那种模式可以可靠地运营更长的时间。
+
+这并不一定是个容易的转变。开放源码将软件业转变成服务业。服务提供商（想想医疗和法律行业）并不会注入更多资本的比例来扩张；那些仅仅尝试追加固定成本，就期望得到高产出的做法，注定会被饿死。合理的选择可以归结为卖唱（通过小费或捐款），经营街角小店（一种小型的、低开销的服务商务），或是找到一个富有的赞
+助人（某些大商家为其商业目的而需要使用及修改开源软件）。
+
+总而言之，技工的小时工资随着汽车的降价而上升\footnote{更完整的讨论，参见《The Magic Cauldron》\cite{Raymond01}。}，同样的原因，雇用软件开发者的费用也会如预料中地提高。而个人和商家也越来越难以获得投资。会有许多程序员富裕起来，但是仅有少数几个能成为百万富翁。这实际上是进步的标志，无能的就被竞争出局。但这也将表示整个软件环境气候的一大变化，可能意味着投资者将失去他们仅存的、在赞助软件启动中很少的利益。
+
+一个有关真正大型软件商维护越来越困难的子问题是如何组织终端用户测试。历史上，Unix文化首要关注内部架构，这意味着，能够提供最终用户舒适界面的价值，从未被我们当作程序构建的基础。如今，尤其是把在目标瞄准同微软和Apple竞争的开源Unix中，这一点正在改变。但是最终用户界面需要实际用户系统地测试一一这存
+在一些挑战。
+
+实际最终用户测试需要机构、专家以及一定水准的管理，然而以分布自愿团体为特征的开源开发却难以部署这些。也许因此，开源的字处理器、电子表格以及其它生产型应用程序不得不留在由大商家赞助的研究计划手中，例如OpenOffice.org，只有它们才能提供那种开销。开源开发者往往认为单一商家就意味着单点失败，并且非常担心这种依赖，但更好的解决方案还没有发展出来。
+
+这些是经济问题。我们还有其它更政治化的问题，因为成功招徕敌人。
+
+有些是老对头啦。微软要成为计算机世界不可动摇垄断者的野心，使得在我们知道我们卷入战争的五年前，就把打败Unix作1980年代中期该公司的战略目标。在2003年年中，尽管好几个成长性市场遭到Linux大范围的侵占，微软仍然是世界上最富有和最强大的软件公司。微软很清楚地知道必须打败新学派的开源Unix以求生存。而为
+了获胜，必须毁灭或是羞辱产生它的文化。
+
+Unix借开源社区之手回来了，而同互联网自由文化的结合，也带来了新的敌人。好莱坞和媒体巨头感到了互联网深深的威胁，对不受控制的软件开发发起了多重攻击。现存的法案，例如Digital Millennium Copyright Act已经被用来起诉那些为媒体权势不喜的软件开发者（最臭名昭著的案件就是针对能够复制加密DVD的DeCSS软件）。预期的计划例如所谓的可信计算平台联盟（Trusted Computing Platform Alliance）和微软的Palladium威胁\footnote{参考\href{http://www.cl.cam.ac.uk/~rja14/tcpa-faq.html}{TCPA FAQ}，由一个著名安全专家所做的一个相当毛骨悚然的可能性分析摘要。}要让开源开发成为非法活动一一而如果开放源码消亡了，Unix也很可能随之消亡。
+
+Unix、黑客以及互联网一起反对微软和好莱坞及媒体巨头。这是我们需要获胜的斗争，不仅是出于我们传统的专业主义、我们对技艺的热爱，以及共有的部族忠贞，还有更重要的原因使这个斗争如此重要。政治可能性渐渐成形于通信技术一一谁可以使用、谁应该检查以及谁可以控制。政府和法人对网络内容的控制，对什么人可以利
+用计算机的控制，都是对政治自由一个长期严重的咸胁。恶梦般的场景就是这样，垄断商家和中央独裁，永远的自然同盟者，相互勾结并炮制理论，越来越多地制订规章、无情镇压以及罗织电子言论罪名。在反对这一切的斗争中，我们是自由的战士一一不仅仅是为了我们自己的自由，也同样是为了所有人的自由。
+
+\section{Unix文化中的问题}
+围绕在Unix社区的文化问题，同Unix自身的技术问题以及伴随成功而来的挑战同样重要。至少存在两个重大的问题：小挑战是内部转型，大挑战是我们要克服历史上的优越感。
+
+小挑战是老学究与新派开源大众之间的摩擦。Linux的成功，特别地，对许多老一辈的Unix程序员来说并不完全舒服。部分是由于代沟的问题。Linux小子们吵闹活泼天真愉悦的狂热行为激怒了老一辈，他们自从七十年代就接触Unix了，而且（常常公正地）认为自己更有智慧。而小子们在老一辈失败的地方不断取得成功的事实更激化
+了这种现象。
+
+在2000年，当花了三天时间参加了一个Macintosh开发者会议之后，我愈发清晰地意识到了更大的心理问题。沉浸在一个同Unix世界假设基础完全相反的编程环境中真是个给人启迪的经历。
+
+Macintosh程序员最为关心用户体验。他们是建筑设计师和装饰家。他们由外而内进行设计，首先就问“我们需要支持哪种交互？”，然后构建隐藏其后的程序逻辑来满足用户界面设计的需求。这就会导致程序外观非常漂亮而内部结构脆弱摇摆。一个声名狼藉的例子，在MacOs 9以前的发布版本中，内存管理器有时对于那些退出但仍
+占用内存的程序，竟然要求用户手动回收内存。Unix支持者本能地反感这类病态设计：他们不能理解Macintosh的人怎么能够忍受这些。
+
+比起来，Unix程序员先考虑基础设施。我们是水管工和砖瓦匠。我们的设计由里而外，构建强大的引擎以解决抽象定义问题（例如“我们如何通过不可靠的链接和硬件而获得从A点到B点的可靠信息包流交换”）。然而引擎外，我们的包装难看，甚至接口常常相当丑陋。\textit{date}(1)、\textit{find}(1)和\textit{ed}(1)就是臭名昭著的例子，但还有其它成百上千的程序也是这样。Macintosh人也本能地反感这种病态设计；他们也不能理解Unix的
+人怎么能够忍受这些。
+
+两种设计哲学都有正确的一面，但是两个阵营却难以理解彼此的立场。Unix开发者典型的反应就是把Macintosh软件当作是给无知人的绣花枕头而抛弃，然后继续构建能够吸引其它Unix开发者的软件。如果终端用户并不喜欢，那是终端用户的不对：他们了解多了之后，会回来的。
+
+在许多地方，这种狭隘思想已经为我们工作得很好。我们是互联网和万维网的守护者。我们的软件和我们的传统统治了重大计算，统治了必须是全天候可靠的、宕机时间最少的应用程序。我们真正极端擅长构建坚实的内部结构；虽非完美，但无论如何没有其它的软件技术文化能够在任何地方接近我们的纪录，这是非常值得骄傲的。
+
+问题是我们愈发必须直面的挑战，是需要更多丰富视图的挑战。世界上大多数的计算机都不是放在服务器机房里，而是在那些终端用户手中。在Unix早期的日子里，在个人计算机之前，我们的文化把自身部分定位为大型机神父，那个大铁玩意管家的反叛者。后来，我们吸收了早期小型机狂热者给人们以力量的理想。但是今天，我们成为了神父；成为了网络和大铁块的守护者。我们潜在的要求是，如果想使用我们的软件，就必须学会像我们一样思考。
+
+在2003年，在我们的态度中存在深深的矛盾一一精英和大众之间的摩擦。我们希望影响和改变这世界92\%{}的人，对他们来说，计算机就意味着游戏、多媒体、漂亮的GUI界面、（对他们来说最技术的）邮件软件、字处理器以及电子数据表。我们正花费主要努力在诸如GNOME以及KDE等设计来给予Unix美妙外观的项目。但在内心
+深处，我们仍旧认为自己是精英，不能或不想去甄别或是倾听以王大婶为代表的普通用户需求。
+
+对于非技术最终用户，我们构建的软件往往不是令人迷惑无法理解，就是样子难看故意屈尊似的，又或两者兼有。即使我们怀着尽可能高的热情尝试去做对用户友好的事，却可悲地前后矛盾。对于完成这份工作，我们从旧学派Unix继承的许多态度和反应都是不恰当的。即使我们想要倾听或帮助王大婶，我们也不知道如何去做一一我
+们设计了我们的服务类目、关心她并提供“解决方案”，但她却发现这同她存在的问题一样可怕。
+
+我们在文化上面临的巨大挑战是，我们是否能够不再过分依赖那些已经很好地为我们工作过的设想——我们是否能够承认，不仅是在思想上，也是在日常实践的施行上，承认Macintosh支持者也抓住了要点。他们的要点也是基于普遍实际，而非Mac专用方式，在“The Inmates Are Running the Asylum\cite{Cooper}”，一部具有深刻见解和充分论证的书籍中，其作者称（别管偶尔的一些奇谈怪论），交互设计也包含了大量坚实的真理，需要为每个Unix程序员所知道。
+
+我们可以避开这一点：我们可以保留教父地位，祈求碰到最好最聪明的少数人——一小撮关注我们历史作用的知识精英——作为软件内部架构和网络的守护者。但如果我们这样做，就很可能走向衰落，直到最后失去几十年来一直支持我们的动力。自有别的东西去服务人们；自有别的东西会赢得动力和金钱并拥有未来92\%{}比例的软件。而这个可能成功的机会，无论是不是属于微软，都将使用我们所不喜欢的软件和实践来完成。
+
+或者我们真正接受这个挑战。开源运动正努力这样去做。但在过去用来解决其它问题的相同工作和思想是不够的。我们的态度必须在根本上有所转变，虽然困难。
+
+在第4章，我们讨论了抛弃设想限制以及在解决技术问题上“抛弃过去”的重要性，建议同禅宗思想类似的超然和“初衷”。我们拥有一个需要更多种类的分离工作。我们必须学会在王大婶面前虚心，并且放弃某些我们长期坚持的、曾使我们如此成功的偏见。
+
+明显地，Macintosh文化已经开始同我们的文化相融合——MacOS X拥有Unix的底层架构，并且在2004年Mac开发者（虽然在某些方面有所斗争）进行了思想上的调整来学习注重内部架构的Unix美德。我们的挑战将是，相互地，吸纳Macintosh以用户为中心的美德。
+
+还有几个表明Unix文化摆脱其狭隘性的迹象。其中之一就是Unix开源社区似乎开始融入被称为“敏捷编程”\footnote{更详细的敏捷编程介绍，参考《\href{http://agilemanifesto.org/}{Agile Manifesto}》（敏捷宣言）}的远动。我们在第4章注意到，Unix程序员已经愉快地抓住了重构的概念，那就是敏捷编程思想的重点之一。
+
+重构，以及其它的敏捷编程概念，例如单元测试和围绕情景设计，似乎清晰地说明和突出了那些迄今已经在Unix传统广泛但隐性流传的实践。另一方面，Unix传统可以给敏捷编程带来长期经验的积累和教训。随着开源软件不断获得市场份额，可以想象这些文化将会融合在一起，如同过去互联网和早期Unix文化在1980年后的融合一样。
+
+\section{信任的理由}
+Unix的未来充满难题。我们确实想让它走好吗？
+
+三十多年来，我们在应对挑战中兴盛起来。我们开拓了软件工程中最好的实践。我们创造了今天的互联网和万维网。我们编制了有史以来最庞大、最复杂、最可靠的软件系统。我们打破了IBM的垄断，我们正在开展反对微软霸权的运动，并且已经深深地震慑了它。
+
+而无论如何，胜利并不是全面的。在1980年代，我们同意专有权对Unix的占领，这几乎毁了我们自己。长期以来，我们忽视了低端市场，忽视了非技术的终端用户，因此让微软钻了空子，大幅度地降低了软件的质量标准。甚至精明的观察家多次断言我们的技术、我们的社区、我们的价值死亡了。
+
+但我们总是可以重振旗鼓地王者归来。我们犯了错，但我们从错误中汲取了教训。我们的文化薪火相传：我们已经从早期的学院黑客、ARPANET实验者、微机狂热者以及其它许多文化中汲取了精华。而开源运动已经复兴了我们早年的激情和理想，今天，我们的力量，我们的规模将远胜过去。
+
+迄今为止，打赌Unix玩家会输的人总是聪明一时糊涂一世。我们能赢——只要我们想赢。
 
 \chapter{附录}
 缩写术语表如API之类的请自行搜索之，这里就省略了。然后贡献者和后面的无根禅师之类的也省略了。能够把这本书看完的程序猿已经很了不起了，还要他们研究那种故弄玄虚的文字，那这个程序猿一定有受虐倾向了。。
@@ -7493,7 +8226,7 @@ A user's guide to the GNU autoconfiguration tools. \href{http://sources.redhat.c
 
 \href{http://www.research.att.com/sw/tools/vcodex/dm-spe.ps}{Available on the Web}.
 
-\bibitem[Wall2000] Larry Wall, Tom Christiansen, and Jon Orwant. Programming Perl. 3rd Edition. O'Reilly \&{} Associates. 2000. ISBN 0-596-00027-8.
+\bibitem[Wall2000]{Wall2000} Larry Wall, Tom Christiansen, and Jon Orwant. Programming Perl. 3rd Edition. O'Reilly \&{} Associates. 2000. ISBN 0-596-00027-8.
 
 \bibitem[Welch]{Welch} Brent Welch. Practical Programming in Tcl and Tk. Prentice-Hall. 1999. ISBN 0-13-022028-0.
 
@@ -7504,1087 +8237,9 @@ A user's guide to the GNU autoconfiguration tools. \href{http://sources.redhat.c
 \bibitem[Yourdon]{Yourdon} Edward Yourdon. Death March. The Complete Software Developer's Guide to Surviving “Mission Impossible” Projects. Prentice-Hall. 1997. ISBN 0-137-48310-4. 
 \end{thebibliography}
 
+
+
 %这里空一行
 
 \end{common-format}  
 \end{document}
-
-
-开放源码：在Unix新社区
-中编程
-Open Source: Programming in the
-New Unix Community
-Software is like sex-it's better when it'sfree.
-    软件和性一样——越自由越好。
-    -Linus Torvalds
-    在第2章，作为总结，我们评述了Unix历史中最大规模的模式；当Unix实践最接
-近开放源码时，就欣欣向荣，反之则停滞不前。然后在第16章，我们又断言开源开发工
-具往往具备高等级质量。至于本章，我们将以简要说明开源开发怎样工作且为何这样工
-作作为开始。实际上，其大多数行为都只不过是Unix传统长期实践的强化而已。
-    随后我们将从抽象领域下到具体，转而描述一些Unix从开源社区借鉴而来的最重要
-的大众习惯的——特别是由社区发展的、关于如何成为良好源码发布的指导原则。其它
-现代操作系统的开发者同样可以沿袭大多数这些习惯并从中受益。
-    我们将假设你用开放源码进行开发而描述这些习惯；当然，即使是编写专有软件，
-多数习惯仍不失价值。基于开放源码的设想在历史上也是有用的，许多习惯在专有Unix
-中都能找到痕迹，像无处不在的工具例如patch （1）、Emacs和GCC筹等都是。
-
-第1 9章开放源码：在Unix新社区中编程
-19.1  Uni×和开放源码
-    开源开发利用了这样的事实，甄别和修改bug的任务适合分解成多个并行的子任务
-——这和实现某个特殊算法不一样。围绕某个原型设计进行邻域开发，也很适合并行处
-理。所以，随着正确技术和社会机制的到位，通过网络松散连接的庞大开发团队可以把
-工作做到出色得让你吃惊。
-    是的，这会让你吃惊，如果还抱守那种把秘密开发和专有控制视为必然的话。从《人
-月神话》[Brooks]直到Linux的兴起，软件工程的正统观念都是关于如何在重量级组织，
-例如企业和政府中，构建小型而管理紧密的团队。而实践却是紧密管理的大型团队。
-    在AT&T拆分以前的早期Unix社区的运作实际就是开源的典型例子。尽管拆分前
-的Unix代码在技术上和法律上是专有的，但在用户和开发者社区中，却被视作共享的。
-那些人们的自愿努力，受到解决问题强烈愿望的推动而自觉迸发出来。而在这些努力之
-中，优秀者层出不穷。的确，开源开发的方法和技术在Unix社区作为一种无意识的群众
-实践而发展，其实在1990后期被分析和标记之前，就已经持续了四分之～个世纪。（参
-考《The Cathedral and the Bazaar<大教堂和集市）》[Raymond01]和《Understanding Open
-Source Software Development（理解开源软件开发）》[Feller-Fitzgerald]）。
-    回顾过去，令人惊讶的是我们对自己的行为意味着什么是多么茫然无知。有些人的
-理解却很透彻；Richard Garbiel在文章“差即是好”中表达的思想是其中最著名的，在
-Brooks【Brooks] （1975）也可以找到预示，甚至远到Vyssotsky和Corbato在Multics的设
-计中的思考（1965）。在1990年代中期被Linux唤醒之前，多达20年的软件开发观察中，
-我也没有意识到这～点。这样的经历应该让任何有见解而谦逊的人知道，是不是还有其
-它什么重要的统一理念依旧暗含在我们的行为中，潜藏在我们集体的眼皮底下未被发掘，
-不是因为复杂而是因为太简单。
-    开源开发的规则很简单：
-    1．源码公开。别隐藏秘密。公开代码以及产生代码的过程。鼓励第三方的同行复审。
-确保其他人能够自由地修改和重新发布代码。尽可能地发展合作开发者。
-
-    2．尽早发布，经常发布。快速的发布节奏意味着反馈迅速而有效。每次递进发布间
-隔越小，回应真实世界反馈的修改过程就越容易。
-    确保第一次的发布能够编译和运行，所有允诺的功能都可运作。通常，一个开源程
-序的启动版本通过至少完成最终目标的某个部分来展示项目的前景，这充分表明发起人
-确实可以继续这个项目。例如，字处理器的启动版本应该支持文本的输入以及文本在屏
-幕上的显示。
-    不能编译或是运行的第一次启动发布会毁掉整个项目（例如大家都知道，这差点就
-在Mozilla浏览器身上发生）。不能编译的发布表明项目开发者不能够完成项目，同样地，
-不能运行的程序也难以吸引其他开发者的参与，因为任何改动对程序是好是坏都不确定。
-    3．给贡献以表扬。如果不能够给合作开发者以物质奖励，就给予精神表扬。即使可
-以给予物质的奖励，也不要忘记人们往往是为展示才华而不是为钱努力工作。
-    规则2的必然推论就是，单一发布不应该视为重大的事件，无需伴随太多的
-  附带许诺和准备。将发布过程无情地精简非常重要，这样就不再为经常发布而感
-  到痛苦。在发布准备期，其余工作都必须停止的安排是个可怕的错误（值得一提
-  的是，如果使用CVS或者类似酌版本控制，处于准备期的发布应该同主干开发线
-  分开，这样就不至于阻塞主线开发过程。）总的来说，不要把发布当作什么特别
-  的大事；而应该当作是例行公事。
--Henry Spencer
-    牢记：频繁发布的原因是为了缩短和加速同用户和开发者间的反馈循环。因此，精
-工细作，等一切完美了才发布的想法是要不得的。不要许太多愿。一步一步地来，承认
-和公布现有的bug，并有信心随着时间的推移，一定会达到完美。发布点多一点儿不是
-坏事，不必为版本号的增加而烦恼。
-    开源开发利用散布在互联网上，而且主要通过email和网络文档交流的大型程序员
-团队。典型地，任何项目的多数贡献者都是为了提高软件对自身效用的回报以及声誉激
-
-第1 9章开放源码：在Unix新社区中编程
-励而自愿工作。一般由一个核心开发者或核心开发组来指导项目；其他贡献者可以零星
-地加入或离去。为了鼓励志愿者，重要的是避免在他们和核心团队之间产生社会壁垒。
-因此需要最小化核心团队的特权，努力模糊界限。
-    开源项目遵循Unix传统尽可能自动化的建议。使用patch（l）工具分发递进更改。许
-多项目（以及所有大型的）都拥有使用诸如CVS（回顾第15章的讨论）等版本控制系
-统的网络访问代码库。Bug和补丁自动追踪系统的使用也很普遍。
-    1997年，在黑客文化之外几乎没人能明白，这样管理大型项目并同样获得高质量的
-开发结果是完全有可能的。在2003年，这已不再是新闻；诸如Linux、Apache和Mozilla
-项目都已经获得了巨大的成功和非常高的公共上镜率。
-    抛弃秘密开发的习惯，转而支持过程的透明化和同行复审是炼金术成为化学学科最
-关键的一步。同样你也开始发现，开源开发标志着软件开发终于长成为一门学科。
-19.2  与开源开发者协同工作的最佳实践
-    开源社区最佳开发实践实际上便是对分布式开发自然而然的适应；在本章中可以了
-解到许多行为准则，用来同其他开发者进行良好沟通。有些Unix绚定是偶然的（例如文
-件的标准命名表达关于发布源的元信息），这常常可以上溯到1980年代早期的Usenet，
-或者GNU项目的约定和标准。
-19.2.1  良好的修补实践
-    多数人在发布自己的项目之前，都是从修补他人的软件而开始接触开源软件开发的。
-假定已经为某个基准源代码更改了一些代码，现在需要设身处地去想想，别人该怎样判
-断是否可以采纳这个补丁呢？
-    代码的质量很难判断，所以开发者往往通过提交的质量来评估补丁，在提交者的风
-格和交流行为中寻找线索——该提交者是否设身处地为他们着想，是否知道评估和合并
-新的补丁究竟该怎样。
-    这是鉴定代码质量相当可靠的方法。在许多年处理来自数以百计陌生人补丁的过程
-中，我很少看到一个考虑周全、尊重我的时间的补丁会是技术上的赝品。反过来看，经
-
-验告诉我们，看起来马马虎虎或是打包很疏懒的补丁往往实际上就是赝品。
-    这里有一些怎样让补丁能够被接受的技巧：
-19.2.1.1  发送补丁而不是完整档案包或文件
-    如果改动包含了一个源代码中并不存在的新文件，当然就必须发送整个新文件。但
-如果修改的只是已有文件，无须发送整个文件。只须发送diff就行：运行difi（1）命令，
-将基准发布版本与修改版本进行比较，并提交输出。
-    dif1）命令及其对偶命令patch（l），是开源开发最基本的工具。差异文件要比整个文件
-好，因为自从获得旧拷贝之后，接受补丁的开发者可能已经更改了主干版本。呈送开发
-者以一个diff文件，节省了别人将改动从其中分离出来的精力；也表示了对别人时间的
-尊重。
-19.2.1.2发送针对当前版本代码的补丁
-    如果发送给维护者的补丁是针对好几个版本以前的，并期望维护者会判断补丁中哪
-些改动已经完成，哪些是新颖独创，这样做既不能达到预期目标也有些粗鲁无礼。
-    追踪源码状态以及把主线代码库需要做什么的最小化补丁提交给维护者，是补丁提
-交者必须承担的责任。这也意味着应该发送针对当前版本的补丁。
-19.2.1.3不要包含可生成文佯的补丁
-    在发送补丁之前需通览一遍，对于一旦维护者采用补丁、重新make后就能重新生成
-的文件，其补丁段应予删除。犯错的经典例子就是Bison或Flex产生的C文件。
-    当今最常见的错误就是，发送的diff文件只包含有巨大的更改段来表明你的
-configure脚本和维护者的差异。其实这个文件可以由autoconf产生。
-    这是有欠考虑的。它把接收者置于麻烦之中，需要把补丁的真实内容从一大堆乌七
-八糟的干扰里分离出来。当然它只是个次要的错误，同我们将要进一步探讨的内容相比，
-并非那般严重——但也是不好的。
-
-第1 9章开放源码：在Unix新社区中编程
-19.2.1.4不要发送与只是优化RCS或者的补丁段
-    有些人喜欢在源码文件中放置一些特殊符号，在登入版本系统时会自动扩展：例如
-RCS和CVS使用的构造。
-    如果使用自己本地的版本控制系统，更改可能会改变这些符号。这并非真正有害，
-因为当接收者在采用补丁而登回代码时，特殊符号可以按照维护者版本控制系统的状态
-设置重新扩展。但这些特殊的补丁段是干扰物，会让人分心。不发送它们更能体现考虑
-的周全。
-    这是另外一个次要的错误。如果别的大事没弄错，这是可以原谅的。但最好避免。
-19.2.1.5使用-c或-u格式而不是缺省的（-e）格式
-    difj（1）默认的（-e）格式非常脆弱。它不包含任何上下文，因此在得到用来修改的
-拷贝之后，如果基准代码中插入或者删除了任何一行，patch工具无法得到正确结果。
-    拿到-e格式的diff文件令人恼火，表明发送者如果不是位新手或马大哈，就是个菜
-鸟。大多数这种补丁想都不用想便可抛弃掉。
-19.2.1.6在补丁中包含文档
-    这非常重要。如果补丁增加了用户可见的部分或者改变了软件的功能特征，请在补
-丁中包含相应手册页和其宅文档文件。不要期望补丁接收者会乐于为此代码编写文档，
-或是在代码中隐藏没有文档说明的功能特征。
-    针对改动做好文档体现了一些好习惯。首先，已经为试图说服的维护者设身处地考
-虑过了。其次，表明对改动后的效果了如指掌，可以向其余不能查看代码的人解释清楚。
-第三，表示了对软件最终用户的关心。
-    良好的文档常常是区分“可靠的贡献”和“匆忙而邋遢的改动”最显著的特征。如
-果花费了足够的时间和心思来做好文档，最后就会发现让多数开发者接受补丁的道路已
-经走完了85%。
-
-19.2.1.7在补丁中包含解释
-    补丁应该包含一份说明，来解释为什么补丁是必须和有用的。这个说明并不直接给
-软件用户而是给接受补丁的维护者。
-    说明可以很短——实际上，我见过的一些最有效的说明仅仅是“请参看补丁中的文
-档更新”。但必须表明正确的态度。
-    正确的态度非常有帮助，是对维护者时间的尊重，也是从容而谦逊的自信。表现出
-对所修补的代码充分理解，展示对维护者问题的认同，这些都是有益的。对于觉察到的
-应用补丁风险预先说明同样大有裨益。下面是一些经验丰富的开发者所发送的各种解释
-示例：
-    “我已经发现代码中有两个问题，X和Y。我改掉了X，但是我并没有试图去解决
-Y问题，因为我对牵涉到的代码还不理解。’’
-    “修改了一个当输入过长时的coredump。我在修改的时候，试图寻找另外的溢出错
-误。我发现有一个可能在blarg.c中，在第666行附近。你能确定在每个传输中发送端产
-生的字节不会多于80?”
-    “你是否已经考虑使用  Foonly  算法来解决这个问题？在
-<ht tp：／/www．example．com/～j smith/f oonly．htm]>处有个好的实现。”
-    “补丁解决了当前的问韪，但我意识到内存分配被不恰当地复杂化了。在我这里可
-以工作，但在发布前你应该进行重负荷测试。”
-    “这可能太过于花哨，但无论如何我还是提交了。也许你会知道一个实现这种功能
-的更简洁的方法。”
-19.2.1，8在代码中包含有用的注释
-    在合并补丁之前维护者希望能够对更改有准确的理解确。当然，这并不是一成不变
-的法则；如果确实同维护者存在很好的合作工作记录，他也许在半自动化地检查前就只
-会随意地瞄上～眼。但是任何帮助维护者理解代码和降低不确定性的作为都会提高补丁
-被接受的几率。
-    代码中良好的注释可以帮助维护者理解代码。糟糕的则不然。
-    以下是个糟糕的注释例子：
-
-
-    这没有任何用处。只是在维护者的代码中间，无端地加入了践踏领土的泥泞靴印。
-如果维护者接受了补丁（不太可能），他几乎肯定会抛弃这段注释。如果希望获得声望，
-应该在工程的News或History文件中包含一个补丁段。这样维护者更可能接受。
-    以下是良好的注释例子：
-
-    这样的注释表明，不仅理解了维护者的代码，也理解了维护者对接受你的改动所需
-要的信心。这种注释正好给予维护者对于更改的信心。
-19.2.1.9如果补丁被拒绝，别往心里去
-    存在许多理由，一个补丁可能会遭到拒绝，这并不存在怀疑和责备的意思。记住多
-数软件维护者都处于相当沉重的时间压力之下，并很保守地接受补丁，生怕一不小心项
-目代码就会崩溃。有时候重新提交改进后的补丁会有所帮助，有时候不会。大家都不容
-易。
-19.2.2  良好的项目、档案文件命名实践
-    随着诸如ibiblio、SourceForge以及CPAN维扩者工作量的增加，一个不断发展的趋
-势就是，项目提交部分或整体会由程序来处理（而不是完全由人来处理）。
-    对于项目和档案文件的命名而言，更重要的是需要采用更适合计算机程序可以解析
-和理解的规则模式。
-19.2.2.1  使用GNU风格的命名法：主干加major.minor.patch的编
-
-    如果档案文件都是类似GNU风格的名称，主干前缀全小写且只包含字母和数字，后
-接连字号，后再接版本号、扩展和其它后缀，对大家都有帮助。
-具备这些部分的名称，其良好的通用形式顺序如下：
-1．项目前缀
-2．横杠
-
-    3．版本号
-    4．点
-    5．“src”或”bin”（可选）
-    6．点号或横线（更倾向点号）
-    7．二进制类型和选项（町选）
-    8．归档和压缩扩展名
-    这种风格的名称主干可以包含连字号或下划线来分隔音节；横线实际上更常用些。
-把相关的项目联合成组，给予一个通用的主干名前缀，并以连字符结束，也是个良好的
-实践。
-    假设正好有个叫做“foobar”的项目，主版本号为1，次版本号或发布号为2，补丁
-级别为3。如果只有一个档案部分（假定为源代码），则文件名称看起来应该像这样：
-foobar-1.2.3．tar．gz
-源文件档案。
-foobar．lsm
-    LSM文件（假定提交到ibiblio）
-    不要使用如下这样的命名方式：
-    foobar123．tar．gz
-    这让许多程序看起来像一个叫做“foobar123’’没有版本号的项目档案。
-    foobarl.2.3．tar．gz
-    这对许多程序而言像是“foobarl”项目版本2.3的档案。
-    foobar-vl.2.3．tar．gz
-    许多程序误认为这是称作“foobar-vl’’的项目。
-    foo_bar-l.2.3．tar．gz
-    下划线给人们带来发音、打字和记忆的困难。
-    FOOBar-1.2.3。tar．gz
-    除非喜欢看起来像出售的熏肠，否则不要这样。这也给人们带来发音、打字和记忆
-的困难。
-
-    如果必须区分源码和二进制档案，或是区分不同的二进制码，或是表达某种文件名
-的编译选项，请紧接在版本号之后加上文件扩展名。也就是，像这样做：
-foobar-1.2 . 3 . src .tar _gz
-源码。
-foobar-1 2 _ 3 bin _ tar _ gz
-二进制，类型没有指定。
-foobar-l. 2 . 3 .bin. i386 _ tar. gz
-f386二进制。
-    foobar-l.2.3.bin. i386. static. tar. gz
-    i386静态链接二进制。
-    foobar-l.2.3.bin.SPARC.tar.gz
-    SPARC二进制。
-    请不要使用像“foobar-i386-1.2.3.tar.gz”之类的名字，因为程序难以从名字主干中识
-别出类型的插入词（如“-i386”）。
-    区分主要和次要发布的约定很简单：补丁号为修正错误和次要功能：次版本号为兼
-容的新功能，而主版本号为不兼容的更改。
-19.2.2.2尊重适当的本地约定
-    有些项目和社区，对于命名和版本号有良好的约定，并不需要遵从以上的建议。例
-如，Apache模块就像mod_foo -样命名，并配有自身的版本号以及协同工作的Apache
-版本。同样地，Perl棋块的版本号可以像浮点数～样命名（例如，可能会发现1.303而不
-是1.3.3的版本号），Foo::Bar模块的1.303发行版通常命名为Foo-Bar-I.303.tar.gz。（另
-一方面，Perl自身，在1 999下半年转换回使用19.2.2.1中描述的约定。）
-    查询和尊重特殊社区和开发者的约定；而对于一般的使用，遵守如上19.2.2.1中的
-指导。
-
-19.2.2.3努力选择唯一且容易键入的名称前缀
-    主干前缀应该适用于整个项目文件，并且应该容易读写和记忆。所以，不要使用下
-划线。没有极特殊的理由，也不要大写或双大写——这会弄乱人眼自然的浏览顺序，并
-且看起来像自作聪明的销售小花招。
-    如果两个不同的项目存在相同的主干名称会让人们感到迷惑。因此在第一次发布前
-就尝试检查是古存在冲突。两个地方可以完成此项检查任务，一个是ibiblio
-<http：／/metalab．unc．edu/pub/Linux>的索引文件，  一个是Freshmeat
-<http：／/www．freshmeat．net>的应用程序索引。另一个检查的好地方是
-SourceForge<h七tp：／/www．sourceforge．net>;做  1个名称搜索。
-19.2.3  良好的开发实践
-    这里有些作法，可以让项目有别于不起眼而易于湮没的项目，能吸引众多奉献者，
-从而成为成功项目。
-19.2.3.1  不要依赖专有代码
-    不要依赖专有语言、函数库或者其它代码。即使在最有利的情况下这样做都充满风
-险；而在开源社区中，这是彻头彻尾的无礼行为。开源开发者不相信他们无法评审酌源
-码。
-19.2.3.2  使用GNU自动工具
-    配置选择应该留到编译期。开源发布的一个巨大优势就是允许软件包适应编译期发
-现的环境。这至关重要，因为这可以让软件包运行在连开发者都从未预见的平台上，并
-且允许软件社区的用户定制自己的移植。只有最大规模的开发组才买得起所有硬件，以
-及雇用足够的员工来支持种类有限的平台。
-    因此：使用GNU自动化工具来处理移植性问题，进行系统配置探测，以及量身定制
-makefile文件。今天，人们在编译源码时期望能够键入configure; make; make
-install就可以得到一个简洁的编译——并且是正确的。关于这些工具的优秀指南可见
-<http://seul.org/docs/autotut/>.
-    autoconf和autoheader都是成熟的软件。automake如前所述，在2003年年中仍然
-脆弱，到处是bug；可能必须维护自己的Makefile．in。幸运的是，它是自动化工具中
-重要性最小的一个。
-
-第19章开放源码：在Unix．新社区中编程
-    无论使用何种配置方法，编译时软件不应向用户咨询系统的信息。安装软件包的用
-户并不一定知道问题的答案，这种方法从一开始就注定是失败的。在编译或安装时软件
-必须能够自己决定所需的全部信息。
-    但是autoconf不应该认为是对一团乱麻式设计的许可。如果可能，编程应遵循POSIX
-标准以及尽可能少地向系统询问配置信息。应尽量保持最少的“ifdef" -或者，最好
-根本不要有。
-19.2.3.3先测试再发布代码
-    良好的测试套件使得团队在发布前能够非常容易地执行回归测试。建立强大而便于
-使用的测试框架，以便逐步把测试增加到软件之中，测试套件就不那么专用和错综复杂，
-开发者也就无需培训了。
-    测试套件的发布也使得，社区用户可以在将贡献发转回制作组之前能够测试他们的
-代码片段。
-    鼓励开发者在他们的桌面和测试机上使用迥异的平台，这样在日常开发中，代码的
-移植性就可以不断得到检验。
-    代码随着自己使用的测试套件一起发布，并且测试套件可以由make test来运行，
-这是非常好的实践，并且可以增强对自己代码的信心。
-19_2.3.4发布前对代码进行健全检查
-    “健全检查（sanity check）”的意恩是：
-类易犯的错误。使用工具捕捉到的错误越多，
-使用可以获得的每一款工具来检查每个人
-用户和自己需要对付的就越少。
-    如果正用GCC编写C/C++，带-Wall选项测试编译，并且在每个发布之前清除掉所
-有的警告信息。使用能够找到的每一款编译器编译代码——不同的编译器常常会发现不
-同的问题。特别地，在一个真正的64位机器上编译软件。底层的数据类型在64位机器
-上可能有所改变，所以常常会发现新的问题。寻找商业Unix系统并且对软件运行lirlt程
-序以进行检查。
-    使用查找内存泄漏和运行期错误的软件；Electric Fence和Valgrind就是其中两款可
-以开源获得的优秀软件。
-    对于  Python珂{目，  PyChecker  <http：／／sourceforge．net／projects／
-pychecker>是个很有用的检查工具。它常常能捕捉到许多不平凡的错误。
-    如果编写Perl程序，可使用perl -c（或是-T，如果可用的话）检查代码。并虔诚
-地使用perl -w以激活警告以及“use strict”来限制不安全的结构和语句。  （进一步的讨
-论参考Perl文档。）
-www.pdf365.com
-19.2  与开源开发者协同工作的最佳实践    449
- 19.2.3.5发布前对文档和README进行拼写检查
-    对软件的文档、README文件和软件中的错误信息进行拼写检查。马虎的代码，编
-译时产生警告信息的代码以及README文件或报错信息里的拼写错误，都会让用户认
-为软件加工草率、不负责任。
-19.2.3.6推荐的C／C++移植性实践
-    如果编写C程序，应完全使用ANSI功能特征。特别应使用函数原型，可以帮助发
-现跨模块冲突。1日式风格的K&R编译器早就成为历史了。
-    不要用编译器的专门特征，例如GCC的-pipe选项或支持嵌套函数的功能。这会导
-致其他人在移植到非Linux、非GCC系统时遇到麻烦。
-    需要移植的代码应被隔离在一个单独区域的一组源文件（例如，一个Os子目录）中。
-涉及不I司编译器、库以及操作系统接口的移植码应该抽象到该目录的文件中。
-    移植层是一个库（或者可能仅仅就是头文件中的一套宏），抽象了程序使用到的某
-个操作系统的一些API。移植层使软件更容易被移植到新的平台。开发团队中往往没人
-了解移植的目标平台（例如，存在成百上千种不同的嵌入式操作系统，没有人知道它们
-之间的重要冲突）。通过创造一个分离的移植层，了觯平台的专家就有可能无需理解任
-何移植层之外的事情而进行软件移植。
-    移植层也简化了应用程序。软件很少需要全功能的、更为复杂的系统调用，例如
-mmap（2）和stat（2），并且配置如此复杂的接口也往往让程序员错漏百出。一个具备抽象接
-口的移植层（例如，某个叫做一file_exists的stat（2）调用替代物）使你可以从系统
-导入有限的、必需的功能，从而简化了应用程序中的代码。
-    基于所需功能而不是平台来编写移植层。尝试为每个支持的平台创建单独的移植层
-会导致多重更新的维护梦魇。一个“平台”至少总是基于两方面来选择：编译器和库／操
-作系统发布版本。在某些情况下，应该是三方面，就像当Linux商家选择一个独立于操
-作系统发布版本的C语言库的时候。M个商家、N个编译器以及O个操作系统发布版本，
-平台的数目很快就增大到任何最大开发团队都力所不及的地步。另一方面，通过利用语
-
-第1 9章开放源码：在Unix新社区中编程
-言和系统标准，例如ANSI和POSIX 1003.1，功能特征集总是相对有限的。
-    移植性的选择既可以基于代码行数也可以基于编译文件。在同一个平台上，真正的
-实现是选择备选代码中的某几行，或是几个不同的文件中的某一个并没有本质区别。经
-验原则是，当实现存在重大不同时（例如在Unix和Windows中的共享内存映射），应
-把为不同平台的移植代码分离到不同的文件中，而当区别比较微小时（例如，是使用
-gettimeofday. clock_gettime、f七ime还是time来获取当前时间），将移植代
-码放在单一文件中。
-    在移植层之外的任何地方，注意这条建议：
-    #ifdef和#if是最后一招，这通常是思路不当、产品过度差异化，无理由
-    “优化”或是无用垃圾聚集的先兆。在代码中，它们就是诅咒。GNU的
-    /usr/include/   stdio．h就是典型的悲剧。
-    ~Doug McIlroy
-    在移植层#ifdef和#if的使用是允许的（如果控制得当）。在此之外，应该尽量
-限制使用，只用于有条件地触发#include。
-    决不要占用系统其它部分的命名空间，包括文件名、错误返回值以及函数名。若育
-共享命名空间的地方，应做好文档说明。
-    选择一个编码规范。有关规范选择的争论会永无休止地进行下去——但无论如何，
-在编写软件过程中支持多重编码规范是太困难太昂贵了，难以达到，所以必须选择某个
-通用的规范。严格地坚持编码规范，代码的一致和干净优先级最高；而编码规范自身的
-细节倒远在其次。
-19.2.4  良好的发行制作实践
-    这些指导描述了软件的发行应该如何去做，以供他人更好地下载、获取以及解包。
-19.2.4.1  确保打包文件总是解包到单一的新目录下
-    初出茅庐的奉献者最要避免的错误就是编制的打包文件，在解包时往往将发行版本
-中的文件和目录解包到当前目录中，这很可能会覆盖已经存在的文件。决不要这样做。
-www.pdf365.com
-19.2与开源开发者协同工作的最佳实践
-451
-    相反地，应确保所有的档案文件都有一个共同的、以项目名命名的目录部分，如此
-一来它们可以解包到一个直接位于当前目录下的顶级目录。为了方便，该目录名应该同
-tarball的主干名相同。这样，例如，一个叫做foo-0. 23．tar.gz的文件包，希望能够
-解压到一个叫做foo-0. 23的予目录中。
-    例19.1展示了一个makefile技巧，假设发行的目录名为“foobar"，而SRC包含一
-系列发布文件，可以这样来完成：
-例19.1  tar文件包制作过程
-
-19.2.4.2包含README文件
-    在源码发行版本中包含一个路标文件README。按照古老的习俗（从1980年以前
-发端于Dinnis Ritchie本人，而80年伐早期在Usenet上传播开来），这是勇敢的开拓者
-在解包源码之后阅读的第一个文件。
-    README文件应该短小精简容易阅读。确保只是一份介绍，而不是长篇累牍。在
-README文件中应该包括如下的良好内容：
-    1．项目的简短描述。
-2．指向项目站点的链接（如果存在）。
-3．开发者编译环境的注意事项以及潜在的移植性问题。
-4．描述重要文件和子目录的路标。
-5．编译及安装的指令或者指向同样内容的文件（通常是INSTALL文件）。
-6．维护者光荣榜列表或者指向同样内容的文件（通常是CREDITS文件）。
-7．项目的最近新闻或者指向同样内容的文件（通常是NEWS文件）。
-8．项目邮件列表地址
-
-第1 9章开放源码：在Unix新社区中编程
-    曾经有段时问，该文件通常命名为READ .ME，然而这与浏览器存在严重的不兼容问
-    题，所有的浏览器往往都假定.ME后缀表示该文件并非文本，只能下载而不能浏览。这
-    种做法已被废除。
-    19.2.4.3尊重和遵从标准文件命名实践
-    甚至在阅读README文件之前，勇敢的开拓者可能已经快速浏览了软件解包后顶级
-    目录中的文件名。这些文件名本身也承载了信息。坚持一定标准的命名习惯，可以让开
-    拓者得到有价值的线索，以得知接下来该浏览什么样的文件。
-    这里是些标准的顶级文件名及其含义。当然，并不是每个发行版本都需要所有文件。
-    README
-    最先被阅读的路标文件。
-    INSTALL
-    配置、编译和安装指导。
-    AUTHORS
-    项目贡献者列表（GNU惯例）。
-    NEWS
-    最近的项目新闻。
-    HISTORY
-    项目历史。
-    CHANGES
-    修订版本之间重大更改的日志。
-    COPYING
-    项目许可证条款（GNU惯例）。
-    LICENSE
-    项目许可证条款。
-    FAQ
-    项目常见问题解答的纯文本文档。
-    注意整体上的习惯，文件名一律大写表明是关于软件包的供人阅读的元信息，而不
-    是关于编译构件的。README文件源自早期自由软件基金的开发经验。
-UNIX缟程艺术
-    www.pdf365.com
-19.2与开源开发者协同工作的最佳实践
-453
-    拥有FAQ文件可以让你省很多力气。当关于项目的某个问题经常出现时，就加到
-FAQ文件中；然后引导用户在发送问题或者错误报告之前首先阅读FAQ文件。一个发
-展良好的FAQ可以减少项目维护者一个数量级的负担，甚至更多。
-    为每个发布编写一份标有时间戳的HISTORY或NEWS文件是非常有价值的。别的不
-说，这可以帮助确定在专利侵犯诉讼案中的先前证明（虽然还未在任何人身上发生，但
-最好先预备着）。
-19.2.4.4为可升级性设计
-    随着新版本的不断发布，软件也不断变化着。有些更改无法向后兼容。相应地，设
-计软件的安装布局时，应认真考虑，以确保多个软件版本能在同一系统中共存。对于库
-来说这尤其重要——不能强求所有的客户端程序都同API的更改保持同步的升级速度。
-    Emacs、Python以及Qt项目对此有个良好的实践：以版本号来命名目录（另一项被
-FSF作为惯例的实践）。Qt库安装后的层次类似这样（（ver）是版本号）：
-
-    正是由于这种组织，多重版本才可共存。客户端程摩必须指定其需要的版本，当然，
-需要付出点小的开销，不要弄乱相关接口。这个良好实践避免了象Windows臭名昭著的
-“DLL地狱’’的失败模式。
-19.2.4.5  在Linux  提供RPM
-    在Linux下可安装二进制软件包的事实标准格式是Red Hat Package Manager，即
-RPM。在多数流行的Linux发行中均得到支持，其它所有的Linux的发行版本实际也有
-支持（除了Debian和Slackware；Debian可以从RPM安装软件）。相应地，在项目站点
-同时提供可安装的RPM和源码包是个绝佳的主意。
-    在源码包文件中包含RPM的spec文件，并设置～个选项可以从makefile生成
-RPM，这也是个好主意。spec文件应该具备．spec扩展名；这样才能让rmp一t选项在
-压缩包中找到它。
-
-
-    额外的风格要点，编写可以自动生成spec文件的shell脚本，自动分析项目的
-makef ile或version．h文件而插入正确的版本号。
-    注意：如果应用源码RPM，应使用BuildRoot让程序在/tmp或/var／tmp下编译。
-如果不这样，在运行make install的过程中，安装过程将会把文件安装到最终的位置。即
-使文件有冲突或是并未想要实际安装时，这个过程也会发生。在完成以后，文件已经安
-装而系统的RPM数据库却毫不知晓。此类糟糕的SRPM行为，是个雷区，应该远离。
-19.2.4.6提供校验和
-    提供二进制文件的校验和（压缩包、RPM等等）。这将允许人们验证文件是否损坏
-或是否被木马程序侵入。
-    尽管有好几个命令来干这个（例如sum以及cksum），但最好还是使用一个密码安
-全的哈希函数。GPG软件包的-detach-sign选项提供这种能力：也可以使用GNU命令
-md5 sum。
-    对于发布的每个二进制文件，项目网页应该列出校验和及其生成命令。
-19.2.5  良好的交流实践
-    软件和文档，如果除自己之外无人知晓它们的存在，那将毫无益处。要是将项目放
-到互联网上，则可以蒂助招揽用户和合作开发者。这里是一些标准的做法。
-19.2.5.1  在Freshmeat上发布通告
-    可以在Freshmeat<ht tp：／/www．freshmeat．net>上发布通告。这个组织的读者
-群众多，也是网络技术新闻的主要提供者。
-    不要设想用户从头一直阅读自己的通告。所以在通告中应该一直保留至少一句关于
-软件目的的说明。糟糕的说法像这样：“宣告FooEditor最新的发布版，现在速度快了十
-倍。”优秀的例子是：“宣告最新的FooEditor发布版，为盲打者设计的文本编辑器，现
-在速度快了十倍。”
-
-19.2.5.2在相关的主题新闻组上发布通告
-    找到～个直接与应用程序相关的Usenet主题组，然后在那儿发布通告。但应该克制，
-只在与代码实现功能相关的地方张贴。
-    如果（例如）正发布使用Perl语言编写的IMAP服务器查询程序，就一定应该张贴
-到cornp．mail．imap。而不应该张贴到comp．lang．perl上，除非程序也同样是Perl
-前沿技术的启发实例。
-    通告应包含项目网站的URL。
-19.2.5.3建立一个网站
-    如果试图围绕项目建立坚实的用户和开发者社区，那应该拥有一个项目网站。网站
-上需要包含如下一些标准的东西：
-●  项目说明（项目存在的理由、项目受众等等）。
-●  项目源码的下载链接。
-●  如何加入项目邮件列表的指导。
-●  常见问题回答列表（FAQ）。
-●  项目文档的HTML版本。
-●  相关或竞争项目的链接。
-优秀项目网站的实例请参考第16章。
-    建立网站的一个简单方法就是将项目放到那种专门提供免费主机服务的站点上。在
-2003年年中，晟重要的两个站点是SourceForge（这是专有合作工具的展示和测试站点）
-以及Savannah（作为一种意识形态的声明，它存放了很多开源顼目）。
-19.2.5.4提供项目邮件列表
-    私有的开发用途的邮件列表可以让项目合作者以此交流和交换补_J’，这是个标准的
-惯例。一些人希望能尽早得到项目进展信息，你应该为他们准备一个通告列表。
-    如果正在管理一个名为“foo"的项目，开发者列表应该是foo-dev或
-foo- friends;通告列表应该是foo -announce。
-    ～个非常重要的决策是“私有”开发列表到底应该有多私有。在设计讨论中更广泛的
-参与常常是件好事，但是如果列表相对开放，迟早就会有些用户在其上询问一些初级问
-
-第1 9章开放源码：在Unix新社区中编程
-题。如何最好地解决这个问题的答案各种各样。仅有文档告知新用户不要在开发列表中
-询问初级问题不是个办法；必须以某种方式加以强调。
-    通告列表应严格控制。通信量最多一月几条；这个列表的整体目标是，向希望知道
-某些重要事情何时发生的人们提供信息，但并不需要知道日常繁冗的细节。如果这个列
-表在他们的邮箱中开始带来严重的混乱，许多人会立刻取消订阅。
-19.2.5.5发布到主要的档案站点
-    关于主要开源存档站点的详细说明参考第16章“何处找”部分。应该将软件包发布
-到这些站点上。
-    其它重要的站点包括：
-
-19.3许可证的逻辑：如何挑选
-    许可证条款的选择涉及这样的决定，软件作者是否希望对人们怎样处理软件施加某
-些限制。
-    如果根本就不想做任何限制，应该把软件放到公共域里去。在每个文件头都包含如
-下的文本是很恰当的做法：
-Placed in public domain by J. Ramdom Hacker， 2003. Share and enjoy!
-    这样做就等于放弃了版权。任何人都可以对代码的任何地方做任意改动。再也没有
-比这更自由的了。
-    但是很少有开源软件是真正像这样发布在公共域的。一些开源开发者希望能够使用
-他们对代码的所有权来确保代码可以保持开放的状态（这往往采取GPL）。而另外～些
-仅仅期望控制代码的合法公开；所有开源许可证共通的一点就是对软件不作任何担保。
-
-19.4为什么应使用某个标准许可证
-    同开放源码定义保持一致并广泛为人所知的许可证，已经具备长期建立的传统默认
-解释。开发者（以及他们关心的用户）知道这些许可证究竟意味着什么，并且理性地承
-担所涉及的风险和折衷。因此，如果可能，应使用oSI站点所载的许可证之一。
-    如果必须编写自己的许可证，请确保得到OSI的认证。这可以避免许多的争论和额
-外开销。除非曾经亲身经历过，不然你无法想象Usenet上许可证谴责战的激烈程度；许
-可证被认为是涉及开源社区核心价值近似神圣的盟约，人们的情绪都变得非常激动。
-    更进一步，如果许可证在法庭上当作证词，已经确立的传统解释的存在或许就非常
-重要。到本书写作时（2003年年中）还没有案例支持或反对任何开源许可证。然而，法
-律原则是（至少是在美国，并且或许其它存在习惯法的国家，例如英国和其余的英联邦
-国家），法庭应按照产生许可证和契约的社区所能预料的行为和实践来解读许可证和契
-约。这样，就有充分的理由相信，当最后不得不由法庭系统来处理的时候，开源社区的
-实践将有决定意义。
-19.5各种开源许可证
-19.5.1  MIT或者×Consortium许可证
-    最宽松的自由软件讦可证是这样的，授予无限权利的拷贝、使用、修改和对修改拷
-贝的再发行，只要在所有修改的版本中保留版权和许可证条款。接受这种许可证就意味
-着放弃控告维护者的权利。
-    可  以  在  OSI  站  点  <hL Lp：／/www．opensource．org／licenses／mit
--license．htrnl>找到标准X Consortium许可证的模板。
-19.5.2  经典BSD许可证
-    比上面稍严一点的许可证，授予无限权利的拷贝、使用、修改，以及对修改拷贝的
-再发行，只要在所有修改的版本中保留版权和许可证条款，并且在广告和软件包相关的
-文档中包含致谢。受让者也必须放弃控告维护者的权利。
-
-第1 9章开放源码：在Unix新社区中编程
-    最初的BSD许可证是这类许可证最著名的。在血统上可以追溯回BSD Unix的自由
-软件文化中，这个许可证甚至使用在离伯克利数千英里之外的地方编写的自由软件上。
-    BSD许可证的次要变种更改了版权所有人和删除了对广告的要求（实际上等价于
-MIT许可证），也并非不常见。注意在1999年年中，加州大学技术转让办公室（Office of
-Technology Transfer of the University of California）废除了BSD许可证中的广告条款。所以
-BSD软件中的许可证的限制已经更宽松了。如果选择BSD方式，我们强烈推荐使用新式
-（没有广告条款的）而非1日式许可证。广告条款被废除了，因为这导致了确定授权广告
-构成时，在法律和过程上的极端复杂性。
-    可以召E OSI站点<http：／/www．opens ource．org/licenses/bsd  -license．html>
-找到BSD许可证的模板。
-19.5.3 Artistic许可证
-    下一个稍严点的许可证授予无限的拷贝、使用和本地修改的权利。允许再发行修改
-后的=I进制版本，但是限制修改源码的再发行以保护作者和自由轶件社区的利益。
-    Artistic许可证为Perl而设计，广泛使用在Perl开发者社区，它就是此类许可证。它
-要求被修改的文件包含“显著声明”，表示已经被修改过。也要求发布更改者让更改可
-以自由获取，并努力将其传播回自由软件社区。
-    可以在  OSI  站点<http：／／WWW，opensource．org／licenses／artistic
--license．html>找到Artistic许可证的拷贝。
-19.5.4通用公共许可证
-    GNU通用公共许可证（及其派生，Library或“Less”GPL）是最广泛使用的单一自
-由软件许可证。如同Artistic许可证～样，若修改后的文件带有“显著声明（ prominent
-notice）’’则允许修改源码再发布。
-    GPL要求，如果程序包含了任何处于GPL涵盖下的部分，则整个程序都处于GPL
-涵盖之下。  （触发这项要求的确切情况并不会让每个人都能清晰理解）。
-    实际上这些特殊的要求使得GPL比其它常用的许可证都要严格。（在针对同样的目
-标问题时，Larry Wall编写的Artistic许可证回避了这个问题。）
-
-    可以在FSF的copyleft站点<ht tp：／/www．gnu．org/copyleft．html>找到指向
-GPL的链接以及如何应用的指导。
-19.5.5  Mozilla公共许可证
-    Mozilla公共许可证支持开源软件，但是可以链接闭源的模块和扩展。它要求发行的
-软件（被涵盖代码，Covered Code）仍然保持开源，但附加软件，如果通过良好定义的API
-来调用，允许保持闭源。
-    可以在  OSI  站点<http：／／www，opensource．org／licenses／MPL-I. 1.
-html>找到MPL许可证的模板。
-UNIX编腥艺-术
-
-Futures:
-Dangers and Opportunities
-The best way to predict thefuture is to invent以，
-    预测未来最好的方法就是去创造未来。
-    /97/年XEROX PARC会议上的发言
-    -Alan Kay
-    历史远未结束。Unix将继续成长变化。围绕Unix的社区和传统也将继续演进。试
-图预见未来有些投机，但我们也许可以从两个方面预测：首先，看看Unix是如何应对过
-去的设计挑战的：其次，确定需要解决的问题和有待开拓的机会。
-20.1  Uni×传统中的平质和偶然
-    为了理解Unix的设计在未来会如何变革，我们可以先看看Unix编程风格在过去的
-日子里是如何随时间而变化的。这种努力将我们直接引领到理解Unix风格的一个挑战面
-前——区分平质属性和偶然属性。也就是说，分辨出哪些特征是从暂时的技术中发展而
-来的，而哪些又是紧密联系于核心的Unix设计挑战——如何正确地模块化和抽象化的同
-时而保持系统的透明和简洁的。
-    这种区分可能是困难的，因为那些偶然发展而来的特征有时会变成平质功用。作为
-
-第20章未来：危机与机遇
-实例，考虑我们在第1 1章讨论过的“沉默是金”的Unix接口设计原则；该原则最初是
-为了适应缓慢的电传打字机，但因为输出简明扼要的程序更容易跟脚本组合而流传至今。
-今天，在大多数程序都通过GUI可视运行的普遍环境下，又有了第三个用处：寡言的程
-序不会分散或浪费用户的注意力。
-    另一方面，一些曾经是Unix本质的特征由于特定成本比例的变化而成为了偶然属
-性。例如，旧学派Unix偏爱的程序设计．（以及像awk （1）的微型语言），逐行处理输
-入流或者逐条记录地处理二进制文件，并需要在块与块之间维护上下文，由精心制作的
-状态机代码实现。另一方面，新学派Unix的设计就幸福多了，可以假定程序把全部输入
-读进内存而可以在需要时随机访问。实际上，现代各种Unix提供mmap （2）操作允许
-程序员将整个文件映射到虚拟内存中，而J/O序列化操作的读盘写盘操作则完全被隐藏
-了。
-    这种变革以存储操作的经济性换取更简单透明的代码。这是出于内存成本比程序员
-时间廉价的调整。1970-1980年代旧学派Unix设计同1990年后新学派Unix设计之间
-的许多差别都可以回溯到相对成本的巨大转变上，今天，所有的机器赘源相对于程序员
-时间来说，比起1969年要廉价好几个数量级。
-    回顾过去，我们可以甄别出三个特殊的技术变化驱动了Unix设计风格中的重大变
-革：网络互联、位图图形显示以及个人计算机。在每场革新中，Unix传统都通过抛弃不
-再合适的偶然属性、寻找新方法来适应新技术的核心观念，从而成功战胜了挑战。生物
-进化也以同样的方式。进化生物学家有个法则：  “不要以为历史起源确定了当前效用，
-反之亦然”。概要地看看Unix是如何适应这些变化的，或许会提供一些线索，让我们认
-识到Unix将如何适应未来我们预测不到的技术变迁。
-    第2章描述了第一个变化：互联网的兴起，并从历史文化的角度，讲述了在1980年
-后TCP，IP如何将最初的Unix和ARPANET文化融合为一体。在第7章，有关诸如System
-V STREAMS之类的过时IPC和网络互连方法的材料，表明在接下来的十年里，许多错
-误的开始、失足以及死胡同迷惑了Unix开发者。关于协议、关于不同机器间的网络互连
-与同一机器上不同进程的通讯之间到底是什么样的关系，那时有太多混乱。t
-1有好几年似乎ISO的七层互联网标准可能战胜TCP/IPo ISO标准由欧洲标准委员会提出，他们在政
-治上言怕采用任何诞生自五角大楼的技术。唉，意气用事盖过了技术的敏锐。结果证明是过度复杂
-和十分无用的，请细节有关参考[Padlipsky]。
-
-    最后当TCP/IP胜出以及BSD套接字重申Unix本质上～切都是字节流的隐喻时，迷
-惑便～扫而空。IPC和网络互联都普遍使用BSD套接字，而两者的老方法大部分弃而不
-用，同时，通信双方是否位于同一主机对Unix软件来说也就更无关紧要了。1990～1991
-年间万维网的发明便是合乎逻辑的结果。
-    1984年，TCPfIP出现的几年之后，位图图形以及Macintosh机登场时，带来了～个
-更加困难的挑战。最初来自Xerox PARC和苹果公司的GUI非常漂亮，但是系统的太多
-层次都捆绑在一起，让Unix程序员对这种设计感到很不舒服。Unix程序员当下的反应
-就是让分离机制与策略成为一个明确准则；到1988年，X窗口系统将其确立下来。通
-过将X窗口构件与完成底层图形操作的显示管理器分离，他们创造了一种架构，按Unix
-的标准是模块化的、清晰的，并且随着时间，可以很容易在此基础上发展出更好的策略
-来。
-    但那只是问题较为容易的部分。困难部分在于决定Unix是否应该拥有统一的界面策
-略；而如果是，又是什么。通过专有工具包（例如Motif）来建立统一界面策略的几个不
-同努力已经宣告失败。知今，在2003年里，GTK和Qt彼此争当这个角色。而在2003
-年这个问题的争论也还没有结束，我们在第II章讨论过的各种UI风格同时并存的持续
-状态似乎很明显。新学派Unix设计保留命令行方式，并通过编写许多在两种风格都可以
-使用的CLI引擎+GUI界面组合，来解决GUI和CLI方式之间的冲突。
-    个人计算机作为技术本身并没有带来什么主要的设计挑战。386以及后来的芯片，
-性能足够强大，所以围绕其设计的系统在成本比例上同Unix非常成熟的小型机、工作站
-和服务器相似。真正的挑战是Unix潜在市场的变化：硬件价格的全面走低，让个人计算
-机吸引了更广泛的、不太懂技术的用户群。
-    专有Unix软件商习惯了把更强大系统卖给高深技术买家的丰厚利润，从未对这个实
-际上更广泛的市场表示出兴趣。理所当然，朝终端用户桌面系统努力的第一次重大启动
-产生于开源社区，并由于本质的意识形态原因而不断增加。到了2003年年中，市场调查
-显示Linux已经占到大约40-/0～5%的份额，接近了苹果分司的Macintosh。
-    无论Linux是否会充分地做得更好，Unix社区反应的本质已经很清楚。我们在第
-三章Linux的分析中检视了这一点。这包捂采取一些取自别处的新技术（例如XML），
-并且付出了许多努力将GUI移植到Unix世界。但是在主题GUI和安装包之下，主要
-
-的重心依然是模块化和清晰的代码一一为严肃、高度可靠的计算和通信提供正确的基
-础设施。
-    诸如Mozilla和OpenOffice.org的大规模桌面开发始于1990年代末，其发展历史很
-好地展示了我们所说的重点。在上述两个开发例子中，社区反馈中最重要的议题并不是
-要求增加新特征，也不是安排发布日期——而是对巨大的单体程序的厌恶以及一致感觉
-在那些巨大程序成为障碍之前，必须瘦身、重构、分解成块。
-    尽管伴随着许多创新，但所有对这三个技术的响应都保持着Unix的设计准则——模
-块化、透明性、机制同策略分离及其它我们在本书早前描绘的品质。Unix程序员在30
-年风雨中学到最有经验的回应，就是回到最初的准则——优先从流、命名空间、进程等
-Unix基本抽象中得到更多效用，而不是增加新的东西。
-20.2  Plan 9：未来之路
-    我们知道Unix的未来看起来会怎样。
-在贝尔实验室编制了Unix的研究组设计。
-它被称作“来自贝尔实验室的Plan 9”2，由
-Plan 9尝试重做Unix，做更好的Unix。
-    设计者在Plan 9中尝试应对的核心设计挑战是整合图形和无处不在的网络互联，使
-它们成为好用的Unix式框架。他们保曰了Unix的选择，尽可能多地通过单一大型文件
-层次命名空间来访问系统服务。实际上，他们是在此基础上改进；许多在Unix中需要通
-过不同专用接口的功能，比如BSD套接字、fcntl （2）以及ioctl（2），在Plan 9中都可通
-过在类似设备的专用文件上使用最普通的读写操作来完成。为了可移植性和易访问性，
-几乎所有设备接口都是文本的而非二进制的。许多系统服务（包括视窗系统在内）都是
-文件服务器，以特殊文件或目录树来表示服务资源。通过将所有的资源都表示成文件，
-Plan 9把访问不同服务器资源的问题转变成访问不同服务器文件的问题。
-2名字来源于1958年的电影，《Plan 9from Outer Space））（外层空间第九计划），该片被当作“最糟
-糕的”而写进历史。（不幸的是，榜单似乎并不正确，1966年有部甚至更糟的影片叫做《Manos: The
-Hands of Fate》（Manos:命运之手），少数看过的人可以作证）。文档，包括描述架构的技术文件，
-以及可以安装在PC机上的完整源码和发布包，都可以通过搜索短语“Plan 9 from Bell Labs”得到。
-
-    Plan 9将这种“比Unix更Unix’’的文件模式和一个全新的概念整合在一起：私有命
-名空间（ private namespace）。每个用户（实际上，每个进程）都可以拥有自己的系统服
-务视图，通过创建自己的文件服务器装配树（ mount tree）。有些文件服务器的装配树将
-由用户手动设置，其它的在登录时自动建立。这样（如同Plan 9from Bell Labs的技术资
-料指出的一样）“/dev/cons总是指终端设备，而/bin/date则指date命令正确的运
-行版本，但是这些名字代表的文件依赖于环境，例如执行date机器的架构等等”。
-    Plan 9最重要的特征是，无论何种实现，所有挂载的文件服务器都具备相同的类文
-件系统接口。有些可能相对于本地文件系统，有些相对于通过网络访问的远程文件系统，
-有些相对于在用户空间运行的系统服务器实例（比如窗口系统或另～种网络栈），还有
-些相对于内核接口。对于用户和客户端程序而言，它们没有区别。
-    Plan 9技术资料中的有个例子就是实现FTP访问远程站点。在Plan 9下并没有ftp（l）
-命令，而存在一个ftpfs文件服务器，每个FTP连接看起来兢像是挂载一个文件系统。在
-挂载点下，对于文件和目录的open、read以及write命令，都由ftpfs自动地转换为FTP
-协议事务。这样，所有普通的文件处理工具，例如/s（1）、  mv（l）以及cp（l）都可以正常
-工作：无论是在vrP装配点下，还是跨越到其它用户眼中的命名空间。用户（或是脚本
-和程序）能够注意到的唯一不同就是不尽一致的检索速度。
-    PJan 9还有许多其它值得推荐的地方，包括一些问题重重Unix系统调用接口的再造、
-摒弃了超级用户概念的，以及许多其它有趣的再思考。它的血统没有污点，设计优雅，
-而且揭露了Unix设计中的一些严重错误。
-    同大多数二次系统不同，在许多地方Plan 9都创造了比其前身更简洁更优美的体系。
-但它为什么没有统治世界呢？
-    有人会提出许多特殊的理由——缺乏重大的市场努力、文档的稀少、许可证和费用
-的困惑和阻碍。对于那些不熟悉Plan 9的人，似乎它的主要功能就是作为关于操作系统
-研究有趣论文的题材。但在先前，Unix自身已经就超越了各种障碍吸引了无数为之献身
-的追随者，最后遍布全球。但为什么P1an 9没有昵？
-    深入到历史长河的调查也许会揭开一个不同的故事，但是在2003年，看起来Plan
-9昀失败仅仅是它的改进尚不足以取代它的前任。对比Plan 9，Unix似乎明显嘎吱作
-响，锈迹斑斑，但是Unix的工作完成得很棒足以保持它的地位。这是个教训，提示
-
-第20章未来：危机与机遇
-雄心勃勃的系统架构师：更优秀解决方案的最危险敌人，就是一个现存的、足够优秀
-的代码库。
-    一些Plan 9的思想已被吸收进现代的Unix，尤其是在更革新的开源版本中。FreeBSD
-具备—个/proc文件系统，几乎完全借Plan 9的模型，可以用来查询或控制运行的进程。
-FreeBSD的rfork（2）以及Linux的clone（2）系统调用也借自Plan 9的ork（2）。Linux的
-/proc文件系统，除了当前进程信息，也附加保存了许多类Plan 9设备文件的综合信息，
-几乎全部使用文本接口来查询和控制内核。Linux 2003年的实验性版本也实现了逐进程
-的装配点，这是迈向Plan 9私有命名空间的一大步。不同的开源Unix版本现在朝着系统
-范围内支持UTF-8的方向努力，而UTF-8正是一种实际上为Plan 9而发明的编码。3
-    随着时间的推移，可能就会那样，随着Unix内部架构某些部分的渐渐老化，越来越
-多的Plan 9思想将整合进Unix中。这是Unix未来一个可能的发展路线。
-20.3 Unix设计中的问题
-    Plan 9洗涤了Unix;但在Unix的基础设计概念集上真正所加的全新的概念足有一
-个（私有命名空间）。但是还有别的基本设计概念存在严重问题吗？在第1章，我们接
-触了几个Unix存在争论的失败之处。既然开源运动已经将Unix的未来设计交回到程序
-员和技术员手中，那些问题就不再是我们必须永远忍受的定局了。我们将重新检视它们
-以更好应对Unix未来应该如何发展的问题。
-20.3.1  Uni×文件就是一大袋字节
-    Unix文件仅仅是个字节大袋子，而没有其它文件属性。特别是没有能力存储有关文
-件类型的信息，以及指向文件实际数据之外相关应用程序的指针。
-    更普遍地，一切都是字节流，甚至包括硬件设备也是字节流。这种隐喻在早期的Unix
-中取得了巨大的成功，而且，在某些地方，例如，被编译的程序不能够产生传递回编译
-器的输出，的的确确是个真正的进步。管道和shell编程也正是从这个隐喻上发轫的。
-3 UTF_8如何诞生的传说涉及Ken Thompson.  Rob Pike、一次新泽西的午餐以及彻夜疯狂的编程
-<ht t_p：／／www.cl.cam.ac.uk／-mgk2 5/ucs／utf -8-history.txt>.
-
-    但是Unix的字节流隐喻太过重要，以至于如果软件对象的某些操作不是特别适合字
-节流或是文件操作（创建、打开、读写删除）的话，那么Unix就存在整合的困难。GUI
-对象尤其是个问题，例如图标，窗口，以及正在操作的文档。在Unix世界经典的模型中，
-“一切都是字节流’’这个隐喻的唯一扩展方式就是ioctl调用，使用内核空间声名狼藉
-的后门。
-    Macintosh系列操作系统的发烧友往往对此咆哮不已。他们提倡～种模型，其中，单
-一文件名可以既有数据“分支”又有资源“分支”。数据分支对应于Unix的字节流，而
-资源分支则是名／值对的集合。而Unix支持者更喜欢文件数据自描述的方式，这样，同
-种类的元数据都有效地存放在该文件中。
-    Unix方法的问题在于写文件的每个程序都必须清楚自描述的方式。这样，例如，如
-果我们需要文件携带类型信息在其中，涉及该文件的每个工具都得小心，要么原封不动
-地保留该类型域，要么解析之后重写。尽管这在理论上可以实现，但在实践中太脆弱了。
-    另一方面，支持文件属性会产生难以应付的问题，什么样的文件操作应该保留文件
-属性。很明显，具名文件的复制应该拷贝源文件的数据及属性．但是如果我们cat（1）文件，
-将其输出重定向到一个新的名字又该如何？
-    答案依赖于属性实际上是否真是文件特性，还是以某种特殊方式作为不可见的前编
-码或后编码与文件数据捆绑在一起。这样问题又变为：属性对何种操作可见？
-    远在七十年代，Xerox PARC文件系统设计就在这个问题中不断挣扎。它们创造了一
-个序列化打开（open serialized）调用，返回同时包含内容和属性的字节流。如果应用在目
-录上，就返回目录属性和目录中所有文件的序列化结果。这种方法是不是一直都有改善，
-并不清楚。
-    Linux 2.5已经支持附带任意名／值对来作为文件特性，但在写作本书时，并没有为太
-多的应用程序所用。Solaris最近的版本也有几乎等价的特征。
-20.3.2  Unix对GUI的支持孱弱
-    Unix的经历证明了使用众多隐喻作为框架的基础是个威力巨大的策略（回忆我们在
-第13章关于框架和共享上下文的讨论）。现代GUI核心的可视隐喻（文件由图标表示，
-打开靠点击，点击会激发某个设计好的处理程序，通常能够创建和编辑这些文件）也证
-
-
-第20章未来：危机与机遇
-明了是成功而持久的。自从Xerox PARC在七十年代先驱性开拓以来，这些就紧紧地抓
-住了用户和界面设计者。
-    尽管最近做出了相当多的努力，在2003年，Unix仍然只是蹩脚地、勉强地支持这
-种隐喻——层次太多，约定太少，构建程序太过于简陋。Unix老手典型的反应就是怀疑
-这折射出GUI隐喻本身更深层次的问题。
-    我认为产生这样的问题部分是由于我们仍未正确理解隐喻。例如，在Mac上，
-  把一个文件拖到垃圾桶去是删除，但把文件拖到某个磁盘上却又是复制，而打印
-  时却又不能把文件拖到打印机的图标上去，那需要通过菜单才能完成。我还能够
-  继续举例下去。它像OS/360上的文件操作，那会儿还没有Unix简单（但不简陋）
-  的文件思想。
--Steve Johnson
-    对于类似的效应，在第Il章我们引用了Brain Kernighan和Mike Lesk的话。但是这
-个疑问并不能简单归罪于GUI就停止了，因为尽管GUI存在许多缺点，但终端用户却有
-巨大的需要。设想，如果我们能够在设计用户交互层面上，把隐喻弄正确明白，Unix就
-能够优雅地支持它了？
-    答案是：也许不能。我们在思考字节袋子模型是否先天不足时就接触到这个间题。
-Macintosh风格的文件属性或许可以帮助提供一种机制，支持更为丰富的GUI。然而这
-似乎并不是完整的答案。我们需要仔细思考，才能得出结论，一个真正强大的GUI框
-架究竟是什么样的一一而且，同样重要地，又如何同现存的Unix框架整合在一起。这
-是个难题，需要基础性的顿悟，但在喧闹而令人困惑的大众软件工程或学术研究巾还
-未出现。
-20.3.3文件删除不可撤销
-    有过VMS经验的人，或是还记得TOPS-20的人，往往怀念这些系统的文件版本功
-能。删除或打开并修改现存文件，实际上只是以一种包含版本号的可预知方式重命名文
-件，只有对版本文件明确的删除操作才会真正地删除数据。
-    Unix没有这种功能，其小小代价是，在因打字疏忽或shell通配符结果不符而错误删
-除文件，把用户惹怒。
-    这个问题好像并没什么可预见的前景，会在操作系统级别上得到更改。Unix开发者
-
-喜欢清晰、简单的操作，用户告诉什么他们就做什么，即使用户指令等于“向我开枪”
-的命令。Unix开发者本能的辩解就是重申：保护用户免受自我损害，应该是GUI或应用
-程序级别的事，而非操作系统。
-20.3.4 Unix假定文件系统是静态的
-    某种角度上，Unix世界的模型完全是静态的。程序的运行总被设想为暂时的，所以
-文件和目录环境在整个执行中都可以当成静态的。如果某个指定的文件或目录发生了改
-变，没有标准的、良好的方式来让系统通知应用程序。当编写长期运行的用户界面软件，
-如果又希望知道环境的改变时，这就会成为重大的问题。
-    Linux具有文件和目录更改通知功能4，有些BSD的版本也复制了这个功能，但尚无
-法移植到其它Unix。
-20.3.5作业控制设计拙劣
-    除了挂起进程（在本身，微不足道地增加了调度程序负担，并不是那么令人讨厌）
-的能力之外，作业控制就是在多重进程中切换终端。不幸地，操作系统只做了最简单的
-部分——确定触发了哪个键——而把所有难题当皮球似地踢给了应用程序，例如保存和
-恢复屏幕的状态。
-    该功能真正良好的实现对于用户进程应该完全不可见：没有专用的信号，不需要保
-存和恢复终端模式．不需要应用程序定时重绘屏幕。其模型应该是，虚拟的键盘必要时
-连接到真正的键盘（如果没有连接，在请求输入时会遭到阻塞），以及一个虚拟屏幕，
-必要时可以显示在真正的屏幕上（当没有显示时，无所谓阻塞不阻塞输出）：而以同样
-的多路复用方式，系统应该可以多路复用磁盘、处理器等等，而用户程序根本就不受影
-响。5
-    正确的做法要求Unix tty驱动跟踪整个当前屏幕的状态，而不仅仅只是支持行缓存
-区，并且当一个挂起的进程恢复到前台运行时，需要在内核级知道终端的类型（可以求
-4在fcntl（2）下查找F—NOTIFY。
-5本段基于Henry Spencer在1984年的分析。他继续注意到作业控制对于POSIX及后来的Unix标准
-是需要和适合认真考虑的，因为它渗透到了每个程序，所以在任何应用程序到系统的接口都必须考
-虑。因此，POSIX认可了这个错误设计，而正确的解决方案却因“不在讨论范围”而甚至没有考虑
-过。
-
-助于一个后台进程）才可以正确地恢复。
-离某个对话，例如xterm或Emacs作业，
-型的）。
-如果没有做好，Unix内核不能够从一个终端分
-然后又将其配接到另一个终端（可能是不同类
-    随着Unix的使用已经转向X显示和终端模拟器，作业控制就变得相对不那么重要
-了，而也就没有曾经那样的破坏力了。然而，仍然讨厌的是没有suspend/attach/detach等
-操作，这种功能对于在不同登录中保留终端对话的状态非常有用。
-    叫做screen（1）的通用开源程序解决了这些问题中的好几个6。然而，必须显式地
-由用户调用，既然这样，就不能保证在每个终端对话都拥有其功能；同时，在功能上与
-之重叠的内核级代码也还没有移除掉。
-20.3.6  Unix API没有使用异常
-    C语言缺乏抛出附带数据的命名异常的机制。因此，Unix API中的C函数用与众不
-同的的返回值（通常是。l或NULL）并设置全局变量ermo来报告错误。7
-    回顾过去，这的确是许多微妙错误的发源之地。匆匆忙忙的程序员常常忽略返回值
-检查。因为没有异常抛出，补救原则也被破坏了；程序流程继续进行，直到错误情形在
-后来的执行中表征出某种失败或数据损失。
-    异常的缺失也意味着某些理虚简单的任务——例如在具备Berkelev风格信号的Unix
-版本上，从信号处理程序中退出——不得不由复杂的代码来实现，从而成为移植的障碍，
-和众多错误的渊薮。
-    这个问题也可能（且通常是）隐藏在Unix API对诸如Python和Java之类具备异常
-的语言的接口中。
-    异常机制的缺乏实际上也牵连出一个更大的问题：由于C语言是弱类型语言，所以
-使用C语言实现的高级语言之间，其通信也是问题多多。多数现代的语言都将诸如链表
-和字典作为基本数据类型——但是，因为这些在通用C语言中没有规范的表示，所以在
-类似Perl和Python之间尝试传递链表就是一个非自然的行为，需要许多胶合代码。
-存在解决更大规模问题的技术，例如CORBA，但是却往往涉及运行期的转换，并且
-6 <http：／／www - math．fu-berlin．de／～guckes/screen/>是screen（1）的项目站点。
-7对于非程序员，异常抛出是程序从函数过程中间跳出的一种方法。它并不是真正的退出，因为在某
-个封装的过程中，抛出的异常可以被捕获代码中途拦截。异常往往用来表示错误或是不希望的情
-形，意味着试图继续正常处理逻辑是毫无意义的。
-
-太过重量级，令人不舒服。
-20.3.7  ioctl（2）和纪几t/（2）是个尴尬
-    ioctl（2）和fcntl（2）机制提供一种在设备驱动中插入钩子的方法。原始的、历史的ioctl（2）
-用法，就是设置波特率以及设置串行通信驱动中的帧比特，所以就产生了这个名字（“I/O
-控制”）。后来，其它驱动函数可以使用ioctl调用，而fcntl（2）作为一个钩子函数增加到
-了文件系统中。
-    年复一年，ioctl和fc:ntl调用不断增加新的用法。但常常缺乏文档，也常常产
-生移植性问题。每一个都带来一大堆繁杂的宏定义来描述操作类型和特殊的参数值。
-    根本的问题同“字节大袋子”一样；Unix的对象模型孱弱不堪，没有留下自然的空
-间放置太多增加的辅助操作。设计者不得不在不满意的解决方案中胡乱选择：
-fcntl／ioctl在／dev中检查设备、新的专用系统调用、或是通过特殊用途虚拟文件系
-统钩子加载进内核里去（例如，在Linux以及别的地方的／proc）。
-    还不清楚在未来，Unix的对象模型是否会得到加强或如何加强。如果类MacOS的
-文件属性成为Unix的通用特征，在设备驱动上调节各式具名属性就可卧接替
-ioctl／fcntl现在的作用（这样至少不需要在接口可以使用前定义一堆宏）。我们已
-经看到Plan 9使用具名文件服务器或文件系统作为基础对象，而不是文件／字节流，这提
-供了另外的可能方法。
-20.3.8  Unix安全模型可能太过原始
-    或许root用户权限太大，对于系统管理功能，Unix应该具备粒度更细的能力或是
-ACL（Access Control Lists，访问控制列表），而不是只有一个什么都能做的超级用户。
-站在这一边的人们或许会辩解，许多系统程序通过set-user-ID就会拥有永久的root用户
-权限；一处被攻破，就意味着全面沦陷。
-    然而论据是小充分的。现代Unix允许指定用户帐户分属多个安全权限组。通过使用
-执行许可以及在程序可执行时set-group-ID，每个组的作用就可以像文件程序的ACL。
-
-理论可行，却很少使用，可以这样认为，对ACL的需求在实践上远比理论少。
-20.3.9  Unix名字种类太多
-    Unix统一了文件和本地设备——都是字节流。但是通过套接字访问的网络设备在不
-同的命名空间却具有不同的语义。而Plan 9展示了文件同本地及远程（网络）设备可以
-平滑地统一在一起，并且所有这些事情都可以通过一个命名空间来管理，当然，命名空
-间可以根据每个用户甚至是每个程序动态地调整。
-20.3.10文件系统可能有害论
-    拥有文件系统根本就是个错误？自从1970年代晚期起就一直存在有趣的研究，研究
-持续对象存储，研究根本没有全局共享文件系统，而将磁盘存储当作巨大交换区，做任
-何事情都通过虚拟对象指针来完成的操作系统。
-    这条阵线上现代的努力（例如EROS8）提示这样的设计可以提供大量的好处，包括
-被证实的安全策略一致性以及更高的性能。然而必须注意到，如果Unix是个失败，它所
-有的竞争者都同样是失败；没有作为主要产品的操作系统都跟随EROS的领导。9
-20.3.11  朝向全局互联网地址空间
-也许URL扬名得还不够。关于Unix未来的方向，我们把最后的话留给Unix的发明者；
-    我未来的理想就是开发一个文件系统的远程按口（也就是Plan 9），然后使
-其在互联网成为标准实现，取代现在的HTML。那实在是酷毙了。
--Ken Thompson
-8 http：／／www - eros-.s .org／
-9 Apple Newton、AS/400小型机以及Palm手持设备上的操作系统可以认为是例外。
-
-20.4  Unix的环境问题
-    Unix旧有的文化在开源运动中大部分进行了自我再造，在灭亡的边缘挽救了我们，
-但这也意味着开放源码的问题现在就是我们自己的问题。
-    问题之一就是如何让开源开发获得持续的经济支持。我们重新植根于Unix早期的
-合作开放进程。我们已经在很大程度上，在抛弃私用专有系统的技术争论上取得胜利。
-我们已经想出了许多方法，在比1970～1980年代更平等的地位上，同市场和管理人员
-合作，并且在许多地方我们的革新都获得了成功。在2003年，开源Unix和它的核心
-开发组，达到了如大型机般受人尊敬和权威的地位，这在1990年代中期是不敢想象的。
-    我们已经走过了很长的路，但是我们还有更长的路要走。我们知道哪种商业模式
-在理论上管用，而且我们现在甚至可以指出一些零星的成功，展示了那些商业模式在
-实践中也确实运营良好；当然，现在我们必须显示那种模式可以可靠地运营更长的时
-间。
-    这并不一定是个容易的转变。开放源码将软件业转变成服务业。服务提供商（想
-想医疗和法律行业）并不会注入更多资本的比例来扩张；那些仅仅尝试追加固定成本，
-就期望得到高产出的做法，注定会被饿死。合理的选择可以归纬为卖唱（通过小费或
-捐款），经营街角小店（一种小型的、低开销的服务商务），或是找到一个富有的赞
-助人（某些大商家为其商业目的而需要使用及修改开源软件）。
-    总而言之，技工的小时工资随着汽车的降价而上升10，同样的原因，雇用软件开发
-者的费用也会如预料中地提高。而个人和商家也越来越难以获得投资。会有许多程序
-员富裕起来，但是仅有少数几个能成为百万富翁。这实际上是进步的标志，无能的就
-被竞争出局。但这也将表示整个软件环境气候的一大变化，可能意味着投资者将失去
-他们仅存的、在赞助软件启动中很少的利益。
-io~-完整的讨论，参见《The Magic Cauldron》 [Raymond01]。
-
-第20章未来：危机与机遇
-    一个有关真正大型软件商维护越来越困难的子问题是如何组织终端用户测试。历
-史上，Unix文化首要关注内部架构，这意味着，能够提供最终用户舒适界面的价值，
-从未被我们当作程序构建的基础。如今，尤其是把在目标瞄准同微软和Apple竞争的
-开源Unix中，这一点正在改变。但是最终用户界面需要实际用户系统地测试一一这存
-在～些挑战。
-    实际最终用户测试需要机构、专家以及一定水准的管理，然而以分布自愿团体为
-特征的开源开发却难以部署这些。也许因此，开源的字处理器、电子表格以及其它生
-产型应用程序不得不留在由大商家赞助的研究计划手中，例如OpenOffice.org，只有它
-们才能提供那种开销。开源开发者往往认为单…商家就意味着单点失败，并且非常担
-心这种依赖，但更好的解决方案还没有发展出来。
-    这些是经济问题。我们还有其它更政治化的问题，因为成功招徕敌人。
-    有些是老对头啦。微软要成为计算机世界不可动摇垄断者的野心，使得在我们知
-道我们卷入战争的五年前，就把打败Unix作1980年代中期该公司的战略目标。在2003
-年年中，尽管好几个成长性市场遭到Linux大范围的侵占，微软仍然是世界上最富有
-和最疆大的软件公司。微软很清楚地知道必须打败新学派的开源Unix以求生存。而为
-了获胜，必须毁灭或是羞辱产生它的文化。
-    Unix借开源社区之手回来了，而同互联网自由文化的结合，也带来了新的敌人。
-  好莱坞和媒体巨头感到了互联网深深的威胁，对不受控制的软件开发发起了多重攻击。
-’  现存的法案，例如Digital Millennium Copyright Act已经被用来起诉那些为媒体权势不
-  喜的软件开发者（最臭名昭著的案件就是针对能够复制加密DVD的DeCSS软件）。
-  预期的计划例如所谓的可信计算甲台联盟（ Trusted Computlng Platform Alliance）和微
-  软的Palladium威胁11要让开源开发成为非法活动一一而如果开放源码消亡了，Unix也
-  很可能随之消亡．
-    Unix、黑客以及互联网～起反对微软和好莱坞及媒体巨头。这是我们需要获胜的
-斗争，不仅是出于我们传统的专业主义、我们对技艺的热爱，以及共有的部族忠贞，
-还有更重要的原因使这个斗争如此重要。政治可能性渐渐成形于通信技术一一谁可以
-使用、谁应该检查以及谁可以控制。政府和法人对网络内容的控制，对什么人可以利
-用计算机的控制，都是对政治自由一个长期严重的咸胁。恶梦般的场景就是这样，垄
-断商家和中央独裁，永远的自然同盟者，相互勾结并炮制理论，越来越多地制订规章、
-2 1参考TCPA FAQ<http：／／WWW - cl．cam. ac．uk／～rj aj 4/tcpa- faq．html>，由一个著名安全
-专家所做的一个相当毛骨悚然的可能性分析摘要。
-
-无情镇压以及罗织电子言论罪名。在反对这一切的斗争中，我们是自由的战士一一不
-仅仅是为了我们自己的自由，也同样是为了所有人的自由。
-20.5  Uni×文化中的问题
-    围绕在Unix社区的文化问题，同Unix自身的技术问题以及伴随成功而来的挑战
-同样重要。至少存在两个重大的问题：小挑战是内部转型，大挑战是我们要克服历史
-上的优越感。
-    小挑战是老学究与新派开源大众之间的摩擦。Linux的成功，特别地，对许多老一
-辈的Unix程序员来说并不完全舒服。部分是由于代沟的问题。Linux小子们吵闹活泼
-天真愉悦的狂热行为激怒了老一辈，他们自从七十年代就接触Unix了，而且（常常公
-正地）认为自己更有智慧。而小子们在老一辈失败的地方不断取得成功的事实更激化
-了这种现象。
-    在2000年，当花了三天时间参加了一个Macintosh开发者会议之后，我愈发清晰
-地意识到了更大的心理问题。沉浸在一个同Unix世界假设基础完全相反的编程环境中
-真是个给人启迪的经历。
-    Macintosh程序员最为关心用户体验。他们是建筑设计师和装饰家。他们由外而内
-进行设计，首先就问“我们需要支持哪种交互？”，然后构建隐藏其后的狸序逻辑来
-满足用户界面设计的需求。这就会导致程序外观非常漂亮而内部结构脆弱摇摆。一个
-声名狼藉的例子，在MacOs 9以前的发布版本中，内存管理器有时对于那些退出但仍
-占用内存的程序，竟然要求用户手动回收内存。Unix支持者本能地反感这类病态设计：
-他们不能理解Macintosh的人怎么能够忍受这些。
-    比起来，Unix程序员先考虑基础设施。我们是水管工和砖瓦匠。我们的设计由里
-而外，构建强大的引擎以解决抽象定义问题（例如“我们如何通过不可靠的链接和硬
-件而获得从A点到B点的可靠信息包流交换”）。然而引擎外，我们的包装难看，甚
-至接口常常相当丑陋。date（l）. find（l）和ed（l）就是臭名昭著的例子，但还有其它成百上
-千的程序也是这样。Macintosh人也本能地反感这种病态设计；他们也不能理解Unix的
-人怎么能够忍受这些。
-    两种设计哲学都有正确的一面，但是两个阵营却难以理解彼此的立场。Unix开发者
-典型的反应就是把Macintosh软件当作是给无知人的绣花枕头而抛弃，然后继续构建能
-
-第20章未来：危机与机遇
-够吸引其它Unix开发者的软件。如果终端用户并不喜欢，那是终端用户的不对：他们了
-解多了之后，会回来的。
-    在许多地方，这种狭隘思想已经为我们工作得很好。我们是互联网和万维网的守护
-者。我们的软件和我们的传统统治了重大计算，统治了必须是全天候可靠的、宕机时间
-最少的应用程序。我们真正极端擅长构建坚实的内部结构；虽非完美，但无论如何没有
-其它的软件技术文化能够在任何地方接近我们的纪录，这是非常值得骄傲的。
-    问题是我们愈发必须直面的挑战，是需要更多丰富视图的挑战。世界上大多数的计
-算机都不是放在服务器机房里，而是在那些终端用户手中。在Unix早期的日子里，在个
-人计算机之前，我们的文化把自身部分定位为大型机神父，那个大铁玩意管家的反叛者。
-后来，我们吸收了早期小型机狂热者给人们以力量的理想。但是今天，我们成为了神父；
-成为了网络和大铁块的守护者。我们潜在的要求是，如果想使用我们的软件，就必须
-学会像我们一样思考。
-    在2003年，在我们的态度中存在深深的矛盾一一精英和大众之间的摩擦。我们希
-望影响和改变这世界92%的人，对他们来说，计算机就意味着游戏、多媒体、漂亮的
-GUI界面、  （对他们来谠最技术的）邮件软件、字处理器以及电子数据表。我们正花
-费主要努力在诸如GNOME以及KDE等设计来给予Unix美妙外观的项目。但在内心
-深处，我们仍旧认为自己是精英，不能或不想去甄别或是倾听以王大婶为代表的普通
-用户需求。
-    对于非技术最终用户，我们构建的软件往往不是令人迷惑无法理解，就是样子难
-看故意屈尊似的，又或两者兼有。即使我们怀着尽可能高的热情尝试去做对用户友好
-的事，却可悲地前后矛盾。对于完成这份工作，我们从旧学派Unix继承的许多态度和
-反应都是不恰当的。即使我们想要倾听或帮助王大婶，我们也不知道如何去做一一我
-们设计了我们的服务类目、关心她并提供“解决方案”，但她却发现这同她存在的问
-题一样可怕。
-    我们在文化上面临的巨大挑战是，我们是否能够不再过分依赖那些已经很好地为
-我们工作过的设想——我们是否能够承认，不仅是在思想上，也是在日常实践的施行上，
-承认Macintosh支持者也抓住了要点。他们的要点也是基于普遍实际，而非Mac专用方
-式，在“The Inmates Are Running the Asylum[CooperJ”，一部具有深刻见解和充分论证
-的书籍中，其作者称（别管偶尔的一些奇谈怪论），交互设计乜包含了大量坚实的真理，
-需要为每个Unix程序员所知道。
-    我们可以避开这～点：我们可以保留教父地位，祈求碰到最好最聪明的少数人——
-一小撮关注我们历史作用的知识精英——作为软件内部架构和网络的守护者。但如果我
-
-们这样做，就很可能走向衰落，直到最后失去几十年来一直支持我们的动力。自有别
-的东西去服务人们；自有别的东西会赢得动力和金钱并拥有未来92%比例的软件。而
-这个可能成功的机会，无论是不是属于微软，都将使用我们所不喜欢的软件和实践来
-完成。
-    或者我们真正接受这个挑战。开源运动正努力这样去做。但在过去用来解决其它问
-题的相同工作和思想是不够的。我们的态度必须在根本上有所转变，虽然困难。
-    在第4章，我们讨论了抛弃设想限制以及在解决技术问题上“抛弃过去”的重要性，
-建议同禅宗思想类似的超然和“初衷”。我们拥有～个需要更多种类的分离工作。我们
-必须学会在王大婶面前虚心，并且放弃某些我们长期坚持的、曾使我们如此成功的偏见。
-    明显地，Macintosh文化已经开始同我们的文化相融合-MacOS X拥有Unix的底
-层架构，并且在2004年Mac开发者（虽然在某些方面有所斗争）进行了思想上的调整
-来学习注重内部架构的Unix美德。我们的挑战将是，相互地，吸纳Macintosh以用户为
-中心的美德。
-    还有几个表明Unix文化摆脱其狭隘性的迹象。其中之一就是Unix开源社区似乎开
-始融入被称为“敏捷编程”12的远动。我们在第4章注意到，Unix程序员已经愉快地抓
-住了重构的概念，那就是敏捷编程思想的重点之一。
-    重构，以及其它的敏捷编程概念，例如单元测试和围绕情景设计，似乎清晰地说明
-和突出了那些迄今已经在Unix传统广泛但隐性流传的实践。另一方面，Unix传统可以
-给敏捷编程带来长期经验的积累和教训。随着开源软件不断获得市场份额，可以想象这
-些文化将会融合在一起，如同过去互联网和早期Unix文化在1980年后的融合一样。
-20.6信任的理由
-    Unix的未来充满难题。我们确实想让它走好吗？
-    三十多年来，我们在应对挑战中兴盛起来。我们开拓了软件工程中最好的实践。我
-们创造了今天的互联网和万维网。我们编制了有史以来最庞大、最复杂、最可靠的软件
-系统。我们打破了IBM的垄断，我们正在开展反对微软霸权的运动，并且已经深深地震
-慑了它。
-12更详细的敏捷编程介绍，参考《Agile Manif est。》（敏捷宣言）
-
-    而无论如何，胜利并不是全面的。在1980年代，我们同意专有权对Unix的占领，
-这几乎毁了我们自己。长期以来，我们忽视了低端市场，忽视了非技术的终端用户，因
-此让微软钻了空子，大幅度地降低了软件的质量标准。甚至精明的观察家多次断言我们
-的技术、我们的社区、我们的价值死亡了。
-    但我们总是可以重振旗鼓地王者归来。我们犯了错，但我们从错误中汲取了教训。
-我们的文化薪火相传：我们已经从早期的学院黑客、ARPANET实验者、微机狂热者以
-及其它许多文化中汲取了精华。而开源运动已经复兴了我们早年的激情和理想，今天，
-我们的力量，我们的规模将远胜过去。
-    迄今为止，打赌Unix玩家会输的人总是聪明一时糊涂一世。我们能赢——只要我们
-想赢。

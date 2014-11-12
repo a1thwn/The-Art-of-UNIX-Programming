@@ -13,6 +13,8 @@
 %\let\myDate\date
 %\newcommand\GoodBye[1][\bfseries]{{#1Good Bye}}
 
+%盒子填不满容忍？
+\hbadness=10000
 
 %========基本必备的宏包========%
 \RequirePackage{calc,float,multicol,moresize}
@@ -154,6 +156,7 @@ text-micro = μ
 
 %=========章節標題設計=========%
 \RequirePackage{titlesec}
+\setcounter{secnumdepth}{3}
 %修改part
 \titleformat{\part}{\huge\sffamily}{\thepart}{0.5em}{}
 %修改chapter
@@ -240,21 +243,21 @@ text-micro = μ
 \renewenvironment{quote}[1][anonymous]{
 \newcommand{\quoteauthor}[1][anonymous]{#1}
 \list{}{\rightmargin\leftmargin %右间距等于左间距
-\itemindent   24pt
+\itemindent   2em
 }\item\relax
-\ttfamily\fontsize{10pt}{12pt}\selectfont}
+\ttfamily}
 {\\
 \makebox[\linewidth][r]{\sffamily —\quoteauthor}
 \endlist}
 
 %重新定义quotation
 \renewenvironment{quotation}
-{\list{}{
-\itemindent 24pt %item的缩进也就是第一段的缩进
+{\list{}{\rightmargin\leftmargin %右间距等于左间距
+\itemindent 2em%item的缩进也就是第一段的缩进
 \listparindent \itemindent %第二段的缩进
 }%
 \item\relax
-\ttfamily\fontsize{10pt}{12pt}\selectfont}
+\ttfamily}
 {\endlist}
 
 %======notecard环境 一种卡片式记忆环境====%
